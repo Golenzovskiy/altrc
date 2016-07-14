@@ -8,14 +8,14 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateServiceProjectTable extends Migration {
+class CreateServiceProjectsTable extends Migration {
     /**
      * Run the migrations.
      *
      * @return void
      */
     public function up() {
-        Schema::create('service_project', function (Blueprint $table) {
+        Schema::create('service_projects', function (Blueprint $table) {
             $table->string('name');
             $table->unsignedInteger('project_id');
             $table->unique(['name', 'project_id']);
@@ -28,6 +28,6 @@ class CreateServiceProjectTable extends Migration {
      * @return void
      */
     public function down() {
-        Schema::drop('service_project');
+        Schema::drop('service_projects');
     }
 }

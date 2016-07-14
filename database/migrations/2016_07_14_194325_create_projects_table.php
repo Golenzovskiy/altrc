@@ -8,7 +8,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateProjectTable extends Migration {
+class CreateProjectsTable extends Migration {
     /**
      * Run the migrations.
      *
