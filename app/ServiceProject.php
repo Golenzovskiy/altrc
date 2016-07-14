@@ -9,7 +9,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Service_Project extends Model {
+class ServiceProject extends Model {
     /**
      * primaryKey
      *
@@ -24,7 +24,7 @@ class Service_Project extends Model {
      * @var bool
      */
     public $incrementing = false;
-    
+
     /**
      * Disable timestamp fields
      * @var bool
