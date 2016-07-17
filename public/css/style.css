@@ -1,0 +1,55 @@
+.padding-top-15 {
+    padding-top: 15px;
+}
+
+.padding-right-15 {
+    padding-right: 15px;
+}
+
+.padding-bottom-15 {
+    padding-bottom: 15px;
+}
+
+.padding-left-15 {
+    padding-left: 15px;
+}
+
+.pbtn {
+    padding: 15px 15px 0;
+}
+
+.rbtn {
+    float: right;
+}
+
+.imgl {
+    max-width: auto;
+    height: 100%;
+    display: block;
+}
+
+.center {
+    text-align: center;
+}
+
+.top {
+    padding: 15px 0;
+}
+
+A.dashed {
+    text-decoration: none;
+    border-bottom: 1px dashed;
+}
+
+.gray-table {
+    background-color: #fcfcfc;
+}
+
+A.tag {
+    font-size: 1.2em;
+    text-decoration: none;
+}
+
+.label-default {
+    font-weight: normal;
+}
