@@ -12,7 +12,7 @@ class CreateReferencesProjectsTable extends Migration
      */
     public function up()
     {
-        Schema::create('references_projects', function (Blueprint $table) {
+        Schema::create('reference_projects', function (Blueprint $table) {
             $table->string('name');
             $table->unsignedInteger('project_id');
             $table->unique(['name', 'project_id']);
@@ -26,6 +26,6 @@ class CreateReferencesProjectsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('references_projects');
+        Schema::drop('reference_projects');
     }
 }
