@@ -11,4 +11,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Project extends Model {
     //
+
+    public function getByFilter($data) {
+        return $this->all();
+    }
 }

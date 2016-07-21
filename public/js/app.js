@@ -1,4 +1,83 @@
+/**
+ * Description
+ *
+ * @author Sintsov Roman <sintsov.roman@gmail.com>
+ * @author Stanislav Golenzovskiy <golenzovskiy@gmail.com>
+ * @copyright Copyright (c) 2016, Altrc
+ */
+function Ajax(form) {
+    this.$form = form;
+    this.type = {};
+    this.url = {};
+
+    this.init = function () {
+        this.type = this.$form.attr('method');
+        this.url  = this.$form.attr('action');
+    };
+
+    this.request = function () {
+        this.init();
+        var result = {};
+        var button = this.$form.find('#filter').get(0);
+        var l = Ladda.create(button);
+        l.start();
+        $.ajax({
+            url: this.url,
+            type: this.type,
+            dataType: "json",
+            data: this.$form.serialize()
+        })
+        .done(function(response) {
+            result = response;
+        })
+        .fail(function() {
+            alert("error");
+        })
+        .always(function () {
+            l.stop();
+        });
+
+        return result;
+    }
+}
+
+var Filter = {
+    filter: $('#js-filter'),
+
+    observer: function() {
+        this.filter.on('submit', function (e) {
+            e.preventDefault();
+            var ajax = new Ajax($(this));
+            console.log(ajax.request());
+        });
+    },
+
+    init: function() {
+        if (this.filter.length > 0) {
+            this.observer();
+        }
+    }
+
+};
+
+function checkFields(form) {
+    var checks_radios = form.find(':checkbox, :radio'),
+        inputs = form.find(':input').not(checks_radios).not('[type="submit"],[type="button"],[type="reset"]');
+
+    var checked = checks_radios.filter(':checked');
+    var filled = inputs.filter(function(){
+        return $.trim($(this).val()).length > 0;
+    });
+
+    if (checked.length + filled.length === 0) {
+        return false;
+    }
+
+    return true;
+}
+
 $(document).ready(function () {
+    Filter.init();
     $("#from").datepicker({
         dateFormat: "dd.mm.yy",
         defaultDate: -365,
@@ -22,52 +101,8 @@ $(document).ready(function () {
 	$("form").change(function() {
 		$(this).find("button").removeAttr("disabled");
 	});
-	
-	function checkFields(form) {
-		var checks_radios = form.find(':checkbox, :radio'),
-		inputs = form.find(':input').not(checks_radios).not('[type="submit"],[type="button"],[type="reset"]'); 
-	
-		var checked = checks_radios.filter(':checked');
-		var filled = inputs.filter(function(){
-			return $.trim($(this).val()).length > 0;
-		});
-		
-		if(checked.length + filled.length === 0) {
-			return false;
-		}
-		
-	return true;
-	}
-	
-	$(function(){
-		$('#form').on('submit',function(e){
-			e.preventDefault();
-			var oneFilled = checkFields($(this));
-			if(oneFilled) {
-				alert('одно заполнено');
-			} else {
-				alert('везде пусто');
-			}
-		});
-	});
-	
-	/* */
 
-    $('#filter').click(function (e) {
-        e.preventDefault();
-        var l = Ladda.create(this);
-        l.start();
-        $.post("filter.php",
-            {data: $('form').serialize()},
-            function (response) {
-                $('#amount').text(response.amount);
-                $("#searchResult").removeClass('hidden');
-            }, "json")
-            .always(function () {
-                l.stop();
-            });
-        return false;
-    });
+	/* */
 
     var sampleTags = ['пищёвка', 'стройка', 'абвгд', 'еёжз'];
     $('#FieldTags').tagit({

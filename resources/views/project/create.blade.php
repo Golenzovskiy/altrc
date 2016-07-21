@@ -3,6 +3,8 @@
 @section('content')
 
 <h3>Добавление нового проекта</h3>
+<form action="/save" method="post" enctype="multipart/form-data">
+<input type="hidden" name="_token" value="{{ csrf_token() }}">
 <div class="panel panel-default">
     <div class="panel-body">
         <div class="row">
@@ -148,10 +150,11 @@
         </div>
         <div class="row">
             <div class="col-lg-12 pbtn">
-                <button type="button" class="rbtn btn btn-primary">Сохранить</button>
+                <button type="submit" class="rbtn btn btn-primary">Сохранить</button>
             </div>
         </div>
     </div>
+</form>
 </div>
 
 @endsection

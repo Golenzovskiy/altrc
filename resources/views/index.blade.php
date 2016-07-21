@@ -3,6 +3,9 @@
 @section('content')
 
 <h3>Поиск по проектам</h3>
+
+<form id="js-filter" action="/filter" method="post" enctype="multipart/form-data">
+<input type="hidden" name="_token" value="{{ csrf_token() }}">
 <div class="panel panel-default">
     <div class="panel-body">
         <form id="form">
@@ -70,6 +73,8 @@
         </form>
     </div>
 </div>
+</form>
+
 <div id="searchResult" class="hidden">
     <h3>Поиск по тегам</h3>
     <div class="panel panel-default">

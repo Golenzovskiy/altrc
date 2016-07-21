@@ -18,3 +18,11 @@ Route::get('/', function () {
 Route::get('create', [
     'uses' => 'ProjectController@create',
 ]);
+
+Route::post('save', [
+    'uses' => 'ProjectController@save',
+]);
+
+Route::post('filter', [
+    'uses' => 'ProjectController@filter',
+]);
