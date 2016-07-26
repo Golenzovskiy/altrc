@@ -9,7 +9,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ServiceProject extends Model {
+class ServiceProject extends AbstractModel {
     /**
      * primaryKey
      *
@@ -30,4 +30,5 @@ class ServiceProject extends Model {
      * @var bool
      */
     public $timestamps = false;
+
 }

@@ -11,9 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
+Route::get('/', [
+    'uses' => 'ProjectController@index',
+]);
 
 Route::get('create', [
     'uses' => 'ProjectController@create',

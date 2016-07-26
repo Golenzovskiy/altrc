@@ -9,7 +9,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class SectorProject extends Model {
+class SectorProject extends AbstractModel {
     /**
      * primaryKey
      *

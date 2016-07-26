@@ -18,14 +18,14 @@ class ProjectsTableSeeder extends Seeder
                 'name' => 'Siemens',
                 'description' => 'Оценка перспективности организации производства рентгено-диагностических оборудования в России для Siemens',
                 'year' => '2016-05-12',
-                'logo' => '/logos/siemens.png',
+                'logo' => '/logos/siemens.jog',
                 'created_at' => date('Y-m-d H-i-s'),
                 'updated_at' => date('Y-m-d H-i-s')
             ],[
                 'name' => 'Oerlikon',
                 'description' => 'Оценка потенциала развития на российском рынке в отраслях-потребителях всех бизнес-направлений компании Oerlikon Group',
                 'year' => '2014-03-01',
-                'logo' => '/logos/oerlikon.png',
+                'logo' => '/logos/oerlikon.jpg',
                 'created_at' => date('Y-m-d H-i-s'),
                 'updated_at' => date('Y-m-d H-i-s')
             ]

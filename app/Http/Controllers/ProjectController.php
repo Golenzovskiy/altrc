@@ -7,12 +7,26 @@
  */
 namespace App\Http\Controllers;
 
+use App\CountryProject;
+use App\ServiceProject;
+use App\SectorProject;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Project;
 use App\Helpers\Helper;
 
 class ProjectController extends Controller {
+
+    /**
+     * Index page
+     */
+    public function index() {
+        return view('index', [
+            'services' => ServiceProject::dictionary(),
+            'sectors' => SectorProject::dictionary(),
+            'country' => CountryProject::dictionary()
+        ]);
+    }
 
     /**
      * Create new project

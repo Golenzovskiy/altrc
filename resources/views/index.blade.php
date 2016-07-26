@@ -26,42 +26,13 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-4">
-                    <h4>Выберите услугу</h4>
-                    <select multiple class="form-control">
-                        <option>Стратегический маркетинг</option>
-                        <option>Стратегия и развитие бизнеса</option>
-                        <option>Оргструктура и изменения</option>
-                        <option>Бенчмаркинг и зарубежные рынки</option>
-                    </select>
-                </div>
-                <div class="col-lg-4">
-                    <h4>Выберите отрасль</h4>
-                    <select multiple class="form-control">
-                        <option>FMCG и потребительские товары</option>
-                        <option>Добыча, сырье и материалы</option>
-                        <option>Ритейл, логистика и дистрибуция</option>
-                        <option>Машиностроение и инжиниринг</option>
-                        <option>Медицина и фармацевтика</option>
-                        <option>Строительство и стройматериалы</option>
-                        <option>Химия и энергетика</option>
-                        <option>Государственные органы и компании</option>
-                    </select>
-                </div>
-                <div class="col-lg-4">
-                    <h4>География</h4>
-                    <select multiple class="form-control">
-                        <option>Россия и СНГ</option>
-                        <option>Китай</option>
-                        <option>Индия</option>
-                        <option>США</option>
-                        <option>Индонезия</option>
-                        <option>Бразилия</option>
-                        <option>Пакистан</option>
-                        <option>Нигерия</option>
-                        <option>Бангладеш</option>
-                    </select>
-                </div>
+
+                @include('include.dictionary', ['title' => 'Выберите услугу', 'items' => $services])
+
+                @include('include.dictionary', ['title' => 'Выберите отрасль', 'items' => $sectors])
+
+                @include('include.dictionary', ['title' => 'География', 'items' => $country])
+
             </div>
             <div class="row">
                 <div class="col-lg-12 pbtn">
