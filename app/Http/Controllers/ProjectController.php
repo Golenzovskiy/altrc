@@ -58,7 +58,7 @@ class ProjectController extends Controller {
        return response()->json([
            'status' => 'success',
            'result' => view('filter.item', ['projects' => $projects])->render(),
-           'amount' => ''
+           'amount' => count($projects)
        ]);
     }
 }

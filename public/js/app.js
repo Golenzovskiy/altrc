@@ -15,9 +15,8 @@ function Ajax(form) {
         this.url  = this.$form.attr('action');
     };
 
-    this.request = function () {
+    this.request = function (fn) {
         this.init();
-        var result = {};
         var button = this.$form.find('#filter').get(0);
         var l = Ladda.create(button);
         l.start();
@@ -28,7 +27,7 @@ function Ajax(form) {
             data: this.$form.serialize()
         })
         .done(function(response) {
-            result = response;
+            fn(response);
         })
         .fail(function() {
             alert("error");
@@ -36,8 +35,6 @@ function Ajax(form) {
         .always(function () {
             l.stop();
         });
-
-        return result;
     }
 }
 
@@ -48,7 +45,12 @@ var Filter = {
         this.filter.on('submit', function (e) {
             e.preventDefault();
             var ajax = new Ajax($(this));
-            console.log(ajax.request());
+            ajax.request(function(json) {
+                if (json.status == 'success') {
+                    $('#filterResult').html(json.result);
+                    $('#searchResult').removeClass('hidden');
+                }
+            });
         });
     },
 
