@@ -57,7 +57,7 @@ class ProjectController extends Controller {
        $projects = $model->getByFilter($request);
        return response()->json([
            'status' => 'success',
-           'result' => view('filter.item', ['projects' => $projects])->render(),
+           'result' => view('filter.result', ['projects' => $projects])->render(),
            'amount' => count($projects)
        ]);
     }

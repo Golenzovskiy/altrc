@@ -31,4 +31,8 @@ class Project extends Model {
     public function references() {
         return $this->hasMany('App\ReferenceProject');
     }
+
+    public function tags() {
+        return $this->hasMany('App\TagProject');
+    }
 }

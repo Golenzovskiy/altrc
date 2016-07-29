@@ -47,8 +47,8 @@ var Filter = {
             var ajax = new Ajax($(this));
             ajax.request(function(json) {
                 if (json.status == 'success') {
-                    $('#filterResult').html(json.result);
-                    $('#searchResult').removeClass('hidden');
+                    $('#searchResult').html(json.result).removeClass('hidden');
+                    $('#amount').html(json.amount);
                 }
             });
         });
@@ -113,13 +113,13 @@ $(document).ready(function () {
 
     $('[data-toggle="tooltip"]').tooltip();
 
-    $(".tag").on("click", function () {
+    $(document).on("click", ".tag", function () {
         var selectedTag = $(this).data("tag");
         $("#filterResult").find("tr[data-tags]").each(function () {
             if ($.inArray(selectedTag, $(this).data('tags')) == -1) {
                 $(this).addClass('hidden').next().addClass('hidden');                
             }
-        })
+        });
         $("#tags-button").find("span").removeClass("label-primary").addClass("label-default");
         $(this).children("span").removeClass("label-default").addClass("label-primary");
     });
