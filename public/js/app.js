@@ -81,7 +81,7 @@ function checkFields(form) {
 $(document).ready(function () {
     Filter.init();
     $("#from").datepicker({
-        dateFormat: "dd.mm.yy",
+        dateFormat: "yy",
         defaultDate: -365,
         changeYear: true,
         numberOfMonths: 1,
@@ -90,7 +90,7 @@ $(document).ready(function () {
         }
     });
     $("#to").datepicker({
-        dateFormat: "dd.mm.yy",
+        dateFormat: "yy",
         changeYear: true,
         numberOfMonths: 1,
         onClose: function (selectedDate) {
