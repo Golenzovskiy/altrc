@@ -86,7 +86,7 @@ $(document).ready(function () {
         changeYear: true,
         numberOfMonths: 1,
         onClose: function (selectedDate) {
-            $("#to").datepicker("option", "minDate", selectedDate);
+            //$("#to").datepicker("option", "minDate", selectedDate);
         }
     });
     $("#to").datepicker({
@@ -94,7 +94,7 @@ $(document).ready(function () {
         changeYear: true,
         numberOfMonths: 1,
         onClose: function (selectedDate) {
-            $("#from").datepicker("option", "maxDate", selectedDate);
+            //$("#from").datepicker("option", "maxDate", selectedDate);
         }
     });
 

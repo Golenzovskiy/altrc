@@ -7,19 +7,20 @@
         </tr>
 
         @foreach ($projects as $k => $project)
+            {{ $tags = '' }}
             @foreach ($project->tags as $tag)
                 {{ $tags[] = $tag->name }}
             @endforeach
             <tr data-tags='{{ json_encode($tags, JSON_UNESCAPED_UNICODE) }}'>
-                <td>
-                    @if ($project->logo)
-                        <img border="0"
-                             src="{{ $project->logo }}">
-                    @endif
-                </td>
-                <td>{{ $project->description }}</td>
-                <td><a class="dashed" data-toggle="collapse" href="#collapse{{$k+1}}"
-                       aria-expanded="false" aria-controls="collapse">{{ $project->references[0]->name }}</a></td>
+            <td>
+                @if ($project->logo)
+                    <img border="0"
+                         src="{{ $project->logo }}">
+                @endif
+            </td>
+            <td>{{ $project->description }}</td>
+            <td><a class="dashed" data-toggle="collapse" href="#collapse{{$k+1}}"
+                   aria-expanded="false" aria-controls="collapse">{{ $project->references[0]->name }}</a></td>
             </tr>
             <tr class="collapse" id="collapse{{$k+1}}">
                 <td colspan="5">
