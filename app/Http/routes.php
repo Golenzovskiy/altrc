@@ -26,3 +26,7 @@ Route::post('save', [
 Route::post('filter', [
     'uses' => 'ProjectController@filter',
 ]);
+
+Route::post('references/update', [
+    'uses' => 'ReferencesController@update',
+]);

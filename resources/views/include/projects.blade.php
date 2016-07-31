@@ -42,12 +42,12 @@
                             </div>
                             <div class="table-responsive">
                                 <table class="table table-default table-hover">
-                                    @foreach ($project->references as $reference)
+                                    @foreach ($project->references as $i => $reference)
                                         <tr>
                                             <th>
                                                 <div class="btn-group">
                                                     <button type="button"
-                                                            class="btn btn-link btn-sm"
+                                                            class="btn btn-link btn-sm js-references-edit"
                                                             aria-label="Edit reference">
                                                                         <span class="glyphicon glyphicon-edit"
                                                                               aria-hidden="true"></span>
@@ -60,7 +60,7 @@
                                                                               aria-hidden="true"></span>
                                                     </button>
                                                 </div>
-                                                {{ $reference->name }}
+                                                <span class="js-references-change" data-id="{{ $project->id }}">{{ $reference->name }}</span>
                                             </th>
                                         </tr>
                                     @endforeach

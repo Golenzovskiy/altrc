@@ -5,6 +5,13 @@
  * @author Stanislav Golenzovskiy <golenzovskiy@gmail.com>
  * @copyright Copyright (c) 2016, Altrc
  */
+
+$.fn.editable.defaults.mode = 'inline';
+$.fn.editable.defaults.params = function (params) {
+    params._token = $("input[name=_token]").val();
+    return params;
+};
+
 function Ajax(form) {
     this.$form = form;
     this.type = {};
@@ -52,6 +59,26 @@ var Filter = {
                     $('#searchResult').html(json.result).removeClass('hidden');
                     $('#amount').html(json.amount);
                     $('.dropdown-toggle').dropdown();
+                    var $value = $('.js-references-change');
+
+                    var name = $value.text();
+                    var pk = $value.data('id');
+
+                    $value.editable({
+                        type: 'text',
+                        url: '/references/update',
+                        name: name,
+                        pk: pk
+                    });
+
+                    $('.js-references-edit').on('click', function (e) {
+                        e.stopPropagation();
+                        var $text = $(this).parent().next();
+                        $text.editable('enable').editable('toggle')
+                            .on('hidden', function(e, reason) {
+                                $(this).editable('disable');
+                            });
+                    });
                 }
             });
         });
