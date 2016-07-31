@@ -65,7 +65,7 @@ class Project extends Model {
             $ids[] = $item->id;
         }
 
-        return $this->whereIn('id', $ids)->get();
+        return $this->whereIn('id', $ids)->paginate(1);
     }
 
     /**

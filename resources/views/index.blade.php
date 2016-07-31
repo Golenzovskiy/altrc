@@ -16,10 +16,10 @@
                     <h4>Выберите год</h4>
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                            <input class="form-control" type="text" placeholder="2015" id="from" name="from">
+                            <input class="form-control" type="text" placeholder="2015" id="from" name="from" value="2007">
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                            <input class="form-control" type="text" placeholder="2016" id="to" name="to">
+                            <input class="form-control" type="text" placeholder="2016" id="to" name="to" value="2020">
                         </div>
                     </div>
                 </div>
@@ -35,7 +35,8 @@
             </div>
             <div class="row">
                 <div class="col-lg-12 pbtn">
-                    <button disabled="disabled" type="submit" class="rbtn btn btn-primary ladda-button"
+                    <!--disabled="disabled"-->
+                    <button type="submit" class="rbtn btn btn-primary ladda-button"
                             data-style="zoom-out" id="filter"><span class="ladda-label">Фильтровать</span>
                     </button>
                 </div>

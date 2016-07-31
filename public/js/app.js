@@ -42,6 +42,8 @@ var Filter = {
     filter: $('#js-filter'),
 
     observer: function() {
+        var self = this;
+
         this.filter.on('submit', function (e) {
             e.preventDefault();
             var ajax = new Ajax($(this));
@@ -49,8 +51,34 @@ var Filter = {
                 if (json.status == 'success') {
                     $('#searchResult').html(json.result).removeClass('hidden');
                     $('#amount').html(json.amount);
+                    $('.dropdown-toggle').dropdown();
                 }
             });
+        });
+
+        $(document).on('click', '.pagination a', function (e) {
+            e.preventDefault();
+            var url = $(this).attr('href');
+            //TODO: ajax loader start
+            $.ajax({
+                url: url,
+                type: 'post',
+                dataType: "json",
+                data: self.filter.serialize()
+            })
+                .done(function(json) {
+                    if (json.status == 'success') {
+                        $('#searchResult').html(json.result).removeClass('hidden');
+                        $('#amount').html(json.amount);
+                        $('.dropdown-toggle').dropdown();
+                    }
+                })
+                .fail(function() {
+                    alert("error");
+                })
+                .always(function () {
+                    //TODO: ajax loader stop
+                });
         });
     },
 
