@@ -18,19 +18,34 @@ class ReferencesController extends Controller {
         if (!$request->value) {
             return response('Значение обязательно к заполнению', 400);
         }
-        if (!$request->pk || !$request->name) {
+        if (!$request->pk) {
             return response('Произошла ошибка отправки данных', 400);
         }
-        ReferenceProject::where('project_id', '=', $request->pk)
-            ->where('name', '=', $request->name)
-            ->update(['name' => $request->value]);
+
+        $model = new ReferenceProject();
+
+        if (!$request->name) {
+            // create
+           $model->insert([
+               'name' => $request->value,
+               'project_id' => $request->pk
+           ]);
+            //TODO: если запись существует надо вернуть пользователю ошибку об этом
+        } else {
+            // update
+            $model->where('project_id', '=', $request->pk)
+                ->where('name', '=', $request->name)
+                ->update(['name' => $request->value]);
+        }
     }
 
-    public function delete() {
-
-    }
-
-    public function create() {
-
+    public function delete(Request $request) {
+        if ($request->id || $request->name) {
+            ReferenceProject::where('project_id', '=', $request->id)
+                ->where('name', '=', $request->name)
+                ->forceDelete();
+        } else {
+            return response('Произошла ошибка при попытке удалить референцию', 400);
+        }
     }
 }

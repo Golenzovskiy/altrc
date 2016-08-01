@@ -30,3 +30,7 @@ Route::post('filter', [
 Route::post('references/update', [
     'uses' => 'ReferencesController@update',
 ]);
+
+Route::post('references/delete', [
+    'uses' => 'ReferencesController@delete',
+]);
