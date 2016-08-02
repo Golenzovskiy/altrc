@@ -8,6 +8,7 @@
 namespace App\Http\Controllers;
 
 use App\CountryProject;
+use App\ReferenceProject;
 use App\ServiceProject;
 use App\SectorProject;
 use Illuminate\Http\Request;
@@ -33,7 +34,11 @@ class ProjectController extends Controller {
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create() {
-        return view('project.create');
+        return view('project.create', [
+            'services' => ServiceProject::dictionary(),
+            'sectors' => SectorProject::dictionary(),
+            'country' => CountryProject::dictionary()
+        ]);
     }
 
     /**
@@ -42,6 +47,37 @@ class ProjectController extends Controller {
      * @return Response
      */
     public function save(Request $request) {
+        $this->validate($request, [
+            'name' => 'required|max:255|unique:projects',
+            'logo' => 'image',
+        ]);
+
+        $project = new Project;
+        $project->name = $request->name;
+        $project->year = $request->year . "-01-01";
+        $project->save();
+
+        $services = new ServiceProject;
+        $data = array();
+        foreach ($request->services as $value) {
+            $data[] = array('name' => $value, 'project_id' => $project->id);
+        }
+        $services->insert($data);
+
+        $sectors = new SectorProject;
+        $data = array();
+        foreach ($request->sectors as $value) {
+            $data[] = array('name' => $value, 'project_id' => $project->id);
+        }
+        $sectors->insert($data);
+
+        $countrys = new CountryProject;
+        $data = array();
+        foreach ($request->country as $value) {
+            $data[] = array('name' => $value, 'project_id' => $project->id);
+        }
+        $countrys->insert($data);
+
         var_dump($request);die;
     }
 

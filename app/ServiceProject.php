@@ -30,5 +30,4 @@ class ServiceProject extends AbstractModel {
      * @var bool
      */
     public $timestamps = false;
-
 }
