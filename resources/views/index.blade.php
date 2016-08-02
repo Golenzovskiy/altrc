@@ -5,7 +5,6 @@
 <h3>Поиск по проектам</h3>
 
 <form id="js-filter" action="/filter" method="post" enctype="multipart/form-data">
-<input type="hidden" name="_token" value="{{ csrf_token() }}">
 <div class="panel panel-default">
     <div class="panel-body">
             <div class="row">

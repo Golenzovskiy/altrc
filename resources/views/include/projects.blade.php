@@ -42,6 +42,19 @@
                             </div>
                             <div class="table-responsive">
                                 <table class="table table-default table-hover">
+                                    <tr class="hidden pattern">
+                                        <th>
+                                            <div class="btn-group">
+                                                <button type="button" class="btn btn-link btn-sm js-references-edit" aria-label="Edit reference">
+                                                    <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                                                </button>
+                                                <button type="button" class="btn btn-link btn-sm js-references-remove" aria-label="Delete reference">
+                                                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                                </button>
+                                            </div>
+                                            <span class="js-references-change editable editable-click" data-emptytext="" data-id="{{ $project->id }}"></span>
+                                        </th>
+                                    </tr>
                                     @foreach ($project->references as $i => $reference)
                                         <tr>
                                             <th>
@@ -53,9 +66,8 @@
                                                                               aria-hidden="true"></span>
                                                     </button>
                                                     <button type="button"
-                                                            class="btn btn-link btn-sm"
-                                                            aria-label="Delete reference"
-                                                            disabled="disabled">
+                                                            class="btn btn-link btn-sm js-references-remove"
+                                                            aria-label="Delete reference">
                                                                         <span class="glyphicon glyphicon-remove"
                                                                               aria-hidden="true"></span>
                                                     </button>
@@ -64,14 +76,16 @@
                                             </th>
                                         </tr>
                                     @endforeach
-                                    <tr>
+                                    <tr class="action">
                                         <td>
-                                            <button type="button" class="btn btn-link btn-sm"
+                                            <button type="button"
+                                                    data-id="{{ $project->id }}"
+                                                    class="btn btn-link btn-sm js-references-create"
                                                     aria-label="Add reference">
                                                                     <span class="glyphicon glyphicon-plus"
                                                                           aria-hidden="true"></span>
                                             </button>
-                                            <i><a href="#">Добавить референцию</a></i></td>
+                                            <i><a href="javascript:void(0)" class="js-references-create" data-id="{{ $project->id }}">Добавить референцию</a></i></td>
                                     </tr>
                                 </table>
                             </div>
