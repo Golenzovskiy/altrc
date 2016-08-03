@@ -18,7 +18,7 @@ class ProjectsTableSeeder extends Seeder
                 'name' => 'Siemens',
                 'description' => 'Оценка перспективности организации производства рентгено-диагностических оборудования в России для Siemens',
                 'year' => '2016-05-12',
-                'logo' => '/logos/siemens.jog',
+                'logo' => '/logos/siemens.jpg',
                 'created_at' => date('Y-m-d H-i-s'),
                 'updated_at' => date('Y-m-d H-i-s')
             ],[
