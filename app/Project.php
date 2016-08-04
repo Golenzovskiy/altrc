@@ -18,6 +18,7 @@ class Project extends Model {
      * @return \Illuminate\Database\Eloquent\Collection|static[]
      */
     public function getByFilter($data) {
+        $perPage = 20;
         //DB::connection()->enableQueryLog();
         $select = DB::table('projects');
 
@@ -65,7 +66,7 @@ class Project extends Model {
             $ids[] = $item->id;
         }
 
-        return $this->whereIn('id', $ids)->paginate(1);
+        return $this->whereIn('id', $ids)->paginate($perPage);
     }
 
     /**

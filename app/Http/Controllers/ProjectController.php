@@ -89,7 +89,7 @@ class ProjectController extends Controller {
        if (!$request->isMethod('post')) {
             return Helper::jsonError('Произошла ошибка');
        }
-       $model =  new Project();
+       $model = new Project();
        $projects = $model->getByFilter($request);
        return response()->json([
            'status' => 'success',
