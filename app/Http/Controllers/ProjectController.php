@@ -11,17 +11,20 @@ use App\CountryProject;
 use App\ReferenceProject;
 use App\ServiceProject;
 use App\SectorProject;
+use Faker\Provider\Image;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Project;
 use App\Helpers\Helper;
 
-class ProjectController extends Controller {
+class ProjectController extends Controller
+{
 
     /**
      * Index page
      */
-    public function index() {
+    public function index()
+    {
         return view('index', [
             'services' => ServiceProject::dictionary(),
             'sectors' => SectorProject::dictionary(),
@@ -33,7 +36,8 @@ class ProjectController extends Controller {
      * Create new project
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function create() {
+    public function create()
+    {
         return view('project.create', [
             'services' => ServiceProject::dictionary(),
             'sectors' => SectorProject::dictionary(),
@@ -46,7 +50,8 @@ class ProjectController extends Controller {
      * @param  Request $request request
      * @return Response
      */
-    public function save(Request $request) {
+    public function save(Request $request)
+    {
         $this->validate($request, [
             'name' => 'required|max:255|unique:projects',
             'logo' => 'image',
@@ -55,30 +60,38 @@ class ProjectController extends Controller {
         $project = new Project;
         $project->name = $request->name;
         $project->year = $request->year . "-01-01";
+        $imgName = $request->file('logo')->getClientOriginalName();
+        $request->file('logo')->move('images/logos', $imgName);
+        $project->logo = '/logos/' . $imgName;
         $project->save();
 
-        $services = new ServiceProject;
-        $data = array();
-        foreach ($request->services as $value) {
-            $data[] = array('name' => $value, 'project_id' => $project->id);
-        }
-        $services->insert($data);
+        $idProject = $project->id;
 
-        $sectors = new SectorProject;
-        $data = array();
-        foreach ($request->sectors as $value) {
-            $data[] = array('name' => $value, 'project_id' => $project->id);
-        }
-        $sectors->insert($data);
+        $dictionaries = [
+            'services' => '\App\ServiceProject',
+            'sectors' => '\App\SectorProject',
+            'country' => '\App\CountryProject'
+        ];
 
-        $countrys = new CountryProject;
-        $data = array();
-        foreach ($request->country as $value) {
-            $data[] = array('name' => $value, 'project_id' => $project->id);
+        foreach ($dictionaries as $key => $value) {
+            if ($request->$key) {
+                $dictionary = new $value();
+                $arr = $request->$key;
+                $this->saveDictionary($dictionary, $arr, $idProject);
+            }
         }
-        $countrys->insert($data);
 
-        var_dump($request);die;
+        var_dump($request);
+        die;
+    }
+
+    private function saveDictionary($dictionary, $arr, $idProject)
+    {
+        $data = array();
+        foreach ($arr as $value) {
+            $data[] = array('name' => $value, 'project_id' => $idProject);
+        }
+        $dictionary->insert($data);
     }
 
     /**
@@ -86,7 +99,7 @@ class ProjectController extends Controller {
      * @return Response
      */
     public function filter(Request $request) {
-       if (!$request->isMethod('post')) {
+        if (!$request->isMethod('post')) {
             return Helper::jsonError('Произошла ошибка');
        }
        $model = new Project();
