@@ -125,17 +125,16 @@ class ProjectController extends Controller
      * @param Request $request request
      * @return Response
      */
-    public function filter(Request $request)
-    {
+    public function filter(Request $request) {
         if (!$request->isMethod('post')) {
             return Helper::jsonError('Произошла ошибка');
-        }
-        $model = new Project();
-        $projects = $model->getByFilter($request);
-        return response()->json([
-            'status' => 'success',
-            'result' => view('filter.result', ['projects' => $projects])->render(),
-            'amount' => $projects->total()
-        ]);
+       }
+       $model = new Project();
+       $projects = $model->getByFilter($request);
+       return response()->json([
+           'status' => 'success',
+           'result' => view('filter.result', ['projects' => $projects])->render(),
+           'amount' => $projects->total()
+       ]);
     }
 }
