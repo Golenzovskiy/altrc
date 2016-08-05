@@ -2,8 +2,8 @@
 
 @section('content')
 
-    <h3>Добавление нового проекта</h3>
-    <form action="/save" method="post" enctype="multipart/form-data">
+    <h3>Редактирование проекта</h3>
+    <form action="/edit/{{ $project->id }}" method="post" enctype="multipart/form-data">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <div class="panel panel-default">
             <div class="panel-body">
@@ -18,8 +18,10 @@
                                 </ul>
                             </div>
                         @endif
+
                         <h4>Название проекта</h4>
-                        <input name="name" type="text" class="form-control" placeholder="Введите слово...">
+                        <input name="name" type="text" class="form-control" placeholder="Введите слово..."
+                               value="{{ $project->name }}">
                         <div class="row">
                             <div class="col-lg-4 col-md-4 col-sm-4">
                                 <h4>Логотип компании</h4>
@@ -27,13 +29,15 @@
                             </div>
                             <div style="z-index: 2" class="col-lg-8 col-md-8 col-sm-8">
                                 <h4>Выберите год</h4>
-                                <input name="year" class="form-control" type="text" placeholder="2015" id="from">
+                                <input name="year" class="form-control" type="text" placeholder="2015" id="from"
+                                       value="{{ date('Y', strtotime($project->year)) }}">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-lg-12">
                                 <h4>Описание проекта</h4>
-                                <textarea class="form-control" rows="3" name="description"></textarea>
+                                <textarea class="form-control" rows="3"
+                                          name="description">{{ $project->description }}</textarea>
                             </div>
                         </div>
                     </div>

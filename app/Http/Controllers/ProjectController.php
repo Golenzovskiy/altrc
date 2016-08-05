@@ -16,6 +16,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Project;
 use App\Helpers\Helper;
+use Symfony\Component\EventDispatcher\Tests\Service;
 
 class ProjectController extends Controller
 {
@@ -60,9 +61,12 @@ class ProjectController extends Controller
         $project = new Project;
         $project->name = $request->name;
         $project->year = $request->year . "-01-01";
-        $imgName = $request->file('logo')->getClientOriginalName();
-        $request->file('logo')->move('images/logos', $imgName);
-        $project->logo = '/logos/' . $imgName;
+        $project->description = $request->description;
+        if ($request->logo) {
+            $imgName = $request->file('logo')->getClientOriginalName();
+            $request->file('logo')->move('images/logos', $imgName);
+            $project->logo = '/logos/' . $imgName;
+        }
         $project->save();
 
         $idProject = $project->id;
@@ -92,6 +96,29 @@ class ProjectController extends Controller
             $data[] = array('name' => $value, 'project_id' => $idProject);
         }
         $dictionary->insert($data);
+    }
+
+    public function edit(Request $request, $id) {
+        if ($request->isMethod('post')) {
+            $project = Project::find($id);
+            $project->name = $request->name;
+            $project->year = $request->year . "-01-01";
+            $project->description = $request->description;
+            $project->save();
+
+            return $this->editView($id);
+        } else {
+            return $this->editView($id);
+        }
+    }
+
+    private function editView($id) {
+        return view('project.edit', [
+            'project' => Project::find($id),
+            'services' => ServiceProject::dictionary(),
+            'sectors' => SectorProject::dictionary(),
+            'country' => CountryProject::dictionary()
+        ]);
     }
 
     /**
