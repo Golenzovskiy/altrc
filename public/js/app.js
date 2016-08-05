@@ -159,7 +159,20 @@ var Filter = {
 
         $('.js-references').each(function () {
             dragula([this, document.getElementById('js-reference-panel')], {
-                copy: true
+                copy: true,
+                removeOnSpill: true
+            }).on('drop', function (el) {
+                $.ajax({
+                    url: '/user/references/store',
+                    type: 'post',
+                    dataType: "html",
+                    data: {'name': $(el).text()}
+                })
+                .done(function(response) {
+                })
+                .fail(function() {
+                    alert("error");
+                });
             });
         });
     },
@@ -270,4 +283,20 @@ $(document).ready(function () {
         }
     });
 
+    dragula([document.getElementById('js-reference-panel')], {
+        removeOnSpill: true
+    }).on('remove', function (el) {
+        $.ajax({
+            url: '/user/references/remove',
+            type: 'post',
+            dataType: "html",
+            data: {'name': $(el).text()}
+        })
+            .done(function(response) {
+            })
+            .fail(function() {
+                alert("error");
+            });
+    });
+    
 });

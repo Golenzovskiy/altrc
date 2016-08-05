@@ -47,4 +47,23 @@
 <div id="searchResult" class="hidden">
 </div>
 
+<div id="menu-bar" class="col-lg-4">
+    <div class="handle">
+        <span class="fa fa-chevron-left fa-lg"></span>
+    </div>
+    <div class="bs-component">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">Референции</h3>
+            </div>
+            <div class="panel-body" id="js-reference-panel">
+                @if($userReferences)
+                    @foreach($userReferences as $name)
+                        <div class="references-text">{{ $name }}</div>
+                    @endforeach
+                @endif
+            </div>
+        </div>
+    </div>
+</div>
 @endsection

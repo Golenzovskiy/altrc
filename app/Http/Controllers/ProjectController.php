@@ -24,12 +24,12 @@ class ProjectController extends Controller
     /**
      * Index page
      */
-    public function index()
-    {
+    public function index(Request $request) {
         return view('index', [
             'services' => ServiceProject::dictionary(),
             'sectors' => SectorProject::dictionary(),
-            'country' => CountryProject::dictionary()
+            'country' => CountryProject::dictionary(),
+            'userReferences' => $request->session()->get('user.references') // добавляем в шаблон рефернеции из сессии пользователя
         ]);
     }
 

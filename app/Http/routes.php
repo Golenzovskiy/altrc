@@ -35,6 +35,14 @@ Route::post('references/delete', [
     'uses' => 'ReferencesController@delete',
 ]);
 
+Route::post('user/references/store', [
+    'uses' => 'User\ReferencesController@store',
+]);
+
+Route::post('user/references/remove', [
+    'uses' => 'User\ReferencesController@remove',
+]);
+
 Route::get('edit/{id}', [
     'uses' => 'ProjectController@edit',
 ]);

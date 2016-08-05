@@ -73,21 +73,6 @@
     </div>
 </div>
 
-<div id="menu-bar" class="col-lg-4">
-    <div class="handle">
-        <span class="fa fa-chevron-left fa-lg"></span>
-    </div>
-    <div class="bs-component">
-        <div class="panel panel-primary">
-            <div class="panel-heading">
-                <h3 class="panel-title">Референции</h3>
-            </div>
-            <div class="panel-body" id="js-reference-panel">
-            </div>
-        </div>
-    </div>
-</div>
-
 <script src="{{asset('js/jquery.min.js')}}"></script>
 <script src="{{asset('js/bootstrap.min.js')}}"></script>
 <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>

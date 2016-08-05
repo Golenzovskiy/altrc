@@ -39,7 +39,7 @@ class ReferencesController extends Controller {
         }
     }
 
-    public function delete(Request $request) {
+    public function remove(Request $request) {
         if ($request->id || $request->name) {
             ReferenceProject::where('project_id', '=', $request->id)
                 ->where('name', '=', $request->name)
@@ -48,4 +48,5 @@ class ReferencesController extends Controller {
             return response('Произошла ошибка при попытке удалить референцию', 400);
         }
     }
+
 }
