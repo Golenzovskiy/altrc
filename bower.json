@@ -1,6 +1,7 @@
 {
   "name": "Altrc",
   "dependencies": {
-    "bootstrap": "~3.3.6"
+    "bootstrap": "~3.3.6",
+    "dragula.js": "dragula#^3.7.1"
   }
 }

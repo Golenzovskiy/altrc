@@ -53,3 +53,64 @@ A.tag {
 .label-default {
     font-weight: normal;
 }
+
+.references-text {
+    display: inline;
+    cursor: move;
+    cursor: grab;
+    cursor: -moz-grab;
+    cursor: -webkit-grab;
+}
+
+#js-reference-panel .references-text {
+    display: block;
+    border-bottom: 1px solid #dddddd;
+    padding-bottom: 10px;
+    cursor: default;
+}
+
+#menu-bar {
+    color: #fff;
+    z-index: 1002;
+    position: fixed;
+    width: 33%;
+    transition: all 300ms ease;
+    /*height: 100%;*/
+    top: 0;
+    right: -33%;
+    padding: 0;
+    height: auto !important;
+}
+
+#menu-bar .panel {
+    border-radius: 0 0 4px 4px;
+    -webkit-appearance: none
+}
+#menu-bar .panel-body {
+    color: #777777;
+}
+#menu-bar .panel-primary > .panel-heading {
+    border-radius: 0;
+}
+#menu-bar a:hover {
+    background-color: #D8D8D8;
+}
+#menu-bar .handle {
+    background-color: #d9230f;
+    border-color: #d9230f;
+    left: -40px;
+    padding: 10px;
+    position: absolute;
+    top: 0;
+    width: 40px;
+    cursor: pointer;
+    /*margin-top: -20px;*/
+    /*-moz-transition: 200ms ease all;
+          -webkit-transition: 200ms ease all;
+        -o-transition: 200ms ease all;
+        transition: 200ms ease all;*/
+}
+#menu-bar .handle:hover {
+    /*left: -46px;
+          width: 30px;*/
+}

@@ -41,7 +41,7 @@
                                 </div>
                             </div>
                             <div class="table-responsive">
-                                <table class="table table-default table-hover">
+                                <table class="table table-default table-hover ">
                                     <tr class="hidden pattern">
                                         <th>
                                             <div class="btn-group">
@@ -52,7 +52,7 @@
                                                     <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                                                 </button>
                                             </div>
-                                            <span class="js-references-change editable editable-click" data-emptytext="" data-id="{{ $project->id }}"></span>
+                                            <span class="js-references-change editable editable-click js-references" data-emptytext="" data-id="{{ $project->id }}"><div class="references-text"></div></span>
                                         </th>
                                     </tr>
                                     @foreach ($project->references as $i => $reference)
@@ -72,7 +72,7 @@
                                                                               aria-hidden="true"></span>
                                                     </button>
                                                 </div>
-                                                <span class="js-references-change" data-id="{{ $project->id }}">{{ $reference->name }}</span>
+                                                <span class="js-references-change js-references" data-id="{{ $project->id }}"><div class="references-text">{{ $reference->name }}</div></span>
                                             </th>
                                         </tr>
                                     @endforeach

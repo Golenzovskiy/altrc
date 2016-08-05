@@ -101,7 +101,7 @@ var Filter = {
             var $newItem = $('.pattern').clone(true);
             $(this).closest('.action').before('<tr class="current">' + $newItem.html() + '</tr>');
 
-            var $value = $parent.find('.current').find('.js-references-change');
+            var $value = $parent.find('.current').find('.js-references-change').find('div');
             var name = $value.text();
             var pk = $value.data('id');
 
@@ -154,6 +154,12 @@ var Filter = {
                 url: '/references/update',
                 name: name,
                 pk: pk
+            });
+        });
+
+        $('.js-references').each(function () {
+            dragula([this, document.getElementById('js-reference-panel')], {
+                copy: true
             });
         });
     },
@@ -240,7 +246,28 @@ $(document).ready(function () {
 	},
 	function(){
 		swal("Удалено!", "Проект удалён.", "success");
-	});
 	})
+	});
+
+    $("#menu-bar a").click(function () {
+        $("#menu-bar").slideReveal("hide");
+    });
+
+    var slider = $("#menu-bar").slideReveal({
+        width: '33%',
+        push: false,
+        position: "right",
+        // speed: 600,
+        trigger: $(".handle"),
+        // autoEscape: false,
+        shown: function (obj) {
+            obj.find(".handle").html('<span class="fa fa-chevron-right fa-lg"></span>');
+            obj.addClass("left-shadow-overlay");
+        },
+        hidden: function (obj) {
+            obj.find(".handle").html('<span class="fa fa-chevron-left fa-lg"></span>');
+            obj.removeClass("left-shadow-overlay");
+        }
+    });
 
 });
