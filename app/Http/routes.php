@@ -34,3 +34,11 @@ Route::post('references/update', [
 Route::post('references/delete', [
     'uses' => 'ReferencesController@delete',
 ]);
+
+Route::get('edit/{id}', [
+    'uses' => 'ProjectController@edit',
+]);
+
+Route::post('edit/{id}', [
+    'uses' => 'ProjectController@edit',
+]);

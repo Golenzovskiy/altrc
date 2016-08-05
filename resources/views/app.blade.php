@@ -13,11 +13,11 @@
     <link rel="stylesheet" type="text/css" href="{{asset('css/app.css')}}"/>
 
     <link href="https://bootswatch.com/simplex/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/ladda-themeless.min.css">
+    <link rel="stylesheet" href="/css/ladda-themeless.min.css">
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-    <link href="css/jquery.tagit.css" rel="stylesheet" type="text/css">
+    <link href="/css/jquery.tagit.css" rel="stylesheet" type="text/css">
     <link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet"/>
-    <link href="css/style.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -74,12 +74,12 @@
 <script src="{{asset('js/jquery.min.js')}}"></script>
 <script src="{{asset('js/bootstrap.min.js')}}"></script>
 <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/datepicker-ru.js"></script>
-<script src="js/spin.min.js"></script>
-<script src="js/ladda.min.js"></script>
-<script src="js/tag-it.js" type="text/javascript" charset="utf-8"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/datepicker-ru.js"></script>
+<script src="/js/spin.min.js"></script>
+<script src="/js/ladda.min.js"></script>
+<script src="/js/tag-it.js" type="text/javascript" charset="utf-8"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
-<script src="js/app.js"></script>
+<script src="/js/app.js"></script>
 </body>
 </html>
