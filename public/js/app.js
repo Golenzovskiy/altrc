@@ -90,6 +90,7 @@ var Filter = {
                 .on('hidden', function(e, reason) {
                     $(this).editable('disable');
                 });
+
         });
 
         $(document).on('click', '.js-references-create', function (e) {
@@ -174,6 +175,12 @@ var Filter = {
                     alert("error");
                 });
             });
+        });
+
+        new Clipboard('.clip', {
+            target: function(trigger) {
+                return $(trigger).parent().get(0);
+            }
         });
     },
 
@@ -297,6 +304,12 @@ $(document).ready(function () {
             .fail(function() {
                 alert("error");
             });
+    });
+
+    new Clipboard('.clip', {
+        target: function(trigger) {
+            return $(trigger).parent().get(0);
+        }
     });
     
 });

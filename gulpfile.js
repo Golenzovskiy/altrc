@@ -22,6 +22,7 @@ elixir(function(mix) {
         .copy(bpath + '/javascripts/bootstrap.min.js', 'public/js')
         .copy(dragulaPath + '/dist/dragula.min.css', 'public/css')
         .copy(dragulaPath + '/dist/dragula.min.js', 'public/js')
-        .copy('resources/assets/vendor/slidereveal/dist/jquery.slidereveal.min.js', 'public/js');
+        .copy('resources/assets/vendor/slidereveal/dist/jquery.slidereveal.min.js', 'public/js')
+        .copy('resources/assets/vendor/clipboard/dist/clipboard.min.js', 'public/js');
 
 });

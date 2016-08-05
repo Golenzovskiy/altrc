@@ -84,6 +84,7 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
 <script src="/js/dragula.min.js" type="text/javascript" charset="utf-8"></script>
 <script src="/js/jquery.slidereveal.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="/js/clipboard.min.js" type="text/javascript" charset="utf-8"></script>
 <script src="/js/app.js"></script>
 </body>
 </html>

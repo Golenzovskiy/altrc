@@ -82,6 +82,11 @@ A.tag {
     height: auto !important;
 }
 
+#menu-bar .clip {
+    padding-left: 10px;
+    cursor: pointer;
+}
+
 #menu-bar .panel {
     border-radius: 0 0 4px 4px;
     -webkit-appearance: none
@@ -113,4 +118,7 @@ A.tag {
 #menu-bar .handle:hover {
     /*left: -46px;
           width: 30px;*/
+}
+.js-references-change .clip {
+    display:none;
 }

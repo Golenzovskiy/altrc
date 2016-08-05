@@ -59,7 +59,7 @@
             <div class="panel-body" id="js-reference-panel">
                 @if($userReferences)
                     @foreach($userReferences as $name)
-                        <div class="references-text">{{ $name }}</div>
+                        <div class="references-text">{{ $name }}<span class="clip fa fa-files-o fa-lg"></span></div>
                     @endforeach
                 @endif
             </div>
