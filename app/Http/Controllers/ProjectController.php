@@ -73,9 +73,9 @@ class ProjectController extends Controller
         $project->save();
         $idProject = $project->id;
 
-        $tags = explode(',', $request->tags[0]);
         if ($request->tags) {
-            $dictionary = new \App\TagProject();
+            $tags = explode(',', $request->tags);
+            $dictionary = new TagProject();
             $arr = $tags;
             $this->saveDictionary($dictionary, $arr, $idProject);
         }
@@ -114,6 +114,12 @@ class ProjectController extends Controller
             $project->name = $request->name;
             $project->year = $request->year . "-01-01";
             $project->description = $request->description;
+            if ($request->logo) {
+                $imgName = $request->file('logo')->getClientOriginalName();
+                $request->file('logo')->move('images/logos', $imgName);
+                $project->logo = '/logos/' . $imgName;
+            }
+
             $project->save();
 
             ServiceProject::DeleteByProject($id);
@@ -121,9 +127,9 @@ class ProjectController extends Controller
             CountryProject::DeleteByProject($id);
             TagProject::DeleteByProject($id);
 
-            $tags = explode(',', $request->tags[0]);
+            $tags = explode(',', $request->tags);
             if ($request->tags) {
-                $dictionary = new \App\TagProject();
+                $dictionary = new TagProject();
                 $arr = $tags;
                 $this->saveDictionary($dictionary, $arr, $id);
             }

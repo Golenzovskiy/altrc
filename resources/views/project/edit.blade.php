@@ -54,12 +54,12 @@
                 <div class="row top">
                     <div class="col-lg-12">
                         <h4>Теги проекта</h4>
-                        <input type="text" class="form-control" placeholder="Введите слово..." id="FieldTags"
-                               name="tags[]" value="
+                        {{-- */$tags[] = ''/* --}}
                         @foreach($selectedTags as $value)
-                        {{ $value->name . ', ' }}
+                            {{-- */$tags[] = $value->name/* --}}
                         @endforeach
-                                ">
+                        <input type="text" class="form-control" placeholder="Введите слово..." id="FieldTags"
+                               name="tags" value="{{ implode(',', $tags) }}">
                     </div>
                 </div>
                 <div class="table-responsive">
