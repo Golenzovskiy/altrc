@@ -53,8 +53,13 @@
                 </div>
                 <div class="row top">
                     <div class="col-lg-12">
+                        <h4>Теги проекта</h4>
                         <input type="text" class="form-control" placeholder="Введите слово..." id="FieldTags"
-                               name="tags[]" value="Пищёвка, Стройка">
+                               name="tags[]" value="
+                        @foreach($selectedTags as $value)
+                        {{ $value->name . ', ' }}
+                        @endforeach
+                                ">
                     </div>
                 </div>
                 <div class="table-responsive">

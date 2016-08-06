@@ -11,6 +11,7 @@ use App\CountryProject;
 use App\ReferenceProject;
 use App\ServiceProject;
 use App\SectorProject;
+use App\TagProject;
 use Faker\Provider\Image;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -24,7 +25,8 @@ class ProjectController extends Controller
     /**
      * Index page
      */
-    public function index(Request $request) {
+    public function index(Request $request)
+    {
         return view('index', [
             'services' => ServiceProject::dictionary(),
             'sectors' => SectorProject::dictionary(),
@@ -67,11 +69,18 @@ class ProjectController extends Controller
             $request->file('logo')->move('images/logos', $imgName);
             $project->logo = '/logos/' . $imgName;
         }
-        $project->save();
 
+        $project->save();
         $idProject = $project->id;
 
-         $dictionaries = [
+        $tags = explode(',', $request->tags[0]);
+        if ($request->tags) {
+            $dictionary = new \App\TagProject();
+            $arr = $tags;
+            $this->saveDictionary($dictionary, $arr, $idProject);
+        }
+
+        $dictionaries = [
             'services' => '\App\ServiceProject',
             'sectors' => '\App\SectorProject',
             'country' => '\App\CountryProject'
@@ -110,6 +119,14 @@ class ProjectController extends Controller
             ServiceProject::DeleteByProject($id);
             SectorProject::DeleteByProject($id);
             CountryProject::DeleteByProject($id);
+            TagProject::DeleteByProject($id);
+
+            $tags = explode(',', $request->tags[0]);
+            if ($request->tags) {
+                $dictionary = new \App\TagProject();
+                $arr = $tags;
+                $this->saveDictionary($dictionary, $arr, $id);
+            }
 
             $dictionaries = [
                 'services' => '\App\ServiceProject',
@@ -143,7 +160,8 @@ class ProjectController extends Controller
             'sectors' => SectorProject::dictionary(),
             'selectedSectors' => SectorProject::where('project_id', '=', $id)->get(),
             'country' => CountryProject::dictionary(),
-            'selectedCountrys' => CountryProject::where('project_id', '=', $id)->get()
+            'selectedCountrys' => CountryProject::where('project_id', '=', $id)->get(),
+            'selectedTags' => TagProject::where('project_id', '=', $id)->get()
         ]);
     }
 
