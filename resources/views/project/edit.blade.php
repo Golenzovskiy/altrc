@@ -40,8 +40,23 @@
                                           name="description">{{ $project->description }}</textarea>
                             </div>
                         </div>
+
                     </div>
-                    @include('include.dictionary', ['name' => 'services[]', 'title' => 'Выберите услугу', 'items' => $services])
+                    <div class="col-lg-4">
+                        <h4>Выберите услугу</h4>
+                        <select multiple class="form-control" name="services[]">
+                            <?php $selected = ''; ?>
+                            @foreach ($services as $servicesAll)
+                                @foreach ($selectedServices as $servicesProject)
+                                    @if($servicesProject->name == $servicesAll->name)
+                                        <?php $selected = 'selected'; ?>
+                                    @endif
+                                @endforeach
+                                <option {{ $selected }} value="{{ $servicesAll->name }}">{{ $servicesAll->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    {{--@include('include.dictionary', ['name' => 'services[]', 'title' => 'Выберите услугу', 'items' => $services])--}}
 
                     @include('include.dictionary', ['name' => 'sectors[]', 'title' => 'Выберите отрасль', 'items' => $sectors])
 

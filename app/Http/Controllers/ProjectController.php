@@ -98,7 +98,8 @@ class ProjectController extends Controller
         $dictionary->insert($data);
     }
 
-    public function edit(Request $request, $id) {
+    public function edit(Request $request, $id)
+    {
         if ($request->isMethod('post')) {
             $project = Project::find($id);
             $project->name = $request->name;
@@ -112,10 +113,15 @@ class ProjectController extends Controller
         }
     }
 
-    private function editView($id) {
+    private function editView($id)
+    {
+        $selectedServices = ServiceProject::where('project_id', '=', $id)->get();
+        $allServices = ServiceProject::dictionary();
+
         return view('project.edit', [
             'project' => Project::find($id),
             'services' => ServiceProject::dictionary(),
+            'selectedServices' => ServiceProject::where('project_id', '=', $id)->get(),
             'sectors' => SectorProject::dictionary(),
             'country' => CountryProject::dictionary()
         ]);
@@ -125,16 +131,17 @@ class ProjectController extends Controller
      * @param Request $request request
      * @return Response
      */
-    public function filter(Request $request) {
+    public function filter(Request $request)
+    {
         if (!$request->isMethod('post')) {
             return Helper::jsonError('Произошла ошибка');
-       }
-       $model = new Project();
-       $projects = $model->getByFilter($request);
-       return response()->json([
-           'status' => 'success',
-           'result' => view('filter.result', ['projects' => $projects])->render(),
-           'amount' => $projects->total()
-       ]);
+        }
+        $model = new Project();
+        $projects = $model->getByFilter($request);
+        return response()->json([
+            'status' => 'success',
+            'result' => view('filter.result', ['projects' => $projects])->render(),
+            'amount' => $projects->total()
+        ]);
     }
 }
