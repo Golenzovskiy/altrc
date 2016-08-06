@@ -71,7 +71,7 @@ class ProjectController extends Controller
 
         $idProject = $project->id;
 
-        $dictionaries = [
+         $dictionaries = [
             'services' => '\App\ServiceProject',
             'sectors' => '\App\SectorProject',
             'country' => '\App\CountryProject'
@@ -106,6 +106,24 @@ class ProjectController extends Controller
             $project->year = $request->year . "-01-01";
             $project->description = $request->description;
             $project->save();
+
+            ServiceProject::DeleteByProject($id);
+            SectorProject::DeleteByProject($id);
+            CountryProject::DeleteByProject($id);
+
+            $dictionaries = [
+                'services' => '\App\ServiceProject',
+                'sectors' => '\App\SectorProject',
+                'country' => '\App\CountryProject'
+            ];
+
+            foreach ($dictionaries as $key => $value) {
+                if ($request->$key) {
+                    $dictionary = new $value();
+                    $arr = $request->$key;
+                    $this->saveDictionary($dictionary, $arr, $id);
+                }
+            }
 
             return $this->editView($id);
         } else {

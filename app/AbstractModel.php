@@ -20,4 +20,8 @@ abstract class AbstractModel extends Model {
     public function scopeDictionary($query){
         return $query->select('name')->groupBy('name')->get();
     }
+
+    public function scopeDeleteByProject($query, $id) {
+        return $query->where('project_id', '=', $id)->delete();
+    }
 }
