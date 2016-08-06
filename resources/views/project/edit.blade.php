@@ -42,25 +42,14 @@
                         </div>
 
                     </div>
-                    <div class="col-lg-4">
-                        <h4>Выберите услугу</h4>
-                        <select multiple class="form-control" name="services[]">
-                            <?php $selected = ''; ?>
-                            @foreach ($services as $servicesAll)
-                                @foreach ($selectedServices as $servicesProject)
-                                    @if($servicesProject->name == $servicesAll->name)
-                                        <?php $selected = 'selected'; ?>
-                                    @endif
-                                @endforeach
-                                <option {{ $selected }} value="{{ $servicesAll->name }}">{{ $servicesAll->name }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    {{--@include('include.dictionary', ['name' => 'services[]', 'title' => 'Выберите услугу', 'items' => $services])--}}
+                    @include('include.dictionary', ['name' => 'services[]', 'title' => 'Выберите услугу',
+                    'items' => $services, 'itemsProject' => $selectedServices])
 
-                    @include('include.dictionary', ['name' => 'sectors[]', 'title' => 'Выберите отрасль', 'items' => $sectors])
+                    @include('include.dictionary', ['name' => 'sectors[]', 'title' => 'Выберите отрасль',
+                    'items' => $sectors, 'itemsProject' => $selectedSectors])
 
-                    @include('include.dictionary', ['name' => 'country[]', 'title' => 'География', 'items' => $country])
+                    @include('include.dictionary', ['name' => 'country[]', 'title' => 'География',
+                    'items' => $country, 'itemsProject' => $selectedCountrys])
                 </div>
                 <div class="row top">
                     <div class="col-lg-12">

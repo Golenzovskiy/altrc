@@ -123,7 +123,9 @@ class ProjectController extends Controller
             'services' => ServiceProject::dictionary(),
             'selectedServices' => ServiceProject::where('project_id', '=', $id)->get(),
             'sectors' => SectorProject::dictionary(),
-            'country' => CountryProject::dictionary()
+            'selectedSectors' => SectorProject::where('project_id', '=', $id)->get(),
+            'country' => CountryProject::dictionary(),
+            'selectedCountrys' => CountryProject::where('project_id', '=', $id)->get()
         ]);
     }
 
