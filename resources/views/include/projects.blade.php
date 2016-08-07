@@ -7,9 +7,9 @@
         </tr>
 
         @foreach ($projects as $k => $project)
-            {{ $tags = '' }}
+            {{-- */ $tags = '' /* --}}
             @foreach ($project->tags as $tag)
-                {{ $tags[] = $tag->name }}
+                {{-- */ $tags[] = $tag->name /* --}}
             @endforeach
             <tr data-tags='{{ json_encode($tags, JSON_UNESCAPED_UNICODE) }}'>
             <td>
