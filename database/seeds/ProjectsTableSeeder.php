@@ -4,9 +4,44 @@ use Illuminate\Database\Seeder;
 
 class ProjectsTableSeeder extends Seeder
 {
+
+    private $csvFileName = '/path';
+
     public function run()
     {
-        DB::table('projects')->insert([
+        $csvData = file_get_contents($this->csvFileName);
+        $lines = explode(PHP_EOL, $csvData);
+        $data = array();
+        foreach ($lines as $line) {
+            $data[] = str_getcsv($line);
+        }
+        dd($data);
+
+        foreach ($data as $row) {
+            if (empty($row)) continue;
+
+            $projectId = DB::table('projects')->insertGetId(
+                [
+                    'name' => $row[0],
+                    'description' => $row[1],
+                    'year' => $row[2],
+                    'logo' => "/logos/{$row[3]}",
+                    'created_at' => date('Y-m-d H-i-s'),
+                    'updated_at' => date('Y-m-d H-i-s')
+                ]);
+
+            if ($projectId) {
+                $countries = explode(';', $row[4]);
+                foreach ($countries as $country) {
+                    DB::table('country_projects')->insert([
+                        'name' => $country,
+                        'project_id' => $projectId
+                    ]);
+                }
+            }
+        }
+
+        /*DB::table('projects')->insert([
             [
                 'name' => 'Volvo',
                 'description' => 'Исследование рынка и рекомендации по наращиванию объемов продаж на российском рынке компании "Volvo Penta"',
@@ -29,7 +64,7 @@ class ProjectsTableSeeder extends Seeder
                 'created_at' => date('Y-m-d H-i-s'),
                 'updated_at' => date('Y-m-d H-i-s')
             ]
-        ]);
+        ]);*/
 
         $this->command->info('Таблица projects заполнена.');
     }
