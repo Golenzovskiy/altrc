@@ -25,7 +25,15 @@
                         <div class="row">
                             <div class="col-lg-4 col-md-4 col-sm-4">
                                 <h4>Логотип компании</h4>
-                                <input name="logo" type="file" id="exampleInputFile">
+                                @if ($project->logo)
+                                    <label for="logo" class="file-label">
+                                        <img id="logo-image" border="0" src="{{ $project->logo }}">
+                                        <input name="logo" type="file" class="hidden" id="logo">
+                                    </label>
+                                @else
+                                    <img id="logo-image" border="0" src="" class="hidden">
+                                    <input name="logo" type="file" id="logo">
+                                @endif
                             </div>
                             <div style="z-index: 2" class="col-lg-8 col-md-8 col-sm-8">
                                 <h4>Выберите год</h4>

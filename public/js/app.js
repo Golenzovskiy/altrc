@@ -306,6 +306,18 @@ $(document).ready(function () {
             });
     });
 
+    $('#logo').change(function(){
+        if (this.files && this.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#logo-image').removeClass('hidden').attr('src', e.target.result);
+            };
+
+            reader.readAsDataURL(this.files[0]);
+        }
+    });
+
     new Clipboard('.clip', {
         target: function(trigger) {
             return $(trigger).parent().get(0);

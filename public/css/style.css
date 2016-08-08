@@ -122,3 +122,10 @@ A.tag {
 .js-references-change .clip {
     display:none;
 }
+.file-label {
+    cursor: pointer;
+}
+#logo-image {
+    max-width: 200px; max-height: 40px;
+    padding-bottom: 10px;
+}
