@@ -35,8 +35,8 @@ class ProjectsTableSeeder extends Seeder
                     'company'       => $row[0],
                     'name'          => trim($row[1]),
                     'description'   => trim($row[2]),
-                    'year'          => $row[3],
-                    'logo'          => ($row[4]) ? "/logos/{$row[4]}" : '',
+                    'year'          => ($row[4]) ? $row[4] . "-01-01" : '',
+                    'logo'          => ($row[3]) ? "/logos/{$row[3]}" : '',
                     'created_at'    => date('Y-m-d H-i-s'),
                     'updated_at'    => date('Y-m-d H-i-s')
                 ]);
