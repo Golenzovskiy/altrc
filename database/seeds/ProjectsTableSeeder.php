@@ -5,67 +5,71 @@ use Illuminate\Database\Seeder;
 class ProjectsTableSeeder extends Seeder
 {
 
-    private $csvFileName = '/path';
+    private $csvFileName = '/csv/projects.csv';
 
     public function run()
     {
-        $csvData = file_get_contents($this->csvFileName);
+        // получаем наш csv файлик
+        // правильно было бы тут делать проверку на получены ли данные, но лара делает это за тебя
+        // когда ты через seed запускаешь этот скрипт
+        $csvData = file_get_contents(__DIR__ . $this->csvFileName);
+        // разбиваем csv на массив строк, разделителем является конец строки PHP_EOL
         $lines = explode(PHP_EOL, $csvData);
+        // будет содержать строку csv в виде масива
         $data = array();
         foreach ($lines as $line) {
-            $data[] = str_getcsv($line);
+            $data[] = str_getcsv($line, ',', '~'); // тильда в качестве экранирующего символа
         }
-        dd($data);
+
+        // извлекает первое значение массива array и возвращает его
+        // в нашем случае мы тем самым удаляем из массива описание полей
+        array_shift($data);
 
         foreach ($data as $row) {
-            if (empty($row)) continue;
 
+            if (empty($row)) continue;
+            // для теста -> var_dump($row);
+            // создали проект
             $projectId = DB::table('projects')->insertGetId(
                 [
-                    'name' => $row[0],
-                    'description' => $row[1],
-                    'year' => $row[2],
-                    'logo' => "/logos/{$row[3]}",
-                    'created_at' => date('Y-m-d H-i-s'),
-                    'updated_at' => date('Y-m-d H-i-s')
+                    'company'       => $row[0],
+                    'name'          => $row[1],
+                    'description'   => $row[2],
+                    'year'          => $row[3],
+                    'logo'          => ($row[4]) ? "/logos/{$row[4]}" : '',
+                    'created_at'    => date('Y-m-d H-i-s'),
+                    'updated_at'    => date('Y-m-d H-i-s')
                 ]);
 
+            // получив ID проекта, заполняем связанные справочники
             if ($projectId) {
-                $countries = explode(';', $row[4]);
-                foreach ($countries as $country) {
-                    DB::table('country_projects')->insert([
-                        'name' => $country,
-                        'project_id' => $projectId
-                    ]);
+
+                // соотвествие название таблиц и позиции значений в csv
+                // то есть в массиве со значениям у тегов будет позиция 5
+                // у усулг позиция 6 и т.д.
+                $list = [
+                    'tag_projects'       => 5,
+                    'service_projects'   => 6,
+                    'sector_projects'    => 7,
+                    'country_projects'   => 8,
+                    'reference_projects' => 9
+                ];
+
+                foreach ($list as $tableName => $index) {
+                    // если пустая ячейка, пропускаем
+                    if (!$row[$index]) continue;
+
+                    $items = explode(';', $row[$index]);
+                    foreach ($items as $item) {
+                        DB::table($tableName)->insert([
+                            'name' => $item,
+                            'project_id' => $projectId
+                        ]);
+                    }
                 }
             }
         }
 
-        /*DB::table('projects')->insert([
-            [
-                'name' => 'Volvo',
-                'description' => 'Исследование рынка и рекомендации по наращиванию объемов продаж на российском рынке компании "Volvo Penta"',
-                'year' => '2013-12-05',
-                'logo' => '/logos/volvo.png',
-                'created_at' => date('Y-m-d H-i-s'),
-                'updated_at' => date('Y-m-d H-i-s')
-           ],[
-                'name' => 'Siemens',
-                'description' => 'Оценка перспективности организации производства рентгено-диагностических оборудования в России для Siemens',
-                'year' => '2016-05-12',
-                'logo' => '/logos/siemens.jpg',
-                'created_at' => date('Y-m-d H-i-s'),
-                'updated_at' => date('Y-m-d H-i-s')
-            ],[
-                'name' => 'Oerlikon',
-                'description' => 'Оценка потенциала развития на российском рынке в отраслях-потребителях всех бизнес-направлений компании Oerlikon Group',
-                'year' => '2014-03-01',
-                'logo' => '/logos/oerlikon.jpg',
-                'created_at' => date('Y-m-d H-i-s'),
-                'updated_at' => date('Y-m-d H-i-s')
-            ]
-        ]);*/
-
-        $this->command->info('Таблица projects заполнена.');
+        $this->command->info('Проекты успешно импортированы');
     }
 }

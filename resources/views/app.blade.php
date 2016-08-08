@@ -42,7 +42,7 @@
                 <span class="icon-bar"></span>
             </button>
             <!--<a href="#" class="navbar-brand"><img height="25px" src="http://www.raexpert.ru/companies/ikf_alt_logo.gif"/></a>-->
-            <a href="#" class="navbar-brand"><img class="img-responsive imgl"
+            <a href="/" class="navbar-brand"><img class="img-responsive imgl"
                                                   src="http://altrc.ru/bitrix/tpl/img/alt-logo-color-rgb.png"/></a>
         </div>
         <div class="collapse navbar-collapse" id="resonsive-menu">
