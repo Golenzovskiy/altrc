@@ -33,7 +33,7 @@
                         </div>
                         <div class="row">
                             <div class="col-lg-12">
-                                <h4>Описание проекта</h4>
+                                <h4>Описание компании</h4>
                                 <textarea class="form-control" rows="3" name="description"></textarea>
                             </div>
                         </div>
