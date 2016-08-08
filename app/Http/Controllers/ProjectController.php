@@ -171,6 +171,15 @@ class ProjectController extends Controller
         ]);
     }
 
+    public function remove($id) {
+        $count = Project::destroy($id);
+        $status = ($count > 0) ? 'success' : 'error';
+        return response()->json([
+            'status' => $status,
+            'message' => ($status == 'success') ? 'Проект успешно удален' : 'При попытке удалить проект произошла ошибка'
+        ]);
+    }
+
     /**
      * @param Request $request request
      * @return Response

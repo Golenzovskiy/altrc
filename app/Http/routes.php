@@ -50,3 +50,7 @@ Route::get('edit/{id}', [
 Route::post('edit/{id}', [
     'uses' => 'ProjectController@edit',
 ]);
+
+Route::get('remove/{id}', [
+    'uses' => 'ProjectController@remove',
+]);

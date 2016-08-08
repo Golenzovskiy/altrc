@@ -128,4 +128,5 @@ A.tag {
 #logo-image {
     max-width: 200px; max-height: 40px;
     padding-bottom: 10px;
+    border: 1px solid #dddddd;
 }
