@@ -33,8 +33,8 @@ class ProjectsTableSeeder extends Seeder
             $projectId = DB::table('projects')->insertGetId(
                 [
                     'company'       => $row[0],
-                    'name'          => $row[1],
-                    'description'   => $row[2],
+                    'name'          => trim($row[1]),
+                    'description'   => trim($row[2]),
                     'year'          => $row[3],
                     'logo'          => ($row[4]) ? "/logos/{$row[4]}" : '',
                     'created_at'    => date('Y-m-d H-i-s'),
@@ -62,7 +62,7 @@ class ProjectsTableSeeder extends Seeder
                     $items = explode(';', $row[$index]);
                     foreach ($items as $item) {
                         DB::table($tableName)->insert([
-                            'name' => $item,
+                            'name' => trim($item),
                             'project_id' => $projectId
                         ]);
                     }
