@@ -33,7 +33,7 @@
                                                 title="Добавить описание"
                                                 class="glyphicon glyphicon glyphicon-pushpin"
                                                 aria-hidden="true"></span></a>
-                                    <a href="#" class="btn btn-default btn-xs"><span
+                                    <a href="/edit/{{ $project->id }}" class="btn btn-default btn-xs"><span
                                                 data-toggle="tooltip" data-placement="top"
                                                 title="Редактировать проект"
                                                 class="glyphicon glyphicon glyphicon-wrench"
