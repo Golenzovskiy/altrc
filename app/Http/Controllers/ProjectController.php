@@ -95,8 +95,7 @@ class ProjectController extends Controller
             }
         }
 
-        var_dump($request);
-        die;
+        return redirect()->action('ProjectController@edit', $idProject);
     }
 
     private function saveDictionary($dictionary, $arr, $idProject)
