@@ -18,9 +18,20 @@
                          src="{{ $project->logo }}">
                 @endif
             </td>
-            <td>{{ $project->description }}</td>
+            <td>
+                {{ $project->name }}
+                @if ($project->description)
+                    ({{ $project->description }})
+                @endif
+            </td>
             <td><a class="dashed" data-toggle="collapse" href="#collapse{{$k+1}}"
-                   aria-expanded="false" aria-controls="collapse">{{ $project->references[0]->name }}</a></td>
+                   aria-expanded="false" aria-controls="collapse">
+                    @if (isset($project->references[0]))
+                        {{ $project->references[0]->name }}
+                    @else
+                        Пока нет референции
+                    @endif
+                </a></td>
             </tr>
             <tr class="collapse" id="collapse{{$k+1}}">
                 <td colspan="5">
@@ -55,27 +66,29 @@
                                             <span class="js-references-change editable editable-click js-references" data-emptytext="" data-id="{{ $project->id }}"><div class="references-text"><span class="clip fa fa-files-o fa-lg"></span></div></span>
                                         </th>
                                     </tr>
-                                    @foreach ($project->references as $i => $reference)
-                                        <tr>
-                                            <th>
-                                                <div class="btn-group">
-                                                    <button type="button"
-                                                            class="btn btn-link btn-sm js-references-edit"
-                                                            aria-label="Edit reference">
-                                                                        <span class="glyphicon glyphicon-edit"
-                                                                              aria-hidden="true"></span>
-                                                    </button>
-                                                    <button type="button"
-                                                            class="btn btn-link btn-sm js-references-remove"
-                                                            aria-label="Delete reference">
-                                                                        <span class="glyphicon glyphicon-remove"
-                                                                              aria-hidden="true"></span>
-                                                    </button>
-                                                </div>
-                                                <span class="js-references-change js-references" data-id="{{ $project->id }}"><div class="references-text">{{ $reference->name }}<span class="clip fa fa-files-o fa-lg"></span></div></span>
-                                            </th>
-                                        </tr>
-                                    @endforeach
+                                    @if ($project->references)
+                                        @foreach ($project->references as $i => $reference)
+                                            <tr>
+                                                <th>
+                                                    <div class="btn-group">
+                                                        <button type="button"
+                                                                class="btn btn-link btn-sm js-references-edit"
+                                                                aria-label="Edit reference">
+                                                                            <span class="glyphicon glyphicon-edit"
+                                                                                  aria-hidden="true"></span>
+                                                        </button>
+                                                        <button type="button"
+                                                                class="btn btn-link btn-sm js-references-remove"
+                                                                aria-label="Delete reference">
+                                                                            <span class="glyphicon glyphicon-remove"
+                                                                                  aria-hidden="true"></span>
+                                                        </button>
+                                                    </div>
+                                                    <span class="js-references-change js-references" data-id="{{ $project->id }}"><div class="references-text">{{ $reference->name }}<span class="clip fa fa-files-o fa-lg"></span></div></span>
+                                                </th>
+                                            </tr>
+                                        @endforeach
+                                    @endif
                                     <tr class="action">
                                         <td>
                                             <button type="button"

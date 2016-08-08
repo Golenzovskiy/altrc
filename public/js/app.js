@@ -104,7 +104,7 @@ var Filter = {
 
             var $value = $parent.find('.current').find('.js-references-change').find('div');
             var name = $value.text();
-            var pk = $value.data('id');
+            var pk = $parent.find('.current').find('.js-references-change').data('id');
 
             $value.editable({
                 type: 'text',
@@ -214,6 +214,7 @@ $(document).ready(function () {
         dateFormat: "yy",
         defaultDate: -365,
         changeYear: true,
+        yearRange: "1990:+0",
         numberOfMonths: 1,
         onClose: function (selectedDate) {
             //$("#to").datepicker("option", "minDate", selectedDate);
@@ -222,6 +223,7 @@ $(document).ready(function () {
     $("#to").datepicker({
         dateFormat: "yy",
         changeYear: true,
+        yearRange: "1990:+0",
         numberOfMonths: 1,
         onClose: function (selectedDate) {
             //$("#from").datepicker("option", "maxDate", selectedDate);
@@ -324,7 +326,7 @@ $(document).ready(function () {
         }
     });
 
-    $(document).on('click', '.js-references-edit', function (e) {
+    $('.js-references-edit').on('click', function (e) {
         e.stopPropagation();
         var $text = $(this).parent().next();
         $text.editable('enable').editable('toggle')
@@ -338,7 +340,7 @@ $(document).ready(function () {
             });
     });
 
-    $(document).on('click', '.js-references-create', function (e) {
+    $('.js-references-create').on('click', function (e) {
         e.stopPropagation();
 
         var pos = $('[data-position]').last().data('position');
@@ -363,7 +365,7 @@ $(document).ready(function () {
             });
     });
 
-    $(document).on('click', '.js-references-remove', function (e) {
+    $('.js-references-remove').on('click', function (e) {
         var $value = $(this).parent().next();
         console.log($value);
         if ($value.hasClass('js-references-change')) {

@@ -159,9 +159,6 @@ class ProjectController extends Controller
 
     private function editView($id)
     {
-        $selectedServices = ServiceProject::where('project_id', '=', $id)->get();
-        $allServices = ServiceProject::dictionary();
-
         return view('project.edit', [
             'project' => Project::find($id),
             'services' => ServiceProject::dictionary(),
@@ -187,8 +184,7 @@ class ProjectController extends Controller
      * @param Request $request request
      * @return Response
      */
-    public function filter(Request $request)
-    {
+    public function filter(Request $request) {
         if (!$request->isMethod('post')) {
             return Helper::jsonError('Произошла ошибка');
         }

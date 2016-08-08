@@ -74,7 +74,7 @@ class Project extends Model {
      * @return string image url
      */
     public function getLogoAttribute() {
-        return '/images' . $this->attributes['logo'];
+        return ($this->attributes['logo']) ? '/images' . $this->attributes['logo'] : '';
     }
 
     public function references() {
