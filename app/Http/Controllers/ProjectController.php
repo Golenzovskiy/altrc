@@ -83,7 +83,8 @@ class ProjectController extends Controller
         $dictionaries = [
             'services' => '\App\ServiceProject',
             'sectors' => '\App\SectorProject',
-            'country' => '\App\CountryProject'
+            'country' => '\App\CountryProject',
+            'references' => '\App\ReferenceProject'
         ];
 
         foreach ($dictionaries as $key => $value) {
@@ -126,6 +127,7 @@ class ProjectController extends Controller
             SectorProject::DeleteByProject($id);
             CountryProject::DeleteByProject($id);
             TagProject::DeleteByProject($id);
+            ReferenceProject::DeleteByProject($id);
 
             $tags = explode(',', $request->tags);
             if ($request->tags) {
@@ -137,7 +139,8 @@ class ProjectController extends Controller
             $dictionaries = [
                 'services' => '\App\ServiceProject',
                 'sectors' => '\App\SectorProject',
-                'country' => '\App\CountryProject'
+                'country' => '\App\CountryProject',
+                'references' => '\App\ReferenceProject'
             ];
 
             foreach ($dictionaries as $key => $value) {

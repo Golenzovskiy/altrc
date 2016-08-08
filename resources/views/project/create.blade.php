@@ -53,83 +53,54 @@
                 </div>
                 <div class="table-responsive">
                     <table class="table table-default table-hover gray-table">
-                        <tr>
+                        <tr class="hidden pattern">
                             <th>
                                 <div class="btn-group">
-                                    <button type="button" class="btn btn-link btn-sm" aria-label="Edit reference">
+                                    <button type="button" class="btn btn-link btn-sm js-references-edit"
+                                            aria-label="Edit reference">
                                         <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                                     </button>
-                                    <button type="button" class="btn btn-link btn-sm" aria-label="Delete reference"
-                                            disabled="disabled">
+                                    <button type="button" class="btn btn-link btn-sm js-references-remove"
+                                            aria-label="Delete reference">
                                         <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                                     </button>
                                 </div>
-                                Исследование рынка и рекомендации по наращиванию объемов продаж на российском рынке
-                                компании "Volvo Penta"
+                                <span class="js-references-change js-references" data-position=""
+                                      data-emptytext="" data-id=""><div
+                                            class="references-text"></div></span>
+                                <input type="hidden" data-position=""
+                                       value="">
                             </th>
                         </tr>
                         <tr>
-                            <td>
+                            <th>
                                 <div class="btn-group">
-                                    <button type="button" class="btn btn-link btn-sm" aria-label="Edit reference">
+                                    <button type="button" class="btn btn-link btn-sm js-references-edit"
+                                            aria-label="Edit reference">
                                         <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                                     </button>
-                                    <button type="button" class="btn btn-link btn-sm" aria-label="Delete reference">
+                                    <button type="button" class="btn btn-link btn-sm js-references-remove"
+                                            aria-label="Delete reference">
                                         <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                                     </button>
                                 </div>
-                                Оценка перспективности организации производства рентгено-диагностических
-                                оборудования в России
-                            </td>
+                                {{-- */ $i = rand() /* --}}
+                                <span class="js-references-change js-references" data-position="{{ $i }}">
+                                        <div class="references-text"></div></span>
+                                <input type="hidden" name="references[]" data-position="{{ $i }}" value="">
+                            </th>
                         </tr>
-                        <tr>
+                        <tr class="action">
                             <td>
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-link btn-sm" aria-label="Edit reference">
-                                        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-                                    </button>
-                                    <button type="button" class="btn btn-link btn-sm" aria-label="Delete reference">
-                                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                                    </button>
-                                </div>
-                                Оценка потенциала развития на российском рынке в отраслях-потребителях всех
-                                бизнес-направлений компании
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-link btn-sm" aria-label="Edit reference">
-                                        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-                                    </button>
-                                    <button type="button" class="btn btn-link btn-sm" aria-label="Delete reference">
-                                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                                    </button>
-                                </div>
-                                Оценка перспективности организации производства рентгено-диагностических
-                                оборудования в России
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-link btn-sm" aria-label="Edit reference">
-                                        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-                                    </button>
-                                    <button type="button" class="btn btn-link btn-sm" aria-label="Delete reference">
-                                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                                    </button>
-                                </div>
-                                Оценка потенциала развития на российском рынке в отраслях-потребителях всех
-                                бизнес-направлений компании
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <button type="button" class="btn btn-link btn-sm" aria-label="Add reference">
-                                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                <button type="button"
+                                        data-id="1111"
+                                        class="btn btn-link btn-sm js-references-create"
+                                        aria-label="Add reference">
+                                                                    <span class="glyphicon glyphicon-plus"
+                                                                          aria-hidden="true"></span>
                                 </button>
-                                <i><a href="#">Добавить референцию</a></i></td>
+                                <i><a href="javascript:void(0)" class="js-references-create"
+                                      data-id="1111">Добавить референцию</a></i></td>
                         </tr>
                     </table>
                 </div>

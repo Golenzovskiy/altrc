@@ -8,7 +8,7 @@
 
 $.fn.editable.defaults.mode = 'inline';
 $.ajaxSetup({
-    headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }
+    headers: {'X-CSRF-Token': $('meta[name=_token]').attr('content')}
 });
 
 function Ajax(form) {
@@ -18,7 +18,7 @@ function Ajax(form) {
 
     this.init = function () {
         this.type = this.$form.attr('method');
-        this.url  = this.$form.attr('action');
+        this.url = this.$form.attr('action');
     };
 
     this.request = function (fn) {
@@ -32,28 +32,28 @@ function Ajax(form) {
             dataType: "json",
             data: this.$form.serialize()
         })
-        .done(function(response) {
-            fn(response);
-        })
-        .fail(function() {
-            alert("error");
-        })
-        .always(function () {
-            l.stop();
-        });
+            .done(function (response) {
+                fn(response);
+            })
+            .fail(function () {
+                alert("error");
+            })
+            .always(function () {
+                l.stop();
+            });
     }
 }
 
 var Filter = {
     filter: $('#js-filter'),
 
-    observer: function() {
+    observer: function () {
         var self = this;
 
         this.filter.on('submit', function (e) {
             e.preventDefault();
             var ajax = new Ajax($(this));
-            ajax.request(function(json) {
+            ajax.request(function (json) {
                 if (json.status == 'success') {
                     self.afterResponse(json);
                 }
@@ -70,12 +70,12 @@ var Filter = {
                 dataType: "json",
                 data: self.filter.serialize()
             })
-                .done(function(json) {
+                .done(function (json) {
                     if (json.status == 'success') {
                         self.afterResponse(json);
                     }
                 })
-                .fail(function() {
+                .fail(function () {
                     alert("error");
                 })
                 .always(function () {
@@ -87,7 +87,7 @@ var Filter = {
             e.stopPropagation();
             var $text = $(this).parent().next();
             $text.editable('enable').editable('toggle')
-                .on('hidden', function(e, reason) {
+                .on('hidden', function (e, reason) {
                     $(this).editable('disable');
                 });
 
@@ -128,21 +128,21 @@ var Filter = {
                         dataType: "html",
                         data: {'id': id, 'name': name}
                     })
-                        .done(function(response) {
+                        .done(function (response) {
                             $value.closest('tr').remove();
                         })
-                        .fail(function() {
+                        .fail(function () {
                             alert("error");
                         })
                         .always(function () {
-                           //TODO ajax loader stop
+                            //TODO ajax loader stop
                         });
                 }
             }
         });
     },
 
-    afterResponse: function(json) {
+    afterResponse: function (json) {
         $('#searchResult').html(json.result).removeClass('hidden');
         $('#amount').html(json.amount);
         $('.dropdown-toggle').dropdown();
@@ -169,22 +169,22 @@ var Filter = {
                     dataType: "html",
                     data: {'name': $(el).text()}
                 })
-                .done(function(response) {
-                })
-                .fail(function() {
-                    alert("error");
-                });
+                    .done(function (response) {
+                    })
+                    .fail(function () {
+                        alert("error");
+                    });
             });
         });
 
         new Clipboard('.clip', {
-            target: function(trigger) {
+            target: function (trigger) {
                 return $(trigger).parent().get(0);
             }
         });
     },
 
-    init: function() {
+    init: function () {
         if (this.filter.length > 0) {
             this.observer();
         }
@@ -197,7 +197,7 @@ function checkFields(form) {
         inputs = form.find(':input').not(checks_radios).not('[type="submit"],[type="button"],[type="reset"]');
 
     var checked = checks_radios.filter(':checked');
-    var filled = inputs.filter(function(){
+    var filled = inputs.filter(function () {
         return $.trim($(this).val()).length > 0;
     });
 
@@ -228,13 +228,13 @@ $(document).ready(function () {
         }
     });
 
-	/* */
-	
-	$("form").change(function() {
-		$(this).find("button").removeAttr("disabled");
-	});
+    /* */
 
-	/* */
+    $("form").change(function () {
+        $(this).find("button").removeAttr("disabled");
+    });
+
+    /* */
 
     var sampleTags = ['пищёвка', 'стройка', 'абвгд', 'еёжз'];
     $('#FieldTags').tagit({
@@ -247,27 +247,27 @@ $(document).ready(function () {
         var selectedTag = $(this).data("tag");
         $("#filterResult").find("tr[data-tags]").each(function () {
             if ($.inArray(selectedTag, $(this).data('tags')) == -1) {
-                $(this).addClass('hidden').next().addClass('hidden');                
+                $(this).addClass('hidden').next().addClass('hidden');
             }
         });
         $("#tags-button").find("span").removeClass("label-primary").addClass("label-default");
         $(this).children("span").removeClass("label-default").addClass("label-primary");
     });
 
-	$("#delete").click(function() {
-		swal({
-		title: "Удалить проект?",
-		text: "Вы уверены, что хотите полностью удалить проект?", 
-		type: "warning",
-		showCancelButton: true,
-		confirmButtonColor: "#DD6B55",
-		confirmButtonText: "Да, удалить проект!",
-		closeOnConfirm: false
-	},
-	function(){
-		swal("Удалено!", "Проект удалён.", "success");
-	})
-	});
+    $("#delete").click(function () {
+        swal({
+                title: "Удалить проект?",
+                text: "Вы уверены, что хотите полностью удалить проект?",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Да, удалить проект!",
+                closeOnConfirm: false
+            },
+            function () {
+                swal("Удалено!", "Проект удалён.", "success");
+            })
+    });
 
     $("#menu-bar a").click(function () {
         $("#menu-bar").slideReveal("hide");
@@ -299,14 +299,14 @@ $(document).ready(function () {
             dataType: "html",
             data: {'name': $(el).text()}
         })
-            .done(function(response) {
+            .done(function (response) {
             })
-            .fail(function() {
+            .fail(function () {
                 alert("error");
             });
     });
 
-    $('#logo').change(function(){
+    $('#logo').change(function () {
         if (this.files && this.files[0]) {
             var reader = new FileReader();
 
@@ -319,9 +319,58 @@ $(document).ready(function () {
     });
 
     new Clipboard('.clip', {
-        target: function(trigger) {
+        target: function (trigger) {
             return $(trigger).parent().get(0);
         }
     });
-    
+
+    $(document).on('click', '.js-references-edit', function (e) {
+        e.stopPropagation();
+        var $text = $(this).parent().next();
+        $text.editable('enable').editable('toggle')
+            .on('hidden', function (e, reason) {
+                $(this).editable('disable');
+            })
+            .on('save', function (e, params) {
+                var target = $(e.target);
+                var position = target.data('position');
+                $('input[data-position=' + position + ']').val(params.newValue);
+            });
+    });
+
+    $(document).on('click', '.js-references-create', function (e) {
+        e.stopPropagation();
+
+        var pos = $('[data-position]').last().data('position');
+        var $parent = $(this).parents('.table');
+
+        $parent.find('.current').removeClass('current');
+        var $newItem = $('.pattern').clone(true);
+
+        $(this).closest('.action').before('<tr class="current">' + $newItem.html() + '</tr>');
+        var $value = $parent.find('.current').find('.js-references-change').find('div');
+
+        $('[data-position]').last().attr('name', 'references[]');
+        $('[data-position]').last().attr('data-position', pos + 1);
+
+        $('.js-references-change').last().attr('data-position', pos + 1);
+
+        $value.editable('show')
+            .on('save', function (e, params) {
+                var target = $(e.target);
+                var position = target.parent().data('position');
+                $('input[data-position=' + position + ']').val(params.newValue);
+            });
+    });
+
+    $(document).on('click', '.js-references-remove', function (e) {
+        var $value = $(this).parent().next();
+        console.log($value);
+        if ($value.hasClass('js-references-change')) {
+            //TODO ajax loader start
+            var name = $value.text();
+            $value.closest('tr').remove();
+        }
+    })
+
 });
