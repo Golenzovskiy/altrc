@@ -56,11 +56,12 @@ class ProjectController extends Controller
     public function save(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required|max:255|unique:projects',
+            'company' => 'required|max:255|unique:projects',
             'logo' => 'image',
         ]);
 
         $project = new Project;
+        $project->company = $request->company;
         $project->name = $request->name;
         $project->year = $request->year . "-01-01";
         $project->description = $request->description;
@@ -111,6 +112,7 @@ class ProjectController extends Controller
     {
         if ($request->isMethod('post')) {
             $project = Project::find($id);
+            $project->company = $request->company;
             $project->name = $request->name;
             $project->year = $request->year . "-01-01";
             $project->description = $request->description;

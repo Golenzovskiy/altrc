@@ -2,6 +2,7 @@
     <table class="table table-default">
         <tr>
             <th>Логотип</th>
+            <th>Компания</th>
             <th>Название проекта</th>
             <th>Варианты формулировок</th>
         </tr>
@@ -12,26 +13,29 @@
                 {{-- */ $tags[] = $tag->name /* --}}
             @endforeach
             <tr data-tags='{{ json_encode($tags, JSON_UNESCAPED_UNICODE) }}'>
-            <td>
-                @if ($project->logo)
-                    <img border="0"
-                         src="{{ $project->logo }}">
-                @endif
-            </td>
-            <td>
-                {{ $project->name }}
-                @if ($project->description)
-                    ({{ $project->description }})
-                @endif
-            </td>
-            <td><a class="dashed" data-toggle="collapse" href="#collapse{{$k+1}}"
-                   aria-expanded="false" aria-controls="collapse">
-                    @if (isset($project->references[0]))
-                        {{ $project->references[0]->name }}
-                    @else
-                        Пока нет референции
+                <td>
+                    @if ($project->logo)
+                        <img border="0"
+                             src="{{ $project->logo }}">
                     @endif
-                </a></td>
+                </td>
+                <td>
+                    {{ $project->company }}
+                </td>
+                <td>
+                    {{ $project->name }}
+                    @if ($project->description)
+                        ({{ $project->description }})
+                    @endif
+                </td>
+                <td><a class="dashed" data-toggle="collapse" href="#collapse{{$k+1}}"
+                       aria-expanded="false" aria-controls="collapse">
+                        @if (isset($project->references[0]))
+                            {{ $project->references[0]->name }}
+                        @else
+                            Пока нет референции
+                        @endif
+                    </a></td>
             </tr>
             <tr class="collapse" id="collapse{{$k+1}}">
                 <td colspan="5">
@@ -56,14 +60,19 @@
                                     <tr class="hidden pattern">
                                         <th>
                                             <div class="btn-group">
-                                                <button type="button" class="btn btn-link btn-sm js-references-edit" aria-label="Edit reference">
+                                                <button type="button" class="btn btn-link btn-sm js-references-edit"
+                                                        aria-label="Edit reference">
                                                     <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                                                 </button>
-                                                <button type="button" class="btn btn-link btn-sm js-references-remove" aria-label="Delete reference">
+                                                <button type="button" class="btn btn-link btn-sm js-references-remove"
+                                                        aria-label="Delete reference">
                                                     <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                                                 </button>
                                             </div>
-                                            <span class="js-references-change editable editable-click js-references" data-emptytext="" data-id="{{ $project->id }}"><div class="references-text"><span class="clip fa fa-files-o fa-lg"></span></div></span>
+                                            <span class="js-references-change editable editable-click js-references"
+                                                  data-emptytext="" data-id="{{ $project->id }}"><div
+                                                        class="references-text"><span
+                                                            class="clip fa fa-files-o fa-lg"></span></div></span>
                                         </th>
                                     </tr>
                                     @if ($project->references)
@@ -84,7 +93,9 @@
                                                                                   aria-hidden="true"></span>
                                                         </button>
                                                     </div>
-                                                    <span class="js-references-change js-references" data-id="{{ $project->id }}"><div class="references-text">{{ $reference->name }}<span class="clip fa fa-files-o fa-lg"></span></div></span>
+                                                    <span class="js-references-change js-references"
+                                                          data-id="{{ $project->id }}"><div class="references-text">{{ $reference->name }}
+                                                            <span class="clip fa fa-files-o fa-lg"></span></div></span>
                                                 </th>
                                             </tr>
                                         @endforeach
@@ -98,7 +109,8 @@
                                                                     <span class="glyphicon glyphicon-plus"
                                                                           aria-hidden="true"></span>
                                             </button>
-                                            <i><a href="javascript:void(0)" class="js-references-create" data-id="{{ $project->id }}">Добавить референцию</a></i></td>
+                                            <i><a href="javascript:void(0)" class="js-references-create"
+                                                  data-id="{{ $project->id }}">Добавить референцию</a></i></td>
                                     </tr>
                                 </table>
                             </div>

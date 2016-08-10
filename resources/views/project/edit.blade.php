@@ -19,10 +19,24 @@
                             </div>
                         @endif
 
-                        <h4>Название проекта</h4>
-                        <input name="name" type="text" class="form-control" placeholder="Введите слово..."
-                               value="{{ $project->name }}">
                         <div class="row">
+                            <div class="col-lg-8 col-md-8 col-sm-8">
+                                <h4>Название компании</h4>
+                                <input name="company" type="text" class="form-control"
+                                       placeholder="Введите слово..." value="{{ $project->company }}">
+                            </div>
+                            <div style="z-index: 2" class="col-lg-4 col-md-4 col-sm-4">
+                                <h4>Выберите год</h4>
+                                <input name="year" class="form-control" type="text" placeholder="2015" id="from"
+                                       value="{{ date('Y', strtotime($project->year)) }}">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-8 col-md-8 col-sm-8">
+                                <h4>Название проекта</h4>
+                                <input name="name" type="text" class="form-control" placeholder="Введите слово..."
+                                       value="{{ $project->name }}">
+                            </div>
                             <div class="col-lg-4 col-md-4 col-sm-4">
                                 <h4>Логотип компании</h4>
                                 @if ($project->logo)
@@ -34,11 +48,6 @@
                                     <img id="logo-image" border="0" src="" class="hidden">
                                     <input name="logo" type="file" id="logo">
                                 @endif
-                            </div>
-                            <div style="z-index: 2" class="col-lg-8 col-md-8 col-sm-8">
-                                <h4>Выберите год</h4>
-                                <input name="year" class="form-control" type="text" placeholder="2015" id="from"
-                                       value="{{ date('Y', strtotime($project->year)) }}">
                             </div>
                         </div>
                         <div class="row">
