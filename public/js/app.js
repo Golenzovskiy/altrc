@@ -22,10 +22,23 @@ function Ajax(form) {
     };
 
     this.request = function (fn) {
+        var request = this.$form.serializeArray();
+        arr = [];
+
+        $(request).each(function (index) {
+            arr.push(this.value);
+        });
+        if (arr[0] == '') {
+            arr.shift();
+        }
+        var request = arr.join('+');
+        $('#request').removeClass('hidden').html('<a href="/">Сбросить фильтр:</a> ' + request);
+
         this.init();
         var button = this.$form.find('#filter').get(0);
         var l = Ladda.create(button);
         l.start();
+        /*console.log(this.$form.serialize());*/
         $.ajax({
             url: this.url,
             type: this.type,

@@ -38,5 +38,7 @@
 </div>
 
 @else
-  <p>По вашему запросу ничего не найдено</p>
+    <div class="alert alert-dismissible alert-warning">
+        <p>По вашему запросу ничего не найдено.</p>
+    </div>
 @endif
