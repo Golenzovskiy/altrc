@@ -15,7 +15,7 @@
             <tr data-tags='{{ json_encode($tags, JSON_UNESCAPED_UNICODE) }}'>
                 <td>
                     @if ($project->logo)
-                        <img border="0"
+                        <img class="max-max-width-100" border="0"
                              src="{{ $project->logo }}">
                     @endif
                 </td>

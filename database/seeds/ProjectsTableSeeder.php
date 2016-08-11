@@ -5,7 +5,7 @@ use Illuminate\Database\Seeder;
 class ProjectsTableSeeder extends Seeder
 {
 
-    private $csvFileName = '/csv/projects.csv';
+    private $csvFileName = '/csv/csv-2.csv';
 
     public function run()
     {
@@ -18,7 +18,7 @@ class ProjectsTableSeeder extends Seeder
         // будет содержать строку csv в виде масива
         $data = array();
         foreach ($lines as $line) {
-            $data[] = str_getcsv($line, ',', '~'); // тильда в качестве экранирующего символа
+            $data[] = str_getcsv($line, ';', '~'); // тильда в качестве экранирующего символа
         }
 
         // извлекает первое значение массива array и возвращает его
@@ -29,14 +29,16 @@ class ProjectsTableSeeder extends Seeder
 
             if (empty($row)) continue;
             // для теста -> var_dump($row);
+            var_dump($row);
             // создали проект
+            $firstImg = explode(";", $row[3]);
             $projectId = DB::table('projects')->insertGetId(
                 [
                     'company'       => $row[0],
                     'name'          => trim($row[1]),
                     'description'   => trim($row[2]),
                     'year'          => ($row[4]) ? $row[4] . "-01-01" : '',
-                    'logo'          => ($row[3]) ? "/logos/{$row[3]}" : '',
+                    'logo'          => ($row[3]) ? "/logos/{$firstImg[0]}" : '',
                     'created_at'    => date('Y-m-d H-i-s'),
                     'updated_at'    => date('Y-m-d H-i-s')
                 ]);
@@ -52,7 +54,7 @@ class ProjectsTableSeeder extends Seeder
                     'service_projects'   => 6,
                     'sector_projects'    => 7,
                     'country_projects'   => 8,
-                    'reference_projects' => 9
+                    'reference_projects' => 1
                 ];
 
                 foreach ($list as $tableName => $index) {
