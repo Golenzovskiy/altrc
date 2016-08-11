@@ -15,6 +15,7 @@
     <link href="https://bootswatch.com/simplex/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/css/ladda-themeless.min.css">
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" type="text/css" href="/css/sweetalert.css">
     <link href="/css/jquery.tagit.css" rel="stylesheet" type="text/css">
     <link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet"/>
     <link href="/css/dragula.min.css" rel="stylesheet">
@@ -85,6 +86,7 @@
 <script src="/js/dragula.min.js" type="text/javascript" charset="utf-8"></script>
 <script src="/js/jquery.slidereveal.min.js" type="text/javascript" charset="utf-8"></script>
 <script src="/js/clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="/js/sweetalert.min.js"></script>
 <script src="/js/app.js"></script>
 </body>
 </html>

@@ -270,6 +270,8 @@ $(document).ready(function () {
     });
 
     $("#delete").click(function () {
+        var pathname = location.pathname.split('/');
+        var id = pathname[pathname.length - 1]
         swal({
                 title: "Удалить проект?",
                 text: "Вы уверены, что хотите полностью удалить проект?",
@@ -279,8 +281,24 @@ $(document).ready(function () {
                 confirmButtonText: "Да, удалить проект!",
                 closeOnConfirm: false
             },
-            function () {
-                swal("Удалено!", "Проект удалён.", "success");
+            function (isConfirm) {
+                if (!isConfirm) return;
+                $.ajax({
+                    url: "/remove/" + id,
+                    dataType: "html",
+                })
+                    .done(function (data) {
+                        swal({
+                            title: "Удалено!",
+                            text: "Проект удалён.",
+                            type: "success"
+                        }, function () {
+                            window.location.href = "/";
+                        });
+                    })
+                    .error(function (data) {
+                        swal("Ошибка!", "Проект не удалён.", "error");
+                    });
             })
     });
 

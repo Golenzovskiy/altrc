@@ -146,6 +146,7 @@
                 </div>
                 <div class="row">
                     <div class="col-lg-12 pbtn">
+                        <button id="delete" type="button" class="btn btn-default">Удалить проект</button>
                         <button type="submit" class="rbtn btn btn-primary">Сохранить</button>
                     </div>
                 </div>
