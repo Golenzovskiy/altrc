@@ -18,7 +18,7 @@ class ProjectsTableSeeder extends Seeder
         // будет содержать строку csv в виде масива
         $data = array();
         foreach ($lines as $line) {
-            $data[] = str_getcsv($line, ';', '~'); // тильда в качестве экранирующего символа
+            $data[] = str_getcsv($line, ',', '~'); // тильда в качестве экранирующего символа
         }
 
         // извлекает первое значение массива array и возвращает его
