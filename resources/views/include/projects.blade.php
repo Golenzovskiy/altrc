@@ -94,8 +94,7 @@
                                                         </button>
                                                     </div>
                                                     <span class="js-references-change js-references"
-                                                          data-id="{{ $project->id }}"><div class="references-text">{{ $reference->name }}
-                                                            <span class="clip fa fa-files-o fa-lg"></span></div></span>
+                                                          data-id="{{ $project->id }}"><div class="references-text">{{ $reference->name }}<span class="clip fa fa-files-o fa-lg"></span></div></span>
                                                 </th>
                                             </tr>
                                         @endforeach
