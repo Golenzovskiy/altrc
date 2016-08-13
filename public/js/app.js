@@ -380,7 +380,7 @@ $(document).ready(function () {
         }
     });
 
-    $('.js-references-edit').on('click', function (e) {
+    $(document).on('click', '.js-references-edit', function (e) {
         e.stopPropagation();
         var $text = $(this).parent().next();
         $text.editable('enable').editable('toggle')
@@ -419,9 +419,8 @@ $(document).ready(function () {
             });
     });
 
-    $('.js-references-remove').on('click', function (e) {
+    $(document).on('click', '.js-references-remove', function (e) {
         var $value = $(this).parent().next();
-        console.log($value);
         if ($value.hasClass('js-references-change')) {
             //TODO ajax loader start
             var name = $value.text();
