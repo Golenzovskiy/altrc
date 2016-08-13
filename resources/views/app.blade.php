@@ -17,7 +17,8 @@
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
     <link rel="stylesheet" type="text/css" href="/css/sweetalert.css">
     <link href="/css/jquery.tagit.css" rel="stylesheet" type="text/css">
-    <link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet"/>
+    <link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/css/bootstrap-editable.css"
+          rel="stylesheet"/>
     <link href="/css/dragula.min.css" rel="stylesheet">
     <link href="/css/style.css" rel="stylesheet">
 
@@ -32,36 +33,30 @@
 </head>
 <body>
 <span id="test" data-a="5" data-b="4"></span>
-<!--a href="#" id="form-submit2" class="btn btn-primary btn-lg ladda-button" data-style="expand-right" data-size="l"><span class="ladda-label">Submit form</span></a-->
-<div class="navbar navbar-default navbar-static-top">
+<div class="navbar navbar-default navbar-fixed-top">
     <div class="container">
-        <div class="navbar-header">
+        <div class="navbar-header pull-left">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#resonsive-menu">
                 <span class="sr-only">Открыть меню</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <!--<a href="#" class="navbar-brand"><img height="25px" src="http://www.raexpert.ru/companies/ikf_alt_logo.gif"/></a>-->
             <a href="/" class="navbar-brand"><img class="img-responsive imgl"
                                                   src="http://altrc.ru/bitrix/tpl/img/alt-logo-color-rgb.png"/></a>
         </div>
-        <div class="collapse navbar-collapse" id="resonsive-menu">
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="/">Найти референцию</a></li>
-                <!--li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Пункт 2 <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Подпункт 1</a></li>
-                        <li><a href="#">Подпункт 2</a></li>
-                        <li><a href="#">Подпункт 3</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">Подпункт 4</a></li>
-                    </ul>
-                </li-->
-                <li><a href="/create">Добавить проект</a></li>
-            </ul>
-        </div>
+        <ul class="nav navbar-nav collapse navbar-collapse" id="resonsive-menu">
+            <li class="active"><a href="/">Найти референцию</a></li>
+            <li><a href="/create">Добавить проект</a></li>
+        </ul>
+        @if(isset($path))
+            @if($path == '/')
+                <button class="btn btn-primary btn-sm navbar-btn pull-right handle" type="button">Отобранные&nbsp;
+                    <span id="amountReferences"
+                          class="badge">{{ isset($userReferences) ? count($userReferences) : 0 }}</span>
+                </button>
+            @endif
+        @endif
     </div>
 </div>
 <div class="container">

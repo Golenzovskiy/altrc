@@ -23,7 +23,7 @@ function Ajax(form) {
 
     this.request = function (fn) {
         var request = this.$form.serializeArray();
-        arr = [];
+        var arr = [];
 
         $(request).each(function (index) {
             arr.push(this.value);
@@ -176,6 +176,7 @@ var Filter = {
                 copy: true,
                 removeOnSpill: true
             }).on('drop', function (el) {
+                $('#amountReferences').html($('#js-reference-panel').children().length);
                 $.ajax({
                     url: '/user/references/store',
                     type: 'post',
@@ -302,7 +303,7 @@ $(document).ready(function () {
             })
     });
 
-    $("#menu-bar a").click(function () {
+    $(".handleClose").click(function () {
         $("#menu-bar").slideReveal("hide");
     });
 
@@ -314,11 +315,11 @@ $(document).ready(function () {
         trigger: $(".handle"),
         // autoEscape: false,
         shown: function (obj) {
-            obj.find(".handle").html('<span class="fa fa-chevron-right fa-lg"></span>');
+            obj.find(".handle").html('<span class="fa fa-chevron-left fa-lg"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>&nbsp;Отобранные!</span>');
             obj.addClass("left-shadow-overlay");
         },
         hidden: function (obj) {
-            obj.find(".handle").html('<span class="fa fa-chevron-left fa-lg"></span>');
+            obj.find(".handle").html('<span class="fa fa-chevron-left fa-lg"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>&nbsp;Отобранные</span>');
             obj.removeClass("left-shadow-overlay");
         }
     });
@@ -326,6 +327,7 @@ $(document).ready(function () {
     dragula([document.getElementById('js-reference-panel')], {
         removeOnSpill: true
     }).on('remove', function (el) {
+        $('#amountReferences').html($('#js-reference-panel').children().length);
         $.ajax({
             url: '/user/references/remove',
             type: 'post',
@@ -349,6 +351,27 @@ $(document).ready(function () {
 
             reader.readAsDataURL(this.files[0]);
         }
+    });
+
+    $('#copy').click(function () {
+        var references = $('#js-reference-panel').children();
+        var arr = [];
+        references.each(function (index, value) {
+            arr.push($(value).text().trim());
+        });
+        var request = arr.join('\n');
+        var clipboard = new Clipboard('#copy', {
+            text: function() {
+                return request;
+            }
+        });
+        /*clipboard.on('success', function(e) {
+            console.log(e);
+        });
+
+        clipboard.on('error', function(e) {
+            console.log(e);
+        });*/
     });
 
     new Clipboard('.clip', {

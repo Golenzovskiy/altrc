@@ -28,6 +28,7 @@ class ProjectController extends Controller
     public function index(Request $request)
     {
         return view('index', [
+            'path' => $request->path(),
             'services' => ServiceProject::dictionary(),
             'sectors' => SectorProject::dictionary(),
             'country' => CountryProject::dictionary(),
