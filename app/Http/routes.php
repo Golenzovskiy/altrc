@@ -32,7 +32,7 @@ Route::post('references/update', [
 ]);
 
 Route::post('references/delete', [
-    'uses' => 'ReferencesController@delete',
+    'uses' => 'ReferencesController@remove',
 ]);
 
 Route::post('user/references/store', [
