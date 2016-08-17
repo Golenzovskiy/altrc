@@ -427,6 +427,29 @@ $(document).ready(function () {
             var name = $value.text();
             $value.closest('tr').remove();
         }
-    })
+    });
+
+
+    $('.multiple').each(function (index, values) {
+        if ($(values).val()) {
+            $(this).next().html('<button type="button" class="btn btn-link btn-xs"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>' + $(values).val().join(', '));
+        }
+        $(this).change(function () {
+            if ($(values).val()) {
+                $(this).each(function (index, values) {
+                    $(this).next().html('<button type="button" class="btn btn-link btn-xs"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>' + $(values).val().join(', '));
+                });
+            } else {
+                $(this).next().html('<button disabled="disabled" type="button" class="btn btn-link btn-xs"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button><i>Ничего не выбрано</i>');
+            }
+        })
+    });
+
+    $('.glyphicon-trash').click(function () {
+        var select = $(this).parent().parent().prev();
+        $(select).children().each(function () {
+            $(this).removeAttr("selected");
+        });
+    });
 
 });
