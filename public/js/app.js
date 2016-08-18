@@ -430,22 +430,26 @@ $(document).ready(function () {
     });
 
 
-    $('.multiple').each(function (index, values) {
+    $('[multiple]').each(function (index, values) {
+		var selectedBlock = $(this).next().children().next();
         if ($(values).val()) {
-            $(this).next().html('<button type="button" class="btn btn-link btn-xs"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>' + $(values).val().join(', '));
+            selectedBlock.html($(values).val().join(', '));
         }
         $(this).change(function () {
             if ($(values).val()) {
                 $(this).each(function (index, values) {
-                    $(this).next().html('<button type="button" class="btn btn-link btn-xs"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>' + $(values).val().join(', '));
+                    selectedBlock.html($(values).val().join(', '));
                 });
             } else {
-                $(this).next().html('<button disabled="disabled" type="button" class="btn btn-link btn-xs"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button><i>Ничего не выбрано</i>');
+                selectedBlock.html('<em>Ничего не выбрано</em>');
             }
         })
     });
 
-    $('.glyphicon-trash').click(function () {
+
+    $('.glyphicon-trash').on('click', function(e){
+		e.preventDefault();
+		$(this).parent().next().html('<em>Ничего не выбрано</em>');
         var select = $(this).parent().parent().prev();
         $(select).children().each(function () {
             $(this).removeAttr("selected");
