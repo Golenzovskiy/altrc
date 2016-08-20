@@ -72,7 +72,6 @@
 <script src="{{asset('js/jquery.min.js')}}"></script>
 <script src="{{asset('js/bootstrap.min.js')}}"></script>
 <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-<script src="/js/bootstrap.min.js"></script>
 <script src="/js/datepicker-ru.js"></script>
 <script src="/js/spin.min.js"></script>
 <script src="/js/ladda.min.js"></script>
