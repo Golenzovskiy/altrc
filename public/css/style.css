@@ -73,6 +73,10 @@ A.tag {
     font-weight: normal;
 }
 
+.dictionary-text {
+    display: inline;
+}
+
 .references-text {
     display: inline;
     cursor: move;

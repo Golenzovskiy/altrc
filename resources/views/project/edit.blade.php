@@ -59,10 +59,10 @@
                         </div>
 
                     </div>
-                    @include('include.dictionary', ['name' => 'services[]', 'title' => 'Выберите услугу',
+                    @include('include.dictionary', ['name' => 'services[]', 'title' => 'Услуги',
                     'items' => $services, 'itemsProject' => $selectedServices])
 
-                    @include('include.dictionary', ['name' => 'sectors[]', 'title' => 'Выберите отрасль',
+                    @include('include.dictionary', ['name' => 'sectors[]', 'title' => 'Отрасли',
                     'items' => $sectors, 'itemsProject' => $selectedSectors])
 
                     @include('include.dictionary', ['name' => 'country[]', 'title' => 'География',
@@ -151,7 +151,7 @@
                     </div>
                 </div>
             </div>
+        </div>
     </form>
-    </div>
 
 @endsection

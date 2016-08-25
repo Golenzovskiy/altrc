@@ -456,4 +456,68 @@ $(document).ready(function () {
         });
     });
 
+    $(document).on('click', '.js-dictionary-remove', function (e) {
+        var value = $(this).parent().next().text();
+        var name = $.trim(value);
+        var model = $(this).closest('div .tab-pane').attr('id');
+        var tr = (this).closest('tr');
+        $.ajax({
+            url: '/dictionarys/delete',
+            type: 'post',
+            dataType: 'html',
+            data: {'name': name, 'model': model}
+        })
+            .done(function () {
+                $(tr).closest('tr').remove();
+            })
+            .fail(function (response) {
+                console.log(response.responseText);
+            })
+            .always(function () {
+                //TODO ajax loader stop
+            });
+    });
+
+    $(document).on('click', '.js-dictionary-edit', function (e) {
+        e.stopPropagation();
+        var value = $(this).parent().next().text();
+        var name = $.trim(value);
+        var model = $(this).closest('div .tab-pane').attr('id');
+        var value = name;
+        $($(this).parent().next()).editable({
+			params: function(params) {
+				params.model = model;
+				return params;
+			},
+            type: 'text',
+            name: name,
+            value: value,
+            url: '/dictionarys/update',
+            pk: 1
+        }).editable('toggle');
+    });
+
+    $(document).on('click', '.js-dictionary-create', function (e) {
+        e.preventDefault();
+        var newRow = $(this).closest('tr').next();
+        newRow.clone().removeClass('hidden').insertAfter($(this).closest('tr'));
+        console.log(this);
+    });
+
+    if (document.location.hash == '#country') {
+        $('#myTabs a[href="#country"]').tab('show')
+    }
+    else if (document.location.hash == '#sectors') {
+        $('#myTabs a[href="#sectors"]').tab('show')
+    }
+    else if (document.location.hash == '#country') {
+        $('#myTabs a[href="#country"]').tab('show')
+    }
+
+    $('[role = tab]').click(function(){
+        //console.log($(this).attr('href'));
+        var id = $(this).attr('data');
+        window.location.hash = $(this).attr('href');
+    });
+
 });

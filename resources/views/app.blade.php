@@ -32,7 +32,6 @@
 
 </head>
 <body>
-<span id="test" data-a="5" data-b="4"></span>
 <div class="navbar navbar-default navbar-fixed-top">
     <div class="container">
         <div class="navbar-header pull-left">

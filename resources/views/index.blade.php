@@ -27,9 +27,9 @@
                 </div>
                 <div class="row">
 
-                    @include('include.dictionary', ['name' => 'services[]', 'title' => 'Выберите услугу', 'items' => $services])
+                    @include('include.dictionary', ['name' => 'services[]', 'title' => 'Услуги', 'items' => $services])
 
-                    @include('include.dictionary', ['name' => 'sectors[]', 'title' => 'Выберите отрасль', 'items' => $sectors])
+                    @include('include.dictionary', ['name' => 'sectors[]', 'title' => 'Отрасли', 'items' => $sectors])
 
                     @include('include.dictionary', ['name' => 'country[]', 'title' => 'География', 'items' => $country])
 

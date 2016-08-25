@@ -46,9 +46,9 @@
                             </div>
                         </div>
                     </div>
-                    @include('include.dictionary', ['name' => 'services[]', 'title' => 'Выберите услугу', 'items' => $services])
+                    @include('include.dictionary', ['name' => 'services[]', 'title' => 'Услуги', 'items' => $services])
 
-                    @include('include.dictionary', ['name' => 'sectors[]', 'title' => 'Выберите отрасль', 'items' => $sectors])
+                    @include('include.dictionary', ['name' => 'sectors[]', 'title' => 'Отрасли', 'items' => $sectors])
 
                     @include('include.dictionary', ['name' => 'country[]', 'title' => 'География', 'items' => $country])
                 </div>
@@ -118,7 +118,7 @@
                     </div>
                 </div>
             </div>
+        </div>
     </form>
-    </div>
 
 @endsection

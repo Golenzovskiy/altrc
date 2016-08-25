@@ -54,3 +54,19 @@ Route::post('edit/{id}', [
 Route::get('remove/{id}', [
     'uses' => 'ProjectController@remove',
 ]);
+
+Route::get('dictionarys', [
+    'uses' => 'DictionaryController@edit',
+]);
+
+Route::post('dictionarys', [
+    'uses' => 'DictionaryController@edit',
+]);
+
+Route::post('dictionarys/delete', [
+    'uses' => 'DictionaryController@remove',
+]);
+
+Route::post('dictionarys/update', [
+    'uses' => 'DictionaryController@update',
+]);
