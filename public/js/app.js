@@ -256,7 +256,6 @@ $(document).ready(function () {
         dataType: "json",
         success: function(data) {
             var tags = data.length === 1 && data[0].length === 0 ? [] : data;
-            console.log(tags);
             $('#FieldTags').tagit({
                 availableTags: tags
             });
