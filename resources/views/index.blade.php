@@ -8,10 +8,13 @@
         <div class="panel panel-default">
             <div class="panel-body">
                 <div class="row">
-                    <div class="col-lg-6"><h4>Поиск по референциям</h4>
+                    <div class="col-lg-4 col-md-6"><h4>Поиск по проектам</h4>
+                        <input name="project" type="text" class="form-control" placeholder="Введите слово...">
+                    </div>
+					<div class="col-lg-4 col-md-6"><h4>Поиск по референциям</h4>
                         <input name="references" type="text" class="form-control" placeholder="Введите слово...">
                     </div>
-                    <div class="col-lg-6">
+                    <div class="col-lg-4">
                         <h4>Выберите год</h4>
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">

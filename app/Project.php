@@ -22,6 +22,10 @@ class Project extends Model {
         //DB::connection()->enableQueryLog();
         $select = DB::table('projects');
 
+        if ($data->project) {
+            $select->where('company', 'like', '%' . $data->project . '%');
+        }
+
         if ($data->references) {
             $select->join('reference_projects', function ($join) use ($data) {
                 $join->on('projects.id', '=', 'reference_projects.project_id')
