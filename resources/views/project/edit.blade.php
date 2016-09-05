@@ -82,7 +82,7 @@
                 <div class="table-responsive">
                     <table class="table table-default table-hover gray-table">
                         <tr class="hidden pattern">
-                            <th>
+                            <td>
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-link btn-sm js-references-edit"
                                             aria-label="Edit reference">
@@ -98,7 +98,7 @@
                                             class="references-text"></div></span>
                                 <input type="hidden" data-position=""
                                        value="">
-                            </th>
+                            </td>
                         </tr>
                         @foreach ($project->references as $i => $reference)
                             {{-- */$disabled = 'disabled="disabled"'/* --}}
@@ -106,7 +106,7 @@
                                 {{-- */$disabled = ""/* --}}
                             @endif
                             <tr>
-                                <th>
+                                <td>
                                     <div class="btn-group">
                                         <button type="button"
                                                 class="btn btn-link btn-sm js-references-edit"
@@ -127,7 +127,7 @@
                                         <div class="references-text">{{ $reference->name }}</div></span>
                                     <input type="hidden" name="references[]" data-position="{{ $i }}"
                                            value="{{ $reference->name }}">
-                                </th>
+                                </td>
                             </tr>
                         @endforeach
                         <tr class="action">

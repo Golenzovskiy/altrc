@@ -62,7 +62,7 @@
                 <div class="table-responsive">
                     <table class="table table-default table-hover gray-table">
                         <tr class="hidden pattern">
-                            <th>
+                            <td>
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-link btn-sm js-references-edit"
                                             aria-label="Edit reference">
@@ -78,10 +78,10 @@
                                             class="references-text"></div></span>
                                 <input type="hidden" data-position=""
                                        value="">
-                            </th>
+                            </td>
                         </tr>
                         <tr>
-                            <th>
+                            <td>
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-link btn-sm js-references-edit"
                                             aria-label="Edit reference">
@@ -96,7 +96,7 @@
                                 <span class="js-references-change js-references" data-position="{{ $i }}">
                                         <div class="references-text"></div></span>
                                 <input type="hidden" name="references[]" data-position="{{ $i }}" value="">
-                            </th>
+                            </td>
                         </tr>
                         <tr class="action">
                             <td>
