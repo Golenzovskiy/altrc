@@ -78,7 +78,7 @@
                                     @if ($project->references)
                                         @foreach ($project->references as $i => $reference)
                                             <tr>
-                                                <th>
+                                                <td>
                                                     <div class="btn-group">
                                                         <button type="button"
                                                                 class="btn btn-link btn-sm js-references-edit"
@@ -95,7 +95,7 @@
                                                     </div>
                                                     <span class="js-references-change js-references"
                                                           data-id="{{ $project->id }}"><div class="references-text">{{ $reference->name }}<span class="clip fa fa-files-o fa-lg"></span></div></span>
-                                                </th>
+                                                </td>
                                             </tr>
                                         @endforeach
                                     @endif
