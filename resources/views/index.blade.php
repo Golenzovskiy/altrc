@@ -38,6 +38,13 @@
 
                 </div>
                 <div class="row">
+                    <div class="col-lg-12">
+                        <h4>Поиск по тегам</h4>
+                        <input type="text" class="form-control" placeholder="Введите слово..." id="FieldTags"
+                               name="tags" value="">
+                    </div>
+                </div>
+                <div class="row">
                     <div class="col-lg-12 padding-top-15">
                         <div id="request" class="hidden well well-sm"></div>
                     </div>

@@ -70,3 +70,7 @@ Route::post('dictionarys/delete', [
 Route::post('dictionarys/update', [
     'uses' => 'DictionaryController@update',
 ]);
+
+Route::get('tags', [
+    'uses' => 'TagsController@getAllTags',
+]);
