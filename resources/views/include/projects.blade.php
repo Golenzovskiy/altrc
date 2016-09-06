@@ -58,7 +58,7 @@
                             <div class="table-responsive">
                                 <table class="table table-default table-hover ">
                                     <tr class="hidden pattern">
-                                        <th>
+                                        <td>
                                             <div class="btn-group">
                                                 <button type="button" class="btn btn-link btn-sm js-references-edit"
                                                         aria-label="Edit reference">
@@ -73,12 +73,15 @@
                                                   data-emptytext="" data-id="{{ $project->id }}"><div
                                                         class="references-text"><span
                                                             class="clip fa fa-files-o fa-lg"></span></div></span>
-                                        </th>
+                                        </td>
                                     </tr>
                                     @if ($project->references)
                                         @foreach ($project->references as $i => $reference)
                                             <tr>
                                                 <td>
+													<button type="button" class="btn btn-{{ $i == 1 ? 'primary' : 'default' }} btn-xs" aria-label="Left Align">
+														<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+													</button>
                                                     <div class="btn-group">
                                                         <button type="button"
                                                                 class="btn btn-link btn-sm js-references-edit"
