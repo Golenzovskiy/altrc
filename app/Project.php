@@ -64,10 +64,10 @@ class Project extends Model {
         }
 
         if ($data->tags) {
-            $tags = explode(',', $data->tags);
-            $select->join('tag_projects', function ($join) use ($tags) {
+            $tagsRequest = explode(',', $data->tags);
+            $select->join('tag_projects', function ($join) use ($tagsRequest) {
                 $join->on('projects.id', '=', 'tag_projects.project_id')
-                    ->whereIn('tag_projects.name', $tags);
+                    ->whereIn('tag_projects.name', $tagsRequest);
             });
         }
 
@@ -78,7 +78,38 @@ class Project extends Model {
             $ids[] = $item->id;
         }
 
-        return $this->whereIn('id', $ids)->paginate($perPage);
+        // нужно не для поиска, а именно для фильтрации, чтобы получать весь спектор тегов выборки
+        if ($data->filterTags) {
+            $tagsRequest = explode(',', $data->filterTags);
+            $select->join('tag_projects', function ($join) use ($tagsRequest) {
+                $join->on('projects.id', '=', 'tag_projects.project_id')
+                    ->whereIn('tag_projects.name', $tagsRequest);
+            });
+
+            $result = $select->select('projects.id')->get();
+
+            $filterIds = [];
+            foreach ($result as $item) {
+                $filterIds[] = $item->id;
+            }
+
+            $projects = $this->whereIn('id', $filterIds)->paginate($perPage);
+
+            $tags = TagProject::whereIn('project_id', $ids)->groupBy('name')->get();
+            foreach ($tags as $item) {
+                if (in_array($item->name, $tagsRequest)) {
+                    $item->active = true;
+                }
+            }
+        } else {
+            $projects = $this->whereIn('id', $ids)->paginate($perPage);
+            $tags = TagProject::whereIn('project_id', $ids)->groupBy('name')->get();
+        }
+
+        return [
+            'projects' => $projects,
+            'tags'     => $tags
+        ];
     }
 
     /**

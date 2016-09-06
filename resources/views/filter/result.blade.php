@@ -1,6 +1,6 @@
 @if (count($projects) > 0)
 
-@include('include.tags', ['project' => $projects])
+@include('include.tags', ['tags' => $tags])
 
 <h3>Результаты поиска&nbsp;<span id="amount" class="badge"></span></h3>
 <div class="panel panel-default">

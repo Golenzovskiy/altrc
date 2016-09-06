@@ -26,7 +26,10 @@ function Ajax(form) {
         var arr = [];
 
         $(request).each(function (index) {
-            arr.push(this.value);
+            // убираем из фильтра поле из облака тегов
+            if (this.name != 'filterTags') {
+                arr.push(this.value);
+            }
         });
         if (arr[0] == '') {
             arr.shift();
@@ -224,6 +227,9 @@ function checkFields(form) {
 
 $(document).ready(function () {
     Filter.init();
+    var $form = $('#js-filter');
+    var $tagsInput = $("#FieldTags");
+
     $("#from").datepicker({
         dateFormat: "yy",
         defaultDate: -365,
@@ -256,7 +262,7 @@ $(document).ready(function () {
         dataType: "json",
         success: function(data) {
             var tags = data.length === 1 && data[0].length === 0 ? [] : data;
-            $('#FieldTags').tagit({
+            $tagsInput.tagit({
                 availableTags: tags
             });
         }
@@ -266,13 +272,20 @@ $(document).ready(function () {
 
     $(document).on("click", ".tag", function () {
         var selectedTag = $(this).data("tag");
-        $("#filterResult").find("tr[data-tags]").each(function () {
+        /*$("#filterResult").find("tr[data-tags]").each(function () {
             if ($.inArray(selectedTag, $(this).data('tags')) == -1) {
                 $(this).addClass('hidden').next().addClass('hidden');
             }
-        });
+        });*/
         $("#tags-button").find("span").removeClass("label-primary").addClass("label-default");
         $(this).children("span").removeClass("label-default").addClass("label-primary");
+        var $filterTags = $form.find('#filter-tags');
+
+        /*var currentValue = $filterTags.val();
+        $filterTags.val((currentValue) ? $filterTags.val() + ',' + selectedTag : selectedTag);*/
+
+        $filterTags.val((selectedTag != $filterTags.val()) ? selectedTag : '');
+        $form.trigger('submit');
     });
 
     $("#delete").click(function () {

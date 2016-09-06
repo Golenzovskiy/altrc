@@ -191,10 +191,14 @@ class ProjectController extends Controller
             return Helper::jsonError('Произошла ошибка');
         }
         $model = new Project();
-        $projects = $model->getByFilter($request);
+        $result = $model->getByFilter($request);
+
+        $projects = $result['projects'];
+        $tags = $result['tags'];
+
         return response()->json([
             'status' => 'success',
-            'result' => view('filter.result', ['projects' => $projects])->render(),
+            'result' => view('filter.result', ['projects' => $projects, 'tags' => $tags])->render(),
             'amount' => $projects->total()
         ]);
     }
