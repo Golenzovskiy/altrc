@@ -79,9 +79,9 @@
                                         @foreach ($project->references as $i => $reference)
                                             <tr>
                                                 <td>
-													<button type="button" class="btn btn-{{ $i == 1 ? 'primary' : 'default' }} btn-xs" aria-label="Left Align">
-														<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-													</button>
+                                                    <button type="button" class="btn btn-{{ $i == 1 ? 'primary' : 'default' }} btn-xs" aria-label="Left Align">
+                                                        <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                                                    </button>
                                                     <div class="btn-group">
                                                         <button type="button"
                                                                 class="btn btn-link btn-sm js-references-edit"
