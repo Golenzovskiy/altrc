@@ -63,6 +63,14 @@ class Project extends Model {
             });
         }
 
+        if ($data->tags) {
+            $tags = explode(',', $data->tags);
+            $select->join('tag_projects', function ($join) use ($tags) {
+                $join->on('projects.id', '=', 'tag_projects.project_id')
+                    ->whereIn('tag_projects.name', $tags);
+            });
+        }
+
         $result = $select->select('projects.id')->get();
 
         $ids = [];
