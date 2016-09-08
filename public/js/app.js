@@ -174,7 +174,7 @@ var Filter = {
             });
         });
 
-        $('.js-references').each(function () {
+        /*$('.js-references').each(function () {
             dragula([this, document.getElementById('js-reference-panel')], {
                 copy: true,
                 removeOnSpill: true
@@ -192,7 +192,7 @@ var Filter = {
                         alert("error");
                     });
             });
-        });
+        });*/
 
         new Clipboard('.clip', {
             target: function (trigger) {
@@ -207,6 +207,85 @@ var Filter = {
         }
     }
 
+};
+
+var References = {
+    panel: $('#js-reference-panel'),
+    amount: $('#amountReferences'),
+
+    observer: function () {
+        var self = this;
+
+        // добавление/удаление референций из списка отобранных
+        $(document).on('click', '.favorite-refer', function () {
+            var request = '';
+
+            var $el = $(this).parent().find('.references-text');
+
+            if ($(this).hasClass('btn-default')) {
+                request = '/user/references/store';
+                self.addToPanel($el.clone());
+            } else {
+                request = '/user/references/remove';
+                self.removeFromPanel($el);
+            }
+
+            $(this).toggleClass('btn-default btn-primary');
+
+            $.ajax({
+                url: request,
+                type: 'post',
+                dataType: "html",
+                data: {'name': $el.text()}
+            }).done(function (response) {
+            }).fail(function () {
+                 alert("error");
+            });
+        });
+
+        // удаление из панели отобранных референций
+        dragula([document.getElementById('js-reference-panel')], {
+            removeOnSpill: true
+        }).on('remove', function (el) {
+            $('#amountReferences').html($('#js-reference-panel').children().length);
+            $.ajax({
+                url: '/user/references/remove',
+                type: 'post',
+                dataType: "html",
+                data: {'name': $(el).text()}
+            })
+                .done(function (response) {
+                })
+                .fail(function () {
+                    alert("error");
+                });
+        });
+    },
+
+    addToPanel: function ($el) {
+        this.panel.append($el);
+        this.counterUpdate(1);
+    },
+
+    removeFromPanel: function ($el) {
+        var findText = $el.text();
+        this.panel.find('.references-text').each(function () {
+            if ($(this).text() == findText) {
+                $(this).remove();
+            }
+        });
+        this.counterUpdate(-1);
+    },
+
+    counterUpdate: function (value) {
+        var total = this.amount.text();
+        total = parseInt(total) + parseInt(value);
+        this.amount.text(total);
+    },
+
+    init: function () {
+        this.observer();
+    }
 };
 
 function checkFields(form) {
@@ -227,6 +306,8 @@ function checkFields(form) {
 
 $(document).ready(function () {
     Filter.init();
+    References.init();
+
     var $form = $('#js-filter');
     var $tagsInput = $("#FieldTags");
 
@@ -272,11 +353,6 @@ $(document).ready(function () {
 
     $(document).on("click", ".tag", function () {
         var selectedTag = $(this).data("tag");
-        /*$("#filterResult").find("tr[data-tags]").each(function () {
-            if ($.inArray(selectedTag, $(this).data('tags')) == -1) {
-                $(this).addClass('hidden').next().addClass('hidden');
-            }
-        });*/
         $("#tags-button").find("span").removeClass("label-primary").addClass("label-default");
         $(this).children("span").removeClass("label-default").addClass("label-primary");
         var $filterTags = $form.find('#filter-tags');
@@ -340,23 +416,6 @@ $(document).ready(function () {
             obj.find(".handle").html('<span class="fa fa-chevron-left fa-lg"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>&nbsp;Отобранные</span>');
             obj.removeClass("left-shadow-overlay");
         }
-    });
-
-    dragula([document.getElementById('js-reference-panel')], {
-        removeOnSpill: true
-    }).on('remove', function (el) {
-        $('#amountReferences').html($('#js-reference-panel').children().length);
-        $.ajax({
-            url: '/user/references/remove',
-            type: 'post',
-            dataType: "html",
-            data: {'name': $(el).text()}
-        })
-            .done(function (response) {
-            })
-            .fail(function () {
-                alert("error");
-            });
     });
 
     $('#logo').change(function () {

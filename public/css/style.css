@@ -79,10 +79,6 @@ A.tag {
 
 .references-text {
     display: inline;
-    cursor: move;
-    cursor: grab;
-    cursor: -moz-grab;
-    cursor: -webkit-grab;
 }
 
 #js-reference-panel .references-text {
