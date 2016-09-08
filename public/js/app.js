@@ -538,4 +538,15 @@ $(document).ready(function () {
         window.location.hash = $(this).attr('href');
     });
 
+    $(document).on('click', '.glyphicon-pushpin', function (e) {
+        e.preventDefault();
+        var project = $(this).closest('.btn-toolbar').next().find('.js-references');
+        if (project.data('description')) {
+            references = project.children().text() + ' (' + project.data('description') + ')';
+        } else {
+            references = project.children().text() + ' (' + project.data('company') + ')';
+        }
+        console.log(references); // Джедай, используй силу, чтобы сохранить references в куки!
+    })
+
 });

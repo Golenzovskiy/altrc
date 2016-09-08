@@ -69,7 +69,9 @@
                                                     <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                                                 </button>
                                             </div>
-                                            <span class="js-references-change editable editable-click js-references"
+                                            <span data-description="{{ $project->description }}"
+                                                  data-company="{{ $project->company }}"
+                                                  class="js-references-change editable editable-click js-references"
                                                   data-emptytext="" data-id="{{ $project->id }}"><div
                                                         class="references-text"><span
                                                             class="clip fa fa-files-o fa-lg"></span></div></span>
@@ -96,7 +98,9 @@
                                                                                   aria-hidden="true"></span>
                                                         </button>
                                                     </div>
-                                                    <span class="js-references-change js-references"
+                                                    <span data-description="{{ $project->description }}"
+                                                          data-company="{{ $project->company }}"
+                                                          class="js-references-change js-references"
                                                           data-id="{{ $project->id }}"><div class="references-text">{{ $reference->name }}<span class="clip fa fa-files-o fa-lg"></span></div></span>
                                                 </td>
                                             </tr>
