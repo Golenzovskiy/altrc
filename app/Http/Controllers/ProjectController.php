@@ -32,8 +32,20 @@ class ProjectController extends Controller
             'services' => ServiceProject::dictionary(),
             'sectors' => SectorProject::dictionary(),
             'country' => CountryProject::dictionary(),
+            'filter' => $request->session()->get('user.filter'),
+            'isFilterSet' => $request->session()->has('user.filter'),
             'userReferences' => $request->session()->get('user.references') // добавляем в шаблон рефернеции из сессии пользователя
         ]);
+    }
+
+    /**
+     * Reset page
+     */
+    public function reset(Request $request) {
+        if ($request->session()->has('user.filter')) {
+            $request->session()->forget('user.filter');
+        }
+        return redirect()->action('ProjectController@index');
     }
 
     /**
@@ -153,7 +165,7 @@ class ProjectController extends Controller
                 }
             }
 
-            return $this->editView($id);
+            return redirect()->action('ProjectController@index');
         } else {
             return $this->editView($id);
         }
@@ -192,6 +204,9 @@ class ProjectController extends Controller
         }
         $model = new Project();
         $result = $model->getByFilter($request);
+
+        // записываем значения фильтра в сессию
+        $request->session()->put('user.filter', $request->all());
 
         $projects = $result['projects'];
         $tags = $result['tags'];

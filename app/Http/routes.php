@@ -74,3 +74,7 @@ Route::post('dictionarys/update', [
 Route::get('tags', [
     'uses' => 'TagsController@getAllTags',
 ]);
+
+Route::get('reset', [
+    'uses' => 'ProjectController@reset',
+]);

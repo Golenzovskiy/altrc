@@ -103,7 +103,7 @@
                                                     <span data-description="{{ $project->description }}"
                                                           data-company="{{ $project->company }}"
                                                           class="js-references-change js-references"
-                                                          data-id="{{ $project->id }}"><div class="references-text">{{ $reference->name }}<span class="clip fa fa-files-o fa-lg"></span></div></span>
+                                                          data-id="{{ $project->id }}"><div class="references-text">{{ $reference->name }}</div></span>
                                                 </td>
                                             </tr>
                                         @endforeach

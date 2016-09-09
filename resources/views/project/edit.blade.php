@@ -94,7 +94,7 @@
                                     </button>
                                 </div>
                                 <span class="js-references-change js-references" data-position=""
-                                      data-emptytext="" data-id=""><div
+                                      data-emptytext="" data-id="{{ $project->id }}"><div
                                             class="references-text"></div></span>
                                 <input type="hidden" data-position=""
                                        value="">

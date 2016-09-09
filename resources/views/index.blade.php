@@ -10,39 +10,39 @@
             <div class="panel-body">
                 <div class="row">
                     <div class="col-lg-4 col-md-6"><h4>Поиск по проектам</h4>
-                        <input name="project" type="text" class="form-control" placeholder="Введите слово...">
+                        <input name="project" type="text" class="form-control" placeholder="Введите слово..." value="{{ (isset($filter['project'])) ? $filter['project'] : '' }}">
                     </div>
 					<div class="col-lg-4 col-md-6"><h4>Поиск по референциям</h4>
-                        <input name="references" type="text" class="form-control" placeholder="Введите слово...">
+                        <input name="references" type="text" class="form-control" placeholder="Введите слово..." value="{{ (isset($filter['references'])) ? $filter['references'] : '' }}">
                     </div>
                     <div class="col-lg-4">
                         <h4>Выберите год</h4>
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                                 <input class="form-control" type="text" placeholder="2015" id="from" name="from"
-                                       value="1990">
+                                       value="{{ (isset($filter['from'])) ? $filter['from'] : '1990' }}">
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                                 <input class="form-control" type="text" placeholder="2016" id="to" name="to"
-                                       value="2020">
+                                       value="{{ (isset($filter['to'])) ? $filter['to'] : '2020' }}">
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="row">
 
-                    @include('include.dictionary', ['name' => 'services[]', 'title' => 'Услуги', 'items' => $services])
+                    @include('include.dictionary', ['name' => 'services[]', 'title' => 'Услуги', 'items' => $services, 'itemsProject' => (isset($filter['services'])) ? $filter['services'] : null ])
 
-                    @include('include.dictionary', ['name' => 'sectors[]', 'title' => 'Отрасли', 'items' => $sectors])
+                    @include('include.dictionary', ['name' => 'sectors[]', 'title' => 'Отрасли', 'items' => $sectors, 'itemsProject' => (isset($filter['sectors'])) ? $filter['sectors'] : null ])
 
-                    @include('include.dictionary', ['name' => 'country[]', 'title' => 'География', 'items' => $country])
+                    @include('include.dictionary', ['name' => 'country[]', 'title' => 'География', 'items' => $country, 'itemsProject' => (isset($filter['country'])) ? $filter['country'] : null ])
 
                 </div>
                 <div class="row">
                     <div class="col-lg-12">
                         <h4>Поиск по тегам</h4>
                         <input type="text" class="form-control" placeholder="Введите слово..." id="FieldTags"
-                               name="tags" value="">
+                               name="tags" value="{{ ($filter && $filter['tags']) ? $filter['tags'] : '' }}">
                     </div>
                 </div>
                 <div class="row">
@@ -51,7 +51,7 @@
                     </div>
                     <div class="col-lg-12 padding-right-15">
                         <!--disabled="disabled"-->
-                        <button type="submit" class="rbtn btn btn-primary ladda-button"
+                        <button type="submit" class="rbtn btn btn-primary ladda-button {{ ($isFilterSet) ? 'js-auto-filter' : '' }}"
                                 data-style="zoom-out" id="filter"><span class="ladda-label">Фильтровать</span>
                         </button>
                     </div>

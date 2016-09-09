@@ -9,8 +9,14 @@
             {{-- */$selected = '';/* --}}
             @if(isset($itemsProject))
                 @foreach ($itemsProject as $itemProject)
-                    @if($itemProject->name == $item->name)
-                        {{-- */$selected = 'selected';/* --}}
+                    @if (is_object($itemProject))
+                        @if($itemProject->name == $item->name)
+                            {{-- */$selected = 'selected';/* --}}
+                        @endif
+                    @else
+                        @if($itemProject == $item->name)
+                            {{-- */$selected = 'selected';/* --}}
+                        @endif
                     @endif
                 @endforeach
             @endif
