@@ -98,64 +98,6 @@ var Filter = {
                     //TODO: ajax loader stop
                 });
         });
-
-        $(document).on('click', '.js-references-edit', function (e) {
-            e.stopPropagation();
-            var $text = $(this).parent().next();
-            $text.editable('enable').editable('toggle')
-                .on('hidden', function (e, reason) {
-                    $(this).editable('disable');
-                });
-
-        });
-
-        $(document).on('click', '.js-references-create', function (e) {
-            e.stopPropagation();
-            var $parent = $(this).parents('.table');
-
-            $parent.find('.current').removeClass('current');
-
-            var $newItem = $('.pattern').clone(true);
-            $(this).closest('.action').before('<tr class="current">' + $newItem.html() + '</tr>');
-
-            var $value = $parent.find('.current').find('.js-references-change').find('div');
-            var name = $value.text();
-            var pk = $parent.find('.current').find('.js-references-change').data('id');
-
-            $value.editable({
-                type: 'text',
-                url: '/references/update',
-                name: name,
-                pk: pk
-            }).editable('show');
-            //$parent.find('.current span').editable('enable').editable('activate');
-        });
-
-        $(document).on('click', '.js-references-remove', function (e) {
-            var $value = $(this).parent().next();
-            if ($value.hasClass('js-references-change')) {
-                //TODO ajax loader start
-                var name = $value.text();
-                var id = $value.data('id');
-                if (id && name) {
-                    $.ajax({
-                        url: '/references/delete',
-                        type: 'post',
-                        dataType: "html",
-                        data: {'id': id, 'name': name}
-                    })
-                        .done(function (response) {
-                            $value.closest('tr').remove();
-                        })
-                        .fail(function () {
-                            alert("error");
-                        })
-                        .always(function () {
-                            //TODO ajax loader stop
-                        });
-                }
-            }
-        });
     },
 
     afterResponse: function (json) {
@@ -259,6 +201,64 @@ var References = {
                 .fail(function () {
                     alert("error");
                 });
+        });
+
+        $(document).on('click', '.js-references-edit', function (e) {
+            e.stopPropagation();
+            var $text = $(this).parent().next();
+            $text.editable('enable').editable('toggle')
+                .on('hidden', function (e, reason) {
+                    $(this).editable('disable');
+                });
+
+        });
+
+        $(document).on('click', '.js-references-create', function (e) {
+            e.stopPropagation();
+            var $parent = $(this).closest('.table');
+
+            $parent.find('.current').removeClass('current');
+
+            var $newItem = $parent.find('.pattern').clone(true);
+            $(this).closest('.action').before('<tr class="current">' + $newItem.html() + '</tr>');
+
+            var $value = $parent.find('.current').find('.js-references-change').find('div');
+            var name = $value.text();
+            var pk = $parent.find('.current').find('.js-references-change').data('id');
+
+            $value.editable({
+                type: 'text',
+                url: '/references/update',
+                name: name,
+                pk: pk
+            }).editable('show');
+            //$parent.find('.current span').editable('enable').editable('activate');
+        });
+
+        $(document).on('click', '.js-references-remove', function (e) {
+            var $value = $(this).parent().next();
+            if ($value.hasClass('js-references-change')) {
+                //TODO ajax loader start
+                var name = $value.text();
+                var id = $value.data('id');
+                if (id && name) {
+                    $.ajax({
+                        url: '/references/delete',
+                        type: 'post',
+                        dataType: "html",
+                        data: {'id': id, 'name': name}
+                    })
+                        .done(function (response) {
+                            $value.closest('tr').remove();
+                        })
+                        .fail(function () {
+                            alert("error");
+                        })
+                        .always(function () {
+                            //TODO ajax loader stop
+                        });
+                }
+            }
         });
     },
 
@@ -456,56 +456,6 @@ $(document).ready(function () {
             return $(trigger).parent().get(0);
         }
     });
-
-    $('.js-references-edit').on('click', function (e) {
-        e.stopPropagation();
-        var $text = $(this).parent().next();
-        $text.editable('enable').editable('toggle')
-            .on('hidden', function (e, reason) {
-                $(this).editable('disable');
-            })
-            .on('save', function (e, params) {
-                var target = $(e.target);
-                var position = target.data('position');
-                $('input[data-position=' + position + ']').val(params.newValue);
-            });
-    });
-
-    $('.js-references-create').on('click', function (e) {
-        e.stopPropagation();
-
-        var pos = $('[data-position]').last().data('position');
-        var $parent = $(this).parents('.table');
-
-        $parent.find('.current').removeClass('current');
-        var $newItem = $('.pattern').clone(true);
-
-        $(this).closest('.action').before('<tr class="current">' + $newItem.html() + '</tr>');
-        var $value = $parent.find('.current').find('.js-references-change').find('div');
-
-        $('[data-position]').last().attr('name', 'references[]');
-        $('[data-position]').last().attr('data-position', pos + 1);
-
-        $('.js-references-change').last().attr('data-position', pos + 1);
-
-        $value.editable('show')
-            .on('save', function (e, params) {
-                var target = $(e.target);
-                var position = target.parent().data('position');
-                $('input[data-position=' + position + ']').val(params.newValue);
-            });
-    });
-
-    $('.js-references-remove').on('click', function (e) {
-        var $value = $(this).parent().next();
-        console.log($value);
-        if ($value.hasClass('js-references-change')) {
-            //TODO ajax loader start
-            var name = $value.text();
-            $value.closest('tr').remove();
-        }
-    });
-
 
     $('[multiple]').each(function (index, values) {
 		var selectedBlock = $(this).next().children().next();
