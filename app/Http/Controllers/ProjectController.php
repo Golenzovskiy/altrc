@@ -198,7 +198,11 @@ class ProjectController extends Controller
 
         return response()->json([
             'status' => 'success',
-            'result' => view('filter.result', ['projects' => $projects, 'tags' => $tags])->render(),
+            'result' => view('filter.result', [
+                'projects' => $projects,
+                'tags' => $tags,
+                'userReferences' => $request->session()->get('user.references')
+            ])->render(),
             'amount' => $projects->total()
         ]);
     }

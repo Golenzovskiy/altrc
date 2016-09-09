@@ -83,7 +83,7 @@
                                         @foreach ($project->references as $i => $reference)
                                             <tr>
                                                 <td>
-                                                    <button type="button" class="favorite-refer btn btn-{{ $i == 1 ? 'primary' : 'default' }} btn-xs" aria-label="Left Align">
+                                                    <button type="button" class="favorite-refer btn btn-{{ ($userReferences && in_array($reference->name, $userReferences)) ? 'primary' : 'default' }} btn-xs" aria-label="Left Align">
                                                         <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
                                                     </button>
                                                     <div class="btn-group">
