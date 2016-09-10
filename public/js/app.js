@@ -35,7 +35,7 @@ function Ajax(form) {
             arr.shift();
         }
         var request = arr.join('+');
-        $('#request').removeClass('hidden').html('<a href="/">Сбросить фильтр:</a> ' + request);
+        $('#request').removeClass('hidden').html('<a href="/reset">Сбросить фильтр:</a> ' + request);
 
         this.init();
         var button = this.$form.find('#filter').get(0);
@@ -98,6 +98,12 @@ var Filter = {
                     //TODO: ajax loader stop
                 });
         });
+
+        // запуск авто фильтра
+        var autoFilter =  this.filter.find('.js-auto-filter');
+        if (autoFilter.length) {
+            this.filter.trigger('submit');
+        }
     },
 
     afterResponse: function (json) {
