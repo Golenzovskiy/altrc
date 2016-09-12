@@ -276,7 +276,6 @@ var References = {
             if ($(this).parent().hasClass('btn-primary')) {
                 if (project.data('description')) {
                     project.each(function (index, value) {
-                        $(project).attr('data-origin-text', $(value).text()); // TODO
                         $(value).children().html($(this).text() + ' <span class="js-additional-text">(' + project.data('description') + ')</span>');
                     });
                 } else {
