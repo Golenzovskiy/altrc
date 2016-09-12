@@ -266,6 +266,28 @@ var References = {
                 }
             }
         });
+
+        $(document).on('click', '.glyphicon-pushpin', function (e) {
+            e.preventDefault();
+
+            $(this).parent().toggleClass('btn-default btn-primary');
+            var project = $(this).closest('.btn-toolbar').next().find('.js-references');
+
+            if ($(this).parent().hasClass('btn-primary')) {
+                if (project.data('description')) {
+                    project.each(function (index, value) {
+                        $(project).attr('data-origin-text', $(value).text()); // TODO
+                        $(value).children().html($(this).text() + ' <span class="js-additional-text">(' + project.data('description') + ')</span>');
+                    });
+                } else {
+                    project.each(function (index, value) {
+                        $(value).children().html($(this).text() + ' <span class="js-additional-text">(' + project.data('company') + ')</span>');
+                    });
+                }
+            } else {
+                $(project).find('.js-additional-text').html('');
+            }
+        });
     },
 
     addToPanel: function ($el) {
@@ -552,16 +574,5 @@ $(document).ready(function () {
         var id = $(this).attr('data');
         window.location.hash = $(this).attr('href');
     });
-
-    $(document).on('click', '.glyphicon-pushpin', function (e) {
-        e.preventDefault();
-        var project = $(this).closest('.btn-toolbar').next().find('.js-references');
-        if (project.data('description')) {
-            references = project.children().text() + ' (' + project.data('description') + ')';
-        } else {
-            references = project.children().text() + ' (' + project.data('company') + ')';
-        }
-        console.log(references); // Джедай, используй силу, чтобы сохранить references в куки!
-    })
 
 });
