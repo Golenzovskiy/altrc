@@ -41,7 +41,6 @@ function Ajax(form) {
         var button = this.$form.find('#filter').get(0);
         var l = Ladda.create(button);
         l.start();
-        /*console.log(this.$form.serialize());*/
         $.ajax({
             url: this.url,
             type: this.type,
@@ -469,13 +468,6 @@ $(document).ready(function () {
                 return request;
             }
         });
-        /*clipboard.on('success', function(e) {
-            console.log(e);
-        });
-
-        clipboard.on('error', function(e) {
-            console.log(e);
-        });*/
     });
 
     new Clipboard('.clip', {
@@ -555,7 +547,6 @@ $(document).ready(function () {
         e.preventDefault();
         var newRow = $(this).closest('tr').next();
         newRow.clone().removeClass('hidden').insertAfter($(this).closest('tr'));
-        console.log(this);
     });
 
     if (document.location.hash == '#country') {
@@ -569,7 +560,6 @@ $(document).ready(function () {
     }
 
     $('[role = tab]').click(function(){
-        //console.log($(this).attr('href'));
         var id = $(this).attr('data');
         window.location.hash = $(this).attr('href');
     });
