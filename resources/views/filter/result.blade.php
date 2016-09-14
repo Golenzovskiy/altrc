@@ -28,9 +28,6 @@
         @include('include.projects', ['project' => $projects])
     </div>
 
-    <!--div id="draggable" class="panel panel-default">
-      <p>Drag me!</p>
-    </div-->
     <nav class="center">
         {{ $projects->links() }}
     </nav>
