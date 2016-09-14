@@ -271,7 +271,7 @@ var References = {
             e.preventDefault();
 
             $(this).parent().toggleClass('btn-default btn-primary');
-            var project = $(this).closest('.btn-toolbar').next().find('.js-references');
+            var project = $(this).closest('.btn-toolbar').next().find('.js-references:not(:first)');
 
             if ($(this).parent().hasClass('btn-primary')) {
                 if (project.data('description')) {
