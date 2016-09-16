@@ -14,13 +14,13 @@
             @endforeach
             <tr data-tags='{{ json_encode($tags, JSON_UNESCAPED_UNICODE) }}'>
                 <td>
+                    {{ $project->company }}
+                </td>
+                <td>
                     @if ($project->logo)
                         <img class="max-max-width-100" border="0"
                              src="{{ $project->logo }}">
                     @endif
-                </td>
-                <td>
-                    {{ $project->company }}
                 </td>
                 <td>
                     {{ $project->name }}
