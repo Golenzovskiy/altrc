@@ -7,6 +7,8 @@
  */
 namespace App;
 
+use Intervention\Image\Facades\Image;
+//use Faker\Provider\Image;
 use Illuminate\Database\Eloquent\Model;
 use DB;
 
@@ -117,7 +119,29 @@ class Project extends Model {
      * @return string image url
      */
     public function getLogoAttribute() {
-        return ($this->attributes['logo']) ? '/images' . $this->attributes['logo'] : '';
+		if ($this->attributes['logo']) {
+			$originImg = $this->attributes['logo'];
+			
+			$imgOrignPath = explode('/', $originImg);
+			$imgName = strtolower(end($imgOrignPath));
+			
+			$img = public_path() . '/images' . $originImg;
+			if (file_exists(public_path() . '/images/logos/thumbs/' . $imgName)) {
+				return '/images/logos/thumbs/' . $imgName;
+			} else {
+				if (file_exists($img)) {
+					if (!file_exists(public_path() . '/images/logos/thumbs/')) {
+						mkdir(public_path() . '/images/logos/thumbs/');
+						chmod(public_path() . '/images/logos/thumbs/', 0770);
+					}
+					$thumb = Image::make($img)->resize(100, null, function ($constraint) {
+						$constraint->aspectRatio();
+					});
+					$thumb->save('images/logos/thumbs/' . $imgName, 90);
+					return '/images/logos/thumbs/' . $imgName;
+				}
+			}
+		}
     }
 
     public function references() {
