@@ -470,6 +470,21 @@ $(document).ready(function () {
             }
         });
     });
+	
+	$('#clear').click(function () {
+		var references = $('#js-reference-panel').children();
+		references.each(function (index, value) {
+			$.ajax({
+				url: '/user/references/remove',
+				type: 'post',
+				dataType: "html",
+				data: {'name': $(value).text()}
+			})
+        });
+		$('#amountReferences').html(0);
+		$('#js-reference-panel').html('');
+		$('.favorite-refer.btn-primary').toggleClass('btn-primary btn-default');
+    });
 
     new Clipboard('.clip', {
         target: function (trigger) {

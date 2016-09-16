@@ -67,9 +67,12 @@
         <div class="bs-component">
             <div class="panel panel-primary">
                 <div class="panel-heading">
-                    <button class="btn btn-default btn-xs" id="copy" data-clipboard-action="copy">Копировать в буфер <span class="glyphicon glyphicon-copy" aria-hidden="true" /></button>
-                    <button class="btn btn-primary btn-xs pull-right handleClose"><span class="glyphicon glyphicon-remove" aria-hidden="true" /></button>
+				<div class="btn-group">
+                    <button class="btn btn-default btn-xs" id="copy" data-clipboard-action="copy">В буфер <span class="glyphicon glyphicon-copy" aria-hidden="true" /></button>
+                    <button class="btn btn-default btn-xs" id="clear" data-clipboard-action="copy">Сбросить <span class="glyphicon glyphicon-trash" aria-hidden="true" /></button>
                 </div>
+                    <button class="btn btn-primary btn-xs pull-right handleClose"><span class="glyphicon glyphicon-remove" aria-hidden="true" /></button>
+				</div>
                 <div class="panel-body" id="js-reference-panel">
                     @if($userReferences)
                         @foreach($userReferences as $name)
