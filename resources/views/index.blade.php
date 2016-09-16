@@ -45,17 +45,19 @@
                                name="tags" value="{{ ($filter && $filter['tags']) ? $filter['tags'] : '' }}">
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-lg-12 padding-top-15">
-                        <div id="request" class="hidden well well-sm"></div>
-                    </div>
-                    <div class="col-lg-12 padding-right-15">
-                        <!--disabled="disabled"-->
-                        <button type="submit" class="rbtn btn btn-primary ladda-button {{ ($isFilterSet) ? 'js-auto-filter' : '' }}"
-                                data-style="zoom-out" id="filter"><span class="ladda-label">Фильтровать</span>
-                        </button>
-                    </div>
-                </div>
+				<div class="row">
+					<div class="col-lg-12 padding-top-15">
+						<div id="request" class="hidden well well-sm"></div>
+					</div>
+					<div class="btn-group col-lg-12 padding-right-15">
+					<div class="pull-right">
+						<a href="/reset" class="reset hidden btn btn-default ladda-button">Сбросить</a>
+						<button type="submit" class="btn btn-primary ladda-button {{ ($isFilterSet) ? 'js-auto-filter' : '' }}"
+						data-style="zoom-out" id="filter"><span class="ladda-label">Фильтровать</span>
+						</button>
+					</div>
+					</div>
+				</div>
             </div>
         </div>
     </form>

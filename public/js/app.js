@@ -35,7 +35,8 @@ function Ajax(form) {
             arr.shift();
         }
         var request = arr.join('+');
-        $('#request').removeClass('hidden').html('<a href="/reset">Сбросить фильтр:</a> ' + request);
+        $('#request').removeClass('hidden').html('<strong>Поисковый запрос: </strong>' + request);
+		$('.reset').removeClass('hidden');
 
         this.init();
         var button = this.$form.find('#filter').get(0);
