@@ -8,9 +8,10 @@
 namespace App;
 
 use Intervention\Image\Facades\Image;
-//use Faker\Provider\Image;
 use Illuminate\Database\Eloquent\Model;
 use DB;
+
+define("PATH_THUMBS_IMAGE", "/images/logos/thumbs/");
 
 class Project extends Model {
 
@@ -121,24 +122,22 @@ class Project extends Model {
     public function getLogoAttribute() {
 		if ($this->attributes['logo']) {
 			$originImg = $this->attributes['logo'];
-			
-			$imgOrignPath = explode('/', $originImg);
-			$imgName = strtolower(end($imgOrignPath));
-			
+			$imgName = md5($this->attributes['logo']);
+
 			$img = public_path() . '/images' . $originImg;
-			if (file_exists(public_path() . '/images/logos/thumbs/' . $imgName)) {
-				return '/images/logos/thumbs/' . $imgName;
+			if (file_exists(public_path() . PATH_THUMBS_IMAGE . $imgName)) {
+				return PATH_THUMBS_IMAGE . $imgName;
 			} else {
 				if (file_exists($img)) {
-					if (!file_exists(public_path() . '/images/logos/thumbs/')) {
-						mkdir(public_path() . '/images/logos/thumbs/');
-						chmod(public_path() . '/images/logos/thumbs/', 0770);
+					if (!file_exists(public_path() . PATH_THUMBS_IMAGE)) {
+						mkdir(public_path() . PATH_THUMBS_IMAGE);
+						chmod(public_path() . PATH_THUMBS_IMAGE, 0770);
 					}
 					$thumb = Image::make($img)->resize(100, null, function ($constraint) {
 						$constraint->aspectRatio();
 					});
-					$thumb->save('images/logos/thumbs/' . $imgName, 90);
-					return '/images/logos/thumbs/' . $imgName;
+					$thumb->save(substr(PATH_THUMBS_IMAGE, 1) . $imgName, 90);
+					return PATH_THUMBS_IMAGE . $imgName;
 				}
 			}
 		}
