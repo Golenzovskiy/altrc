@@ -74,28 +74,31 @@
                                     </button>
                                 </div>
                                 <span class="js-references-change js-references" data-position=""
-                                      data-emptytext="" data-id=""><div
-                                            class="references-text"></div></span>
-                                <input type="hidden" data-position=""
-                                       value="">
+                                      data-emptytext="" data-id=""><div class="references-text"></div>
+                                </span>
+                                <input type="hidden" data-position="" value="">
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-link btn-sm js-references-edit"
-                                            aria-label="Edit reference">
-                                        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-                                    </button>
-                                    <button type="button" class="btn btn-link btn-sm js-references-remove"
-                                            aria-label="Delete reference">
-                                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                                    </button>
+                                <div style="float: left">
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-link btn-sm js-references-edit"
+                                                aria-label="Edit reference">
+                                            <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                                        </button>
+                                        <button type="button" class="btn btn-link btn-sm js-references-remove"
+                                                aria-label="Delete reference">
+                                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                        </button>
+                                    </div>
                                 </div>
                                 {{-- */ $i = rand() /* --}}
-                                <span class="js-references-change js-references" data-position="{{ $i }}">
-                                        <div class="references-text"></div></span>
-                                <input type="hidden" name="references[]" data-position="{{ $i }}" value="">
+                                <div>
+                                    <span class="js-references-change js-references" data-position="{{ $i }}">
+                                            <div class="references-text"></div></span>
+                                    <input type="hidden" name="references[]" data-position="{{ $i }}" value="">
+                                </div>
                             </td>
                         </tr>
                         <tr class="action">

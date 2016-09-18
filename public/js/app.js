@@ -168,7 +168,8 @@ var References = {
         $(document).on('click', '.favorite-refer', function () {
             var request = '';
 
-            var $el = $(this).parent().find('.references-text');
+            var $el = $(this).parent().parent().find('.references-text');
+            console.log($el);
 
             if ($(this).hasClass('btn-default')) {
                 request = '/user/references/store';
@@ -211,7 +212,7 @@ var References = {
 
         $(document).on('click', '.js-references-edit', function (e) {
             e.stopPropagation();
-            var $text = $(this).parent().next();
+            var $text = $(this).parent().parent().next().children();
             $text.editable('enable').editable('toggle')
                 .on('hidden', function (e, reason) {
                     $(this).editable('disable');
@@ -242,7 +243,7 @@ var References = {
         });
 
         $(document).on('click', '.js-references-remove', function (e) {
-            var $value = $(this).parent().next();
+            var $value = $(this).parent().parent().next().children();
             if ($value.hasClass('js-references-change')) {
                 //TODO ajax loader start
                 var name = $value.text();

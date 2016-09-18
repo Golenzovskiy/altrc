@@ -42,7 +42,7 @@
                     <div class="panel panel-default">
                         <div class="panel-body">
                             <div class="btn-toolbar padding-bottom-15">
-                                <div class="btn-group pull-right">
+                                <div class="btn-group pull-right padding-right-8">
                                     <a href="#" class="btn btn-default btn-xs"><span
                                                 data-toggle="tooltip" data-placement="top"
                                                 title="Добавить описание"
@@ -59,51 +59,61 @@
                                 <table class="table table-default table-hover ">
                                     <tr class="hidden pattern">
                                         <td>
-                                            <button type="button" class="favorite-refer btn btn-default btn-xs" aria-label="Left Align">
-                                                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-                                            </button>
-                                            <div class="btn-group">
-                                                <button type="button" class="btn btn-link btn-sm js-references-edit"
-                                                        aria-label="Edit reference">
-                                                    <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-                                                </button>
-                                                <button type="button" class="btn btn-link btn-sm js-references-remove"
-                                                        aria-label="Delete reference">
-                                                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                                                </button>
-                                            </div>
+                                            <div class="pull-right">
+                                                <div class="btn-group">
+                                                        <div class="btn-group">
+                                                            <button type="button" class="btn btn-link btn-sm js-references-edit"
+                                                                    aria-label="Edit reference">
+                                                                <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                                                            </button>
+                                                            <button type="button" class="btn btn-link btn-sm js-references-remove"
+                                                                    aria-label="Delete reference">
+                                                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                    <button type="button" class="favorite-refer btn btn-default btn-xs" aria-label="Left Align">
+                                                        <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                                                    </button>
+                                                </div>
+                                            <div>
                                             <span data-description="{{ $project->description }}"
                                                   data-company="{{ $project->company }}"
                                                   class="js-references-change editable editable-click js-references"
                                                   data-emptytext="" data-id="{{ $project->id }}"><div
                                                         class="references-text"></div></span>
+                                            </div>
                                         </td>
                                     </tr>
                                     @if ($project->references)
                                         @foreach ($project->references as $i => $reference)
                                             <tr>
                                                 <td>
-                                                    <button type="button" class="favorite-refer btn btn-{{ ($userReferences && in_array($reference->name, $userReferences)) ? 'primary' : 'default' }} btn-xs" aria-label="Left Align">
-                                                        <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-                                                    </button>
-                                                    <div class="btn-group">
-                                                        <button type="button"
-                                                                class="btn btn-link btn-sm js-references-edit"
-                                                                aria-label="Edit reference">
-                                                                            <span class="glyphicon glyphicon-edit"
-                                                                                  aria-hidden="true"></span>
-                                                        </button>
-                                                        <button type="button"
-                                                                class="btn btn-link btn-sm js-references-remove"
-                                                                aria-label="Delete reference">
-                                                                            <span class="glyphicon glyphicon-remove"
-                                                                                  aria-hidden="true"></span>
+                                                    <div class="pull-right">
+                                                        <div class="btn-group">
+                                                            <button type="button"
+                                                                    class="btn btn-link btn-sm js-references-edit"
+                                                                    aria-label="Edit reference">
+                                                                                <span class="glyphicon glyphicon-edit"
+                                                                                      aria-hidden="true"></span>
+                                                            </button>
+                                                            <button type="button"
+                                                                    class="btn btn-link btn-sm js-references-remove"
+                                                                    aria-label="Delete reference">
+                                                                                <span class="glyphicon glyphicon-remove"
+                                                                                      aria-hidden="true"></span>
+                                                            </button>
+                                                        </div>
+                                                        <button type="button" class="favorite-refer btn btn-{{ ($userReferences && in_array($reference->name, $userReferences)) ? 'primary' : 'default' }} btn-xs" aria-label="Left Align">
+                                                            <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
                                                         </button>
                                                     </div>
-                                                    <span data-description="{{ $project->description }}"
-                                                          data-company="{{ $project->company }}"
-                                                          class="js-references-change js-references"
-                                                          data-id="{{ $project->id }}"><div class="references-text">{{ $reference->name }}</div></span>
+                                                    <div>
+                                                        <span data-description="{{ $project->description }}"
+                                                        data-company="{{ $project->company }}"
+                                                        class="js-references-change js-references"
+                                                        data-id="{{ $project->id }}"><div class="references-text">{{ $reference->name }}</div></span>
+                                                    </div>
                                                 </td>
                                             </tr>
                                         @endforeach
