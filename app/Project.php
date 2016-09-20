@@ -11,12 +11,11 @@ use Intervention\Image\Facades\Image;
 use Illuminate\Database\Eloquent\Model;
 use DB;
 
-define("PATH_THUMBS_IMAGE", "/images/logos/thumbs/");
-
 class Project extends Model {
 
     public $imgPath;
     const ORIGIN_DIR = '/images/logos/';
+    const THUMB_DIR = '/images/logos/thumbs/';
 
     /**
      * Return result by filter params
@@ -124,23 +123,23 @@ class Project extends Model {
      */
     public function getLogoAttribute() {
 		if ($this->attributes['logo']) {
-			$originImg = $this->attributes['logo'];
-			$imgName = md5($this->attributes['logo']);
+			$imgPathDB = $this->attributes['logo'];
+			$imgThumb = md5($imgPathDB) . '.' . pathinfo($imgPathDB)['extension'];
 
-			$img = public_path() . '/images' . $originImg;
-			if (file_exists(public_path() . PATH_THUMBS_IMAGE . $imgName)) {
-				return PATH_THUMBS_IMAGE . $imgName;
+			$img = $this->getImgPath(self::ORIGIN_DIR) . pathinfo($this->attributes['logo'])['basename'];
+			if (file_exists($this->getImgPath(self::THUMB_DIR) . $imgThumb)) {
+			    return self::THUMB_DIR . $imgThumb;
 			} else {
 				if (file_exists($img)) {
-					if (!file_exists(public_path() . PATH_THUMBS_IMAGE)) {
-						mkdir(public_path() . PATH_THUMBS_IMAGE);
-						chmod(public_path() . PATH_THUMBS_IMAGE, 0770);
+					if (!file_exists($this->getImgPath(self::THUMB_DIR))) {
+						mkdir($this->getImgPath(self::THUMB_DIR));
+						chmod($this->getImgPath(self::THUMB_DIR), 0770);
 					}
 					$thumb = Image::make($img)->resize(100, null, function ($constraint) {
 						$constraint->aspectRatio();
 					});
-					$thumb->save(substr(PATH_THUMBS_IMAGE, 1) . $imgName, 90);
-					return PATH_THUMBS_IMAGE . $imgName;
+					$thumb->save($this->getImgPath(self::THUMB_DIR) . $imgThumb, 90);
+					return self::THUMB_DIR . $imgThumb;
 				}
 			}
 		}
