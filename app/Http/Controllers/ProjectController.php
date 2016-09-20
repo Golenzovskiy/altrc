@@ -79,9 +79,17 @@ class ProjectController extends Controller
         $project->year = $request->year . "-01-01";
         $project->description = $request->description;
         if ($request->logo) {
-            $imgName = $request->file('logo')->getClientOriginalName();
-            $request->file('logo')->move('images/logos', $imgName);
-            $project->logo = '/logos/' . $imgName;
+            $imgName = pathinfo($request->file('logo')->getClientOriginalName())['filename'];
+            if (glob($project->getImgPath(Project::ORIGIN_DIR) . $imgName . ".*")) {
+                $imgExtension =$request->file('logo')->getClientOriginalExtension();
+                $i = count(glob($project->getImgPath(Project::ORIGIN_DIR) . $imgName . "_*.*"));
+                $img = $imgName . '_' . ++$i . '.' . $imgExtension;
+                $request->file('logo')->move(($project->getImgPath(Project::ORIGIN_DIR)), $img);
+            } else {
+                $img = $request->file('logo')->getClientOriginalName();
+                $request->file('logo')->move(($project->getImgPath(Project::ORIGIN_DIR)), $img);
+            }
+            $project->logo = '/logos/' . $img;
         }
 
         $project->save();
@@ -130,9 +138,17 @@ class ProjectController extends Controller
             $project->year = $request->year . "-01-01";
             $project->description = $request->description;
             if ($request->logo) {
-                $imgName = $request->file('logo')->getClientOriginalName();
-                $request->file('logo')->move('images/logos', $imgName);
-                $project->logo = '/logos/' . $imgName;
+                $imgName = pathinfo($request->file('logo')->getClientOriginalName())['filename'];
+                if (glob($project->getImgPath(Project::ORIGIN_DIR) . $imgName . ".*")) {
+                    $imgExtension =$request->file('logo')->getClientOriginalExtension();
+                    $i = count(glob($project->getImgPath(Project::ORIGIN_DIR) . $imgName . "_*.*"));
+                    $img = $imgName . '_' . ++$i . '.' . $imgExtension;
+                    $request->file('logo')->move(($project->getImgPath(Project::ORIGIN_DIR)), $img);
+                } else {
+                    $img = $request->file('logo')->getClientOriginalName();
+                    $request->file('logo')->move(($project->getImgPath(Project::ORIGIN_DIR)), $img);
+                }
+                $project->logo = '/logos/' . $img;
             }
 
             $project->save();

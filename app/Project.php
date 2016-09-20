@@ -15,6 +15,9 @@ define("PATH_THUMBS_IMAGE", "/images/logos/thumbs/");
 
 class Project extends Model {
 
+    public $imgPath;
+    const ORIGIN_DIR = '/images/logos/';
+
     /**
      * Return result by filter params
      * @param array $data filter params
@@ -142,6 +145,11 @@ class Project extends Model {
 			}
 		}
     }
+
+	public function getImgPath($dir) {
+        $this->imgPath = public_path() . $dir;
+        return $this->imgPath;
+	}
 
     public function references() {
         return $this->hasMany('App\ReferenceProject');

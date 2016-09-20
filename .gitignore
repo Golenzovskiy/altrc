@@ -1,4 +1,4 @@
-/public/images/logos/thumbs/
+/public/images/*
 /vendor
 /node_modules
 /public/storage
