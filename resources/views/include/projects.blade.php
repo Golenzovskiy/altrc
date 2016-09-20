@@ -1,8 +1,8 @@
 <div class="table-responsive pbtn">
     <table class="table table-default">
         <tr>
-            <th>Логотип</th>
             <th>Компания</th>
+            <th>Логотип</th>
             <th>Название проекта</th>
             <th>Варианты формулировок</th>
         </tr>
