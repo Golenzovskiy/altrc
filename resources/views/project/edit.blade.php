@@ -3,7 +3,7 @@
 @section('content')
 
     <h3>Редактирование проекта</h3>
-    <form action="/edit/{{ $project->id }}" method="post" enctype="multipart/form-data">
+    <form class="edit-mode" action="/edit/{{ $project->id }}" method="post" enctype="multipart/form-data">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <div class="panel panel-default">
             <div class="panel-body">

@@ -316,6 +316,62 @@ var References = {
     }
 };
 
+var Edit = {
+    // логика работы с референциями для режима редактирования
+    observer: function () {
+
+        $('.js-references-edit').on('click', function (e) {
+            e.stopPropagation();
+            var $text = $(this).parent().next();
+            $text.editable('enable').editable('toggle')
+                .on('hidden', function (e, reason) {
+                    $(this).editable('disable');
+                })
+                .on('save', function (e, params) {
+                    var target = $(e.target);
+                    var position = target.data('position');
+                    $('input[data-position=' + position + ']').val(params.newValue);
+                });
+        });
+
+        $('.js-references-create').on('click', function (e) {
+            e.stopPropagation();
+
+            var pos = $('[data-position]').last().data('position');
+            var $parent = $(this).parents('.table');
+
+            $parent.find('.current').removeClass('current');
+            var $newItem = $('.pattern').clone(true);
+
+            $(this).closest('.action').before('<tr class="current">' + $newItem.html() + '</tr>');
+            var $value = $parent.find('.current').find('.js-references-change').find('div');
+
+            $('[data-position]').last().attr('name', 'references[]');
+            $('[data-position]').last().attr('data-position', pos + 1);
+
+            $('.js-references-change').last().attr('data-position', pos + 1);
+
+            $value.editable('show')
+                .on('save', function (e, params) {
+                    var target = $(e.target);
+                    var position = target.parent().data('position');
+                    $('input[data-position=' + position + ']').val(params.newValue);
+                });
+        });
+
+        $('.js-references-remove').on('click', function () {
+            var $value = $(this).parent().next();
+            if ($value.hasClass('js-references-change')) {
+                $value.closest('tr').remove();
+            }
+        });
+    },
+
+    init: function () {
+        this.observer();
+    }
+};
+
 function checkFields(form) {
     var checks_radios = form.find(':checkbox, :radio'),
         inputs = form.find(':input').not(checks_radios).not('[type="submit"],[type="button"],[type="reset"]');
@@ -334,7 +390,12 @@ function checkFields(form) {
 
 $(document).ready(function () {
     Filter.init();
-    References.init();
+
+    if ($('.edit-mode').length > 0) {
+        Edit.init();
+    } else {
+        References.init();
+    }
 
     var $form = $('#js-filter');
     var $tagsInput = $("#FieldTags");
