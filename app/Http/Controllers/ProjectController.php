@@ -75,6 +75,7 @@ class ProjectController extends Controller
 
         $project = new Project;
         $project->company = $request->company;
+        $project->company_alternative = $request->company_alternative;
         $project->name = $request->name;
         $project->year = $request->year . "-01-01";
         $project->description = $request->description;
@@ -134,6 +135,7 @@ class ProjectController extends Controller
         if ($request->isMethod('post')) {
             $project = Project::find($id);
             $project->company = $request->company;
+            $project->company_alternative = $request->company_alternative;
             $project->name = $request->name;
             $project->year = $request->year . "-01-01";
             $project->description = $request->description;

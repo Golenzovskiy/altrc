@@ -1,5 +1,10 @@
 body { padding-top: 42px; }
 
+.description {
+    height: 130px !important;
+    resize: vertical;
+}
+
 .radius-up {
 	border-radius: 3px 3px 0px 0px;
 }

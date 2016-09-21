@@ -19,38 +19,36 @@
                             </div>
                         @endif
                         <div class="row">
-                            <div class="col-lg-8 col-md-8 col-sm-8">
+                            <div class="col-lg-4 col-md-5 col-sm-6 col-xs-12">
                                 <h4>Название компании</h4>
                                 <input name="company" type="text" class="form-control" placeholder="Введите слово...">
                             </div>
-                            <div style="z-index: 2" class="col-lg-4 col-md-4 col-sm-4">
-                                <h4>Выберите год</h4>
-                                <input name="year" class="form-control" type="text" placeholder="2015" id="from">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-8 col-md-8 col-sm-8">
+                            <div class="col-lg-8 col-md-7 col-sm-6 col-xs-12">
                                 <h4>Название проекта</h4>
                                 <input name="name" type="text" class="form-control" placeholder="Введите слово...">
                             </div>
-                            <div class="col-lg-4 col-md-4 col-sm-4">
+                            <div class="col-lg-4 col-md-5 col-sm-6 col-xs-12">
+                                <h4>Альтернативные названия компании</h4>
+                                <input name="company_alternative" type="text" class="form-control" placeholder="Введите слово...">
+                            </div>
+                            <div style="z-index: 2" class="col-lg-4 col-md-3 col-sm-6 col-xs-12">
+                                <h4>Выберите год</h4>
+                                <input name="year" class="form-control" type="text" placeholder="2015" id="from">
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                                 <h4>Логотип компании</h4>
                                 <img id="logo-image" border="0" src="" class="hidden">
                                 <input name="logo" type="file" id="logo">
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <h4>Описание компании</h4>
-                                <textarea class="form-control" rows="3" name="description"></textarea>
-                            </div>
-                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <h4>Описание компании</h4>
+                        <textarea class="form-control description" rows="6" name="description"></textarea>
                     </div>
                     @include('include.dictionary', ['name' => 'services[]', 'title' => 'Услуги', 'items' => $services])
 
                     @include('include.dictionary', ['name' => 'sectors[]', 'title' => 'Отрасли', 'items' => $sectors])
-
-                    @include('include.dictionary', ['name' => 'country[]', 'title' => 'География', 'items' => $country])
                 </div>
                 <div class="row top">
                     <div class="col-lg-12">
