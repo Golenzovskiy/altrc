@@ -32,8 +32,8 @@
                             </div>
                             <div class="col-lg-4 col-md-5 col-sm-6 col-xs-12">
                                 <h4>Альтернативные названия компании</h4>
-                                <input name="company" type="text" class="form-control"
-                                       placeholder="Введите слово..." value="{{ $project->company }}">
+                                <input name="company_alternative" type="text" class="form-control"
+                                       placeholder="Введите слово..." value="{{ $project->company_alternative }}">
                             </div>
                             <div style="z-index: 2" class="col-lg-4 col-md-3 col-sm-6 col-xs-12">
                                 <h4>Выберите год</h4>
