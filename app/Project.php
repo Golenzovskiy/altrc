@@ -24,18 +24,14 @@ class Project extends Model {
      */
     public function getByFilter($data) {
         $perPage = 20;
-        //DB::connection()->enableQueryLog();
-        $select = DB::table('projects');
+        DB::connection()->enableQueryLog();
+        $select = DB::table('projects')->select('projects.id');
 
-        if ($data->project) {
-            $select->where('company', 'like', '%' . $data->project . '%');
-        }
-
-        if ($data->references) {
-            $select->join('reference_projects', function ($join) use ($data) {
-                $join->on('projects.id', '=', 'reference_projects.project_id')
-                    ->where('reference_projects.name', 'like', '%' . $data->references . '%');
-            });
+        if ($data->search) {
+            $select->where('company', 'like', '%' . $data->search . '%')->orWhere('company_alternative', 'like', '%' . $data->search . '%');
+            $references = DB::table('reference_projects')->select('project_id')->where('reference_projects.name', 'like', '%' . $data->search . '%');
+            $tags = DB::table('tag_projects')->select('project_id')->where('tag_projects.name', $data->search);
+            $select->union($references)->union($tags);
         }
 
         if ($data->from) {
@@ -68,15 +64,7 @@ class Project extends Model {
             });
         }
 
-        if ($data->tags) {
-            $tagsRequest = explode(',', $data->tags);
-            $select->join('tag_projects', function ($join) use ($tagsRequest) {
-                $join->on('projects.id', '=', 'tag_projects.project_id')
-                    ->whereIn('tag_projects.name', $tagsRequest);
-            });
-        }
-
-        $result = $select->select('projects.id')->get();
+        $result = $select->get();
 
         $ids = [];
         foreach ($result as $item) {

@@ -9,11 +9,9 @@
         <div class="panel panel-default">
             <div class="panel-body">
                 <div class="row">
-                    <div class="col-lg-4 col-md-6"><h4>Поиск по проектам</h4>
-                        <input name="project" type="text" class="form-control" placeholder="Введите слово..." value="{{ (isset($filter['project'])) ? $filter['project'] : '' }}">
-                    </div>
-					<div class="col-lg-4 col-md-6"><h4>Поиск по референциям</h4>
-                        <input name="references" type="text" class="form-control" placeholder="Введите слово..." value="{{ (isset($filter['references'])) ? $filter['references'] : '' }}">
+                    <div class="col-lg-8 col-md-6"><h4>Поиск</h4>
+                        <input name="search" type="text" class="form-control" placeholder="Введите слово..."
+                               value="{{ (isset($filter['search'])) ? $filter['search'] : '' }}">
                     </div>
                     <div class="col-lg-4">
                         <h4>Выберите год</h4>
@@ -37,13 +35,6 @@
 
                     @include('include.dictionary', ['name' => 'country[]', 'title' => 'География', 'items' => $country, 'itemsProject' => (isset($filter['country'])) ? $filter['country'] : null ])
 
-                </div>
-                <div class="row">
-                    <div class="col-lg-12">
-                        <h4>Поиск по тегам</h4>
-                        <input type="text" class="form-control" placeholder="Введите слово..." id="FieldTags"
-                               name="tags" value="{{ ($filter && $filter['tags']) ? $filter['tags'] : '' }}">
-                    </div>
                 </div>
 				<div class="row">
 					<div class="col-lg-12 padding-top-15">
