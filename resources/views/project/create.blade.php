@@ -79,24 +79,20 @@
                         </tr>
                         <tr>
                             <td>
-                                <div style="float: left">
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-link btn-sm js-references-edit"
-                                                aria-label="Edit reference">
-                                            <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-                                        </button>
-                                        <button type="button" class="btn btn-link btn-sm js-references-remove"
-                                                aria-label="Delete reference">
-                                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                                        </button>
-                                    </div>
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-link btn-sm js-references-edit"
+                                            aria-label="Edit reference">
+                                        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                                    </button>
+                                    <button type="button" class="btn btn-link btn-sm js-references-remove"
+                                            aria-label="Delete reference">
+                                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                    </button>
                                 </div>
                                 {{-- */ $i = rand() /* --}}
-                                <div>
-                                    <span class="js-references-change js-references" data-position="{{ $i }}">
-                                            <div class="references-text"></div></span>
-                                    <input type="hidden" name="references[]" data-position="{{ $i }}" value="">
-                                </div>
+                                <span class="js-references-change js-references" data-position="{{ $i }}">
+                                        <div class="references-text"></div></span>
+                                <input type="hidden" name="references[]" data-position="{{ $i }}" value="">
                             </td>
                         </tr>
                         <tr class="action">
