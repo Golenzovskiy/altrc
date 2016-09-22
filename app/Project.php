@@ -28,10 +28,14 @@ class Project extends Model {
         $select = DB::table('projects')->select('projects.id');
 
         if ($data->search) {
-            $select->where('company', 'like', '%' . $data->search . '%')->orWhere('company_alternative', 'like', '%' . $data->search . '%');
-            $references = DB::table('reference_projects')->select('project_id')->where('reference_projects.name', 'like', '%' . $data->search . '%');
-            $tags = DB::table('tag_projects')->select('project_id')->where('tag_projects.name', $data->search);
-            $select->union($references)->union($tags);
+            $select->leftJoin('reference_projects', 'projects.id', '=', 'reference_projects.project_id')
+                ->leftJoin('tag_projects', 'projects.id', '=', 'tag_projects.project_id')
+                ->orWhere(function ($query) use ($data) {
+                    $query->orWhere('reference_projects.name', 'like', '%' . $data->search . '%')
+                          ->orWhere('tag_projects.name', $data->search)
+                          ->orWhere('projects.company', 'like', '%' . $data->search . '%')
+                          ->orWhere('projects.company_alternative', 'like', '%' . $data->search . '%');
+                });
         }
 
         if ($data->from) {
@@ -44,21 +48,21 @@ class Project extends Model {
         }
 
         if ($data->services) {
-            $select->join('service_projects', function ($join) use ($data) {
+            $select->leftJoin('service_projects', function ($join) use ($data) {
                 $join->on('projects.id', '=', 'service_projects.project_id')
                     ->whereIn('service_projects.name', $data->services);
             });
         }
 
         if ($data->sectors) {
-            $select->join('sector_projects', function ($join) use ($data) {
+            $select->leftJoin('sector_projects', function ($join) use ($data) {
                 $join->on('projects.id', '=', 'sector_projects.project_id')
                     ->whereIn('sector_projects.name', $data->sectors);
             });
         }
 
         if ($data->country) {
-            $select->join('country_projects', function ($join) use ($data) {
+            $select->leftJoin('country_projects', function ($join) use ($data) {
                 $join->on('projects.id', '=', 'country_projects.project_id')
                     ->whereIn('country_projects.name', $data->country);
             });
@@ -74,7 +78,7 @@ class Project extends Model {
         // нужно не для поиска, а именно для фильтрации, чтобы получать весь спектор тегов выборки
         if ($data->filterTags) {
             $tagsRequest = explode(',', $data->filterTags);
-            $select->join('tag_projects', function ($join) use ($tagsRequest) {
+            $select->leftJoin('tag_projects', function ($join) use ($tagsRequest) {
                 $join->on('projects.id', '=', 'tag_projects.project_id')
                     ->whereIn('tag_projects.name', $tagsRequest);
             });
