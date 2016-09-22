@@ -320,7 +320,7 @@ var Edit = {
     // логика работы с референциями для режима редактирования
     observer: function () {
 
-        $('.js-references-edit').on('click', function (e) {
+        $(document).on('click', '.js-references-edit', function (e) {
             e.stopPropagation();
             var $text = $(this).parent().next();
             $text.editable('enable').editable('toggle')
@@ -334,7 +334,7 @@ var Edit = {
                 });
         });
 
-        $('.js-references-create').on('click', function (e) {
+        $(document).on('click', '.js-references-create', function (e) {
             e.stopPropagation();
 
             var pos = $('[data-position]').last().data('position');
@@ -359,7 +359,7 @@ var Edit = {
                 });
         });
 
-        $('.js-references-remove').on('click', function () {
+        $(document).on('click', '.js-references-remove', function () {
             var $value = $(this).parent().next();
             if ($value.hasClass('js-references-change')) {
                 $value.closest('tr').remove();
