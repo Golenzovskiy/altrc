@@ -1,5 +1,5 @@
 /**
- * Description
+ * App js logic
  *
  * @author Sintsov Roman <sintsov.roman@gmail.com>
  * @author Stanislav Golenzovskiy <golenzovskiy@gmail.com>
@@ -59,6 +59,27 @@ function Ajax(form) {
             });
     }
 }
+
+
+// hack for x-editable full width
+var xeditableFullWidth = function (el) {
+    var inputW = 0, controlW = 0;
+    var $parent = $(el).parents('td');
+    var tdW = $parent.width();
+
+    var editButtonW = $parent.find('.editable-buttons').outerWidth(true);
+    var $input = $parent.find('.editable-input input');
+
+    if ($('.edit-mode').length > 0) {
+        controlW = $parent.find('.btn-group').outerWidth(true);
+        inputW = tdW - (controlW + editButtonW + 10);
+    } else {
+        controlW = $parent.find('.pull-right').outerWidth(true);
+        inputW = tdW - (controlW + editButtonW + 35);
+    }
+    $input.css('width', inputW + 'px');
+};
+
 
 var Filter = {
     filter: $('#js-filter'),
@@ -215,9 +236,8 @@ var References = {
             var $text = $(this).parent().parent().next().children();
             $text.editable('enable').editable('toggle')
                 .on('hidden', function (e, reason) {
-                    $(this).editable('disable');
+                   // $(this).editable('disable');
                 });
-
         });
 
         $(document).on('click', '.js-references-create', function (e) {
@@ -239,6 +259,9 @@ var References = {
                 name: name,
                 pk: pk
             }).editable('show');
+
+            xeditableFullWidth($value);
+
             //$parent.find('.current span').editable('enable').editable('activate');
         });
 
@@ -337,7 +360,9 @@ var Edit = {
         $(document).on('click', '.js-references-create', function (e) {
             e.stopPropagation();
 
-            var pos = $('[data-position]').last().data('position');
+            var $position = $('[data-position]');
+
+            var pos = $position.last().data('position');
             var $parent = $(this).parents('.table');
 
             $parent.find('.current').removeClass('current');
@@ -346,8 +371,8 @@ var Edit = {
             $(this).closest('.action').before('<tr class="current">' + $newItem.html() + '</tr>');
             var $value = $parent.find('.current').find('.js-references-change').find('div');
 
-            $('[data-position]').last().attr('name', 'references[]');
-            $('[data-position]').last().attr('data-position', pos + 1);
+            $position.last().attr('name', 'references[]');
+            $position.last().attr('data-position', pos + 1);
 
             $('.js-references-change').last().attr('data-position', pos + 1);
 
@@ -357,6 +382,8 @@ var Edit = {
                     var position = target.parent().data('position');
                     $('input[data-position=' + position + ']').val(params.newValue);
                 });
+
+            xeditableFullWidth($value);
         });
 
         $(document).on('click', '.js-references-remove', function () {
@@ -642,4 +669,7 @@ $(document).ready(function () {
         window.location.hash = $(this).attr('href');
     });
 
+    $(document).on('click', '.editable, .js-references-edit', function () {
+        xeditableFullWidth(this);
+    })
 });
