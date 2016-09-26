@@ -85,7 +85,8 @@
                                         <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                                     </button>
                                     <button type="button" class="btn btn-link btn-sm js-references-remove"
-                                            aria-label="Delete reference">
+                                            aria-label="Delete reference"
+                                            disabled="disabled">
                                         <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                                     </button>
                                 </div>

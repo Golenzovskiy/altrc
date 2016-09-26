@@ -87,6 +87,10 @@
                                     </tr>
                                     @if ($project->references)
                                         @foreach ($project->references as $i => $reference)
+                                            {{-- */$disabled = 'disabled="disabled"'/* --}}
+                                            @if($i !== 0)
+                                                {{-- */$disabled = ""/* --}}
+                                            @endif
                                             <tr>
                                                 <td>
                                                     <div class="pull-right">
@@ -99,7 +103,8 @@
                                                             </button>
                                                             <button type="button"
                                                                     class="btn btn-link btn-sm js-references-remove"
-                                                                    aria-label="Delete reference">
+                                                                    aria-label="Delete reference"
+                                                                    {{ $disabled }}>
                                                                                 <span class="glyphicon glyphicon-remove"
                                                                                       aria-hidden="true"></span>
                                                             </button>
