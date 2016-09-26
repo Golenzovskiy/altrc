@@ -18,6 +18,13 @@
                                 </ul>
                             </div>
                         @endif
+                        @if(Session::has('emptyReference'))
+                            <div class="alert alert-danger" role="alert">
+                                <ul>
+                                    <li>{{ Session::get('emptyReference') }}</li>
+                                </ul>
+                            </div>
+                        @endif
                         <div class="row">
                             <div class="col-lg-4 col-md-5 col-sm-6 col-xs-12">
                                 <h4>Название компании</h4>
