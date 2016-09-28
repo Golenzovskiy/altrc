@@ -251,9 +251,9 @@ var References = {
             var $newItem = $parent.find('.pattern').clone(true);
             $(this).closest('.action').before('<tr class="current">' + $newItem.html() + '</tr>');
 
-            var $value = $parent.find('.current').find('.js-references-change').find('div');
+            var $value = $parent.find('.current .js-references-change div');
             var name = $value.text();
-            var pk = $parent.find('.current').find('.js-references-change').data('id');
+            var pk = $parent.find('.current .js-references-change div');
 
             $value.editable({
                 type: 'text',
@@ -362,7 +362,7 @@ var Edit = {
         $(document).on('click', '.js-references-create', function (e) {
             e.stopPropagation();
 
-             var $parent = $(this).parents('.table');
+            var $parent = $(this).parents('.table');
 
             $parent.find('.current').removeClass('current');
             var $newItem = $('.pattern').clone(true);
@@ -383,6 +383,7 @@ var Edit = {
                     var target = $(e.target);
                     var position = target.parent().attr('data-position');
                     $('input[data-position=' + position + ']').val(params.newValue);
+                    $('.table').find('tr:not(.hidden)').first().find('.js-references-remove').attr('disabled', 'disabled');
                 });
 
             xeditableFullWidth($value);
