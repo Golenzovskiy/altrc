@@ -143,6 +143,8 @@ var Filter = {
             });
         });
 
+        $('#tag-panel').html($('.tag-hidden-wrapper .panel').html());
+
         /*$('.js-references').each(function () {
             dragula([this, document.getElementById('js-reference-panel')], {
                 copy: true,
@@ -454,7 +456,7 @@ $(document).ready(function () {
     });
 
     /* */
-    $.ajax({
+    /*$.ajax({
         url: "/tags",
         dataType: "json",
         success: function(data) {
@@ -463,7 +465,7 @@ $(document).ready(function () {
                 availableTags: tags
             });
         }
-    });
+    });*/
 
     $('[data-toggle="tooltip"]').tooltip();
 

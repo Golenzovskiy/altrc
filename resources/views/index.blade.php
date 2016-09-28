@@ -33,7 +33,7 @@
 
                     @include('include.dictionary', ['name' => 'sectors[]', 'title' => 'Отрасли', 'items' => $sectors, 'itemsProject' => (isset($filter['sectors'])) ? $filter['sectors'] : null ])
 
-                    @include('include.dictionary', ['name' => 'country[]', 'title' => 'География', 'items' => $country, 'itemsProject' => (isset($filter['country'])) ? $filter['country'] : null ])
+                    @include('include.tags', ['tags' => []])
 
                 </div>
 				<div class="row">

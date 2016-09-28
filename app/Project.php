@@ -24,7 +24,7 @@ class Project extends Model {
      */
     public function getByFilter($data) {
         $perPage = 20;
-        DB::connection()->enableQueryLog();
+        //DB::connection()->enableQueryLog();
         $select = DB::table('projects')->select('projects.id');
 
         if ($data->search) {
@@ -78,12 +78,9 @@ class Project extends Model {
         // нужно не для поиска, а именно для фильтрации, чтобы получать весь спектор тегов выборки
         if ($data->filterTags) {
             $tagsRequest = explode(',', $data->filterTags);
-            $select->leftJoin('tag_projects', function ($join) use ($tagsRequest) {
-                $join->on('projects.id', '=', 'tag_projects.project_id')
-                    ->whereIn('tag_projects.name', $tagsRequest);
-            });
-
-            $result = $select->select('projects.id')->get();
+            $select->whereIn('tag_projects.name', $tagsRequest);
+            
+            $result = $select->get();
 
             $filterIds = [];
             foreach ($result as $item) {
