@@ -17,7 +17,6 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Project;
 use App\Helpers\Helper;
-use Illuminate\Support\Facades\Session;
 use Symfony\Component\EventDispatcher\Tests\Service;
 
 class ProjectController extends Controller
@@ -111,10 +110,6 @@ class ProjectController extends Controller
             'references' => '\App\ReferenceProject'
         ];
 
-        if (Helper::isEmptyValuesArray($request->references)) {
-            Session::flash('emptyReference', 'Необходимо добавить как минимум одну референцию.');
-            return redirect()->back();
-        }
         foreach ($dictionaries as $key => $value) {
             if ($request->$key) {
                 $dictionary = new $value();

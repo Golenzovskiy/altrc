@@ -16,8 +16,4 @@ class Helper {
             'message' => $message
         ];
     }
-
-    public static function isEmptyValuesArray($value) {
-        return (empty(array_filter($value))) ? true : false;
-    }
 }
