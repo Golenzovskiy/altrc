@@ -456,7 +456,7 @@ $(document).ready(function () {
     });
 
     /* */
-    /*$.ajax({
+    $.ajax({
         url: "/tags",
         dataType: "json",
         success: function(data) {
@@ -465,7 +465,7 @@ $(document).ready(function () {
                 availableTags: tags
             });
         }
-    });*/
+    });
 
     $('[data-toggle="tooltip"]').tooltip();
 
