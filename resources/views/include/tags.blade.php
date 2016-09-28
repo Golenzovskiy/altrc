@@ -1,5 +1,6 @@
-<h3>Облако тегов</h3>
-<div class="panel panel-default">
+<div class="col-lg-4 {{ (isset($className)) ? $className : '' }}">
+<h4>Теги</h4>
+<div class="panel panel-default" id="tag-panel">
     <div class="panel-body">
         <div class="row">
             <div id="tags-button" class="col-lg-12">
@@ -9,4 +10,5 @@
             </div>
         </div>
     </div>
+</div>
 </div>

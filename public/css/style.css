@@ -159,3 +159,6 @@ A.tag {
     padding-bottom: 10px;
     border: 1px solid #dddddd;
 }
+#tag-panel {
+    height: 131px;
+}

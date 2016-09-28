@@ -1,6 +1,6 @@
 @if (count($projects) > 0)
 
-@include('include.tags', ['tags' => $tags])
+@include('include.tags', ['tags' => $tags, 'className' => 'hidden tag-hidden-wrapper'])
 
 <h3>Результаты поиска&nbsp;<span id="amount" class="badge"></span></h3>
 <div class="panel panel-default">
