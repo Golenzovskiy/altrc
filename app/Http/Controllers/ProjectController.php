@@ -17,6 +17,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Project;
 use App\Helpers\Helper;
+use Illuminate\Support\Facades\Session;
 use Symfony\Component\EventDispatcher\Tests\Service;
 
 class ProjectController extends Controller
@@ -71,6 +72,7 @@ class ProjectController extends Controller
         $this->validate($request, [
             'company' => 'required|max:255|unique:projects',
             'logo' => 'image',
+            'references' => 'array_filled',
         ]);
 
         $project = new Project;
@@ -132,6 +134,11 @@ class ProjectController extends Controller
 
     public function edit(Request $request, $id)
     {
+        $this->validate($request, [
+            'logo' => 'image',
+            'references' => 'array_filled',
+        ]);
+
         if ($request->isMethod('post')) {
             $project = Project::find($id);
             $project->company = $request->company;
