@@ -78,7 +78,14 @@ class Project extends Model {
         // нужно не для поиска, а именно для фильтрации, чтобы получать весь спектор тегов выборки
         if ($data->filterTags) {
             $tagsRequest = explode(',', $data->filterTags);
-            $select->whereIn('tag_projects.name', $tagsRequest);
+            if ($data->search) {
+                $select->whereIn('tag_projects.name', $tagsRequest);
+            } else {
+                $select->leftJoin('tag_projects', function ($join) {
+                    $join->on('projects.id', '=', 'tag_projects.project_id');
+                });
+                $select->whereIn('tag_projects.name', $tagsRequest);
+            }
             
             $result = $select->get();
 
