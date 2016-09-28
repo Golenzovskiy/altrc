@@ -362,26 +362,26 @@ var Edit = {
         $(document).on('click', '.js-references-create', function (e) {
             e.stopPropagation();
 
-            var $position = $('[data-position]');
-
-            var pos = $position.last().data('position');
-            var $parent = $(this).parents('.table');
+             var $parent = $(this).parents('.table');
 
             $parent.find('.current').removeClass('current');
             var $newItem = $('.pattern').clone(true);
 
             $(this).closest('.action').before('<tr class="current">' + $newItem.html() + '</tr>');
+
+            var $position = $('[data-position]');
+            var pos = $position.length;
             var $value = $parent.find('.current').find('.js-references-change').find('div');
 
             $position.last().attr('name', 'references[]');
-            $position.last().attr('data-position', pos + 1);
+            $position.last().attr('data-position', pos);
 
-            $('.js-references-change').last().attr('data-position', pos + 1);
+            $('.js-references-change').last().attr('data-position', pos);
 
             $value.editable('show')
                 .on('save', function (e, params) {
                     var target = $(e.target);
-                    var position = target.parent().data('position');
+                    var position = target.parent().attr('data-position');
                     $('input[data-position=' + position + ']').val(params.newValue);
                 });
 
