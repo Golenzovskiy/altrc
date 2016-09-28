@@ -24,9 +24,9 @@
                                 <li role="presentation" class=""><a href="#sectors" role="tab" id="profile-tab"
                                                                     data-toggle="tab" aria-controls="profile"
                                                                     aria-expanded="false">Отрасли</a></li>
-                                <li role="presentation" class=""><a href="#country" role="tab" id="profile-tab"
+                                <li role="presentation" class=""><a href="#tags" role="tab" id="profile-tab"
                                                                     data-toggle="tab" aria-controls="profile"
-                                                                    aria-expanded="false">География</a></li>
+                                                                    aria-expanded="false">Теги</a></li>
                             </ul>
                             <div class="tab-content" id="myTabContent">
                                 <div class="tab-pane fade active in" role="tabpanel" id="services"
@@ -128,6 +128,13 @@
                                             @foreach($sectors as $items)
                                                 <tr>
                                                     <td>
+                                                        {{-- */$exampleCollapseNum = rand(1,500)/* --}}
+                                                        <button style="min-width: 56px;" class="btn btn-default btn-sm"
+                                                                type="button" data-toggle="collapse"
+                                                                data-target="#collapseExample_{{ $exampleCollapseNum }}" aria-expanded="false"
+                                                                aria-controls="collapseExample">
+                                                            <span class="badge">{{ $exampleCollapseNum }}</span>
+                                                        </button>
                                                         <div class="btn-group">
                                                             <button type="button"
                                                                     class="btn btn-link btn-sm js-dictionary-edit"
@@ -145,13 +152,26 @@
                                                         <span class="js-dictionary-change js-dictionary">
                                                             <div class="dictionary-text">{{ $items->name }}</div>
                                                         </span>
+                                                        <div class="collapse" id="collapseExample_{{ $exampleCollapseNum }}">
+                                                            <div class="panel panel-default">
+                                                                <div class="panel-body">
+                                                                    <ul class="list-unstyled">
+                                                                        <li><a href="#">Название проекта</a></li>
+                                                                        <li><a href="#">Название проекта</a></li>
+                                                                        <li><a href="#">Название проекта</a></li>
+                                                                        <li><a href="#">Название проекта</a></li>
+                                                                        <li><a href="#">Название проекта</a></li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </td>
                                                 </tr>
                                             @endforeach
                                         </table>
                                     </div>
                                 </div>
-                                <div class="tab-pane fade" role="tabpanel" id="country"
+                                <div class="tab-pane fade" role="tabpanel" id="tags"
                                      aria-labelledby="dropdown2-tab">
                                     <div class="table-responsive">
                                         <table class="table table-condense table-hover gray-table">
@@ -186,7 +206,7 @@
                                                     </span>
                                                 </td>
                                             </tr>
-                                            @foreach($country as $items)
+                                            @foreach($allTags as $items)
                                                 <tr>
                                                     <td>
                                                         <div class="btn-group">

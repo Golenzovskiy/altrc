@@ -657,14 +657,14 @@ $(document).ready(function () {
         newRow.clone().removeClass('hidden').insertAfter($(this).closest('tr'));
     });
 
-    if (document.location.hash == '#country') {
-        $('#myTabs a[href="#country"]').tab('show')
+    if (document.location.hash == '#services') {
+        $('#myTabs a[href="#services"]').tab('show')
     }
     else if (document.location.hash == '#sectors') {
         $('#myTabs a[href="#sectors"]').tab('show')
     }
-    else if (document.location.hash == '#country') {
-        $('#myTabs a[href="#country"]').tab('show')
+    else if (document.location.hash == '#tags') {
+        $('#myTabs a[href="#tags"]').tab('show')
     }
 
     $('[role = tab]').click(function(){

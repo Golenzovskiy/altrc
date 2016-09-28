@@ -12,6 +12,7 @@ use App\ServiceProject;
 use App\SectorProject;
 use App\CountryProject;
 use App\DictionaryProject;
+use App\TagProject;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -27,6 +28,7 @@ class DictionaryController extends Controller
             'services' => ServiceProject::dictionary(),
             'sectors' => SectorProject::dictionary(),
             'country' => CountryProject::dictionary(),
+            'allTags' => TagProject::all(),
         ]);
     }
 
