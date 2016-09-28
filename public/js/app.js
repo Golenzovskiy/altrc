@@ -251,9 +251,9 @@ var References = {
             var $newItem = $parent.find('.pattern').clone(true);
             $(this).closest('.action').before('<tr class="current">' + $newItem.html() + '</tr>');
 
-            var $value = $parent.find('.current .js-references-change div');
+            var $value = $parent.find('.current').find('.js-references-change').find('div');
             var name = $value.text();
-            var pk = $parent.find('.current .js-references-change div');
+            var pk = $parent.find('.current .js-references-change').data('id');
 
             $value.editable({
                 type: 'text',
