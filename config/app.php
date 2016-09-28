@@ -159,6 +159,7 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         Intervention\Image\ImageServiceProvider::class,
+        App\Providers\ValidatorServiceProvider::class,
 
         Barryvdh\Debugbar\ServiceProvider::class,
 

@@ -72,6 +72,7 @@ class ProjectController extends Controller
         $this->validate($request, [
             'company' => 'required|max:255|unique:projects',
             'logo' => 'image',
+            'references' => 'array_filled',
         ]);
 
         $project = new Project;
@@ -111,10 +112,6 @@ class ProjectController extends Controller
             'references' => '\App\ReferenceProject'
         ];
 
-        if (Helper::isEmptyValuesArray($request->references)) {
-            Session::flash('emptyReference', 'Необходимо добавить как минимум одну референцию.');
-            return redirect()->back();
-        }
         foreach ($dictionaries as $key => $value) {
             if ($request->$key) {
                 $dictionary = new $value();
@@ -137,6 +134,11 @@ class ProjectController extends Controller
 
     public function edit(Request $request, $id)
     {
+        $this->validate($request, [
+            'logo' => 'image',
+            'references' => 'array_filled',
+        ]);
+
         if ($request->isMethod('post')) {
             $project = Project::find($id);
             $project->company = $request->company;
