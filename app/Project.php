@@ -22,10 +22,13 @@ class Project extends Model {
      * @param array $data filter params
      * @return \Illuminate\Database\Eloquent\Collection|static[]
      */
-    public function getByFilter($data) {
-        $perPage = 20;
+    public function getByFilter($data, $perPage = 20) {
         //DB::connection()->enableQueryLog();
         $select = DB::table('projects')->select('projects.id');
+
+        if ($data->amountDisplayProjects) {
+            $perPage = $data->amountDisplayProjects;
+        }
 
         if ($data->search) {
             $select->leftJoin('reference_projects', 'projects.id', '=', 'reference_projects.project_id')

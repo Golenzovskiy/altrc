@@ -97,6 +97,14 @@ var Filter = {
             });
         });
 
+        $(document).on('click', '.dropdown', function (e) {
+            e.preventDefault;
+            var target = e.target;
+            var amount = $(target).parent().data('amount');
+            $('input[name=amountDisplayProjects]').val(amount);
+            self.filter.trigger('submit');
+        });
+
         $(document).on('click', '.pagination a', function (e) {
             e.preventDefault();
             var url = $(this).attr('href');
