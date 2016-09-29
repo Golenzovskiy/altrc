@@ -19,6 +19,7 @@ class CreateServiceProjectsTable extends Migration {
             $table->string('name');
             $table->unsignedInteger('project_id');
             $table->unique(['name', 'project_id']);
+            $table->index('name');
         });
     }
 

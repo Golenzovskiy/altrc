@@ -51,21 +51,21 @@ class Project extends Model {
         }
 
         if ($data->services) {
-            $select->leftJoin('service_projects', function ($join) use ($data) {
+            $select->join('service_projects', function ($join) use ($data) {
                 $join->on('projects.id', '=', 'service_projects.project_id')
                     ->whereIn('service_projects.name', $data->services);
             });
         }
 
         if ($data->sectors) {
-            $select->leftJoin('sector_projects', function ($join) use ($data) {
+            $select->join('sector_projects', function ($join) use ($data) {
                 $join->on('projects.id', '=', 'sector_projects.project_id')
                     ->whereIn('sector_projects.name', $data->sectors);
             });
         }
 
         if ($data->country) {
-            $select->leftJoin('country_projects', function ($join) use ($data) {
+            $select->join('country_projects', function ($join) use ($data) {
                 $join->on('projects.id', '=', 'country_projects.project_id')
                     ->whereIn('country_projects.name', $data->country);
             });
@@ -84,7 +84,7 @@ class Project extends Model {
             if ($data->search) {
                 $select->whereIn('tag_projects.name', $tagsRequest);
             } else {
-                $select->leftJoin('tag_projects', function ($join) {
+                $select->join('tag_projects', function ($join) {
                     $join->on('projects.id', '=', 'tag_projects.project_id');
                 });
                 $select->whereIn('tag_projects.name', $tagsRequest);

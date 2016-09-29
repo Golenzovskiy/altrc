@@ -64,9 +64,15 @@
                                                     </span>
                                                 </td>
                                             </tr>
-                                            @foreach($services as $items)
+                                            @foreach($services as $i => $items)
                                             <tr>
                                                 <td>
+                                                    <button style="min-width: 56px;" class="btn btn-default btn-sm"
+                                                            type="button" data-toggle="collapse"
+                                                            data-target="#service_{{ $i }}" aria-expanded="false"
+                                                            aria-controls="service">
+                                                        <span class="badge">{{ $items->project_count }}</span>
+                                                    </button>
                                                     <div class="btn-group ">
                                                         <button type="button"
                                                                 class="btn btn-link btn-sm js-dictionary-edit"
@@ -84,6 +90,17 @@
                                                     <span class="js-dictionary-change js-dictionary">
                                                         <span class="dictionary-text">{{ $items->name }}</span>
                                                     </span>
+                                                    <div class="collapse" id="service_{{ $i }}">
+                                                        <div class="panel panel-default">
+                                                            <div class="panel-body">
+                                                                <ul class="list-unstyled">
+                                                                    @foreach($items->projects as $project)
+                                                                        <li><a href="/edit/{{ $project->id }}">{{ $project->company }}</a></li>
+                                                                    @endforeach
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </td>
                                             </tr>
                                             @endforeach
@@ -125,15 +142,14 @@
                                                     </span>
                                                 </td>
                                             </tr>
-                                            @foreach($sectors as $items)
+                                            @foreach($sectors as $i => $items)
                                                 <tr>
                                                     <td>
-                                                        {{-- */$exampleCollapseNum = rand(1,500)/* --}}
                                                         <button style="min-width: 56px;" class="btn btn-default btn-sm"
                                                                 type="button" data-toggle="collapse"
-                                                                data-target="#collapseExample_{{ $exampleCollapseNum }}" aria-expanded="false"
-                                                                aria-controls="collapseExample">
-                                                            <span class="badge">{{ $exampleCollapseNum }}</span>
+                                                                data-target="#sectors_{{ $i }}" aria-expanded="false"
+                                                                aria-controls="sectors">
+                                                            <span class="badge">{{ $items->project_count }}</span>
                                                         </button>
                                                         <div class="btn-group">
                                                             <button type="button"
@@ -152,15 +168,13 @@
                                                         <span class="js-dictionary-change js-dictionary">
                                                             <div class="dictionary-text">{{ $items->name }}</div>
                                                         </span>
-                                                        <div class="collapse" id="collapseExample_{{ $exampleCollapseNum }}">
+                                                        <div class="collapse" id="sectors_{{ $i }}">
                                                             <div class="panel panel-default">
                                                                 <div class="panel-body">
                                                                     <ul class="list-unstyled">
-                                                                        <li><a href="#">Название проекта</a></li>
-                                                                        <li><a href="#">Название проекта</a></li>
-                                                                        <li><a href="#">Название проекта</a></li>
-                                                                        <li><a href="#">Название проекта</a></li>
-                                                                        <li><a href="#">Название проекта</a></li>
+                                                                        @foreach($items->projects as $project)
+                                                                            <li><a href="/edit/{{ $project->id }}">{{ $project->company }}</a></li>
+                                                                        @endforeach
                                                                     </ul>
                                                                 </div>
                                                             </div>
@@ -206,9 +220,15 @@
                                                     </span>
                                                 </td>
                                             </tr>
-                                            @foreach($allTags as $items)
+                                            @foreach($allTags as $i => $items)
                                                 <tr>
                                                     <td>
+                                                        <button style="min-width: 56px;" class="btn btn-default btn-sm"
+                                                                type="button" data-toggle="collapse"
+                                                                data-target="#tags_{{ $i }}" aria-expanded="false"
+                                                                aria-controls="tags">
+                                                            <span class="badge">{{ $items->project_count }}</span>
+                                                        </button>
                                                         <div class="btn-group">
                                                             <button type="button"
                                                                     class="btn btn-link btn-sm js-dictionary-edit"
@@ -226,6 +246,17 @@
                                                         <span class="js-dictionary-change js-dictionary">
                                                             <div class="dictionary-text">{{ $items->name }}</div>
                                                         </span>
+                                                        <div class="collapse" id="tags_{{ $i }}">
+                                                            <div class="panel panel-default">
+                                                                <div class="panel-body">
+                                                                    <ul class="list-unstyled">
+                                                                        @foreach($items->projects as $project)
+                                                                            <li><a href="/edit/{{ $project->id }}">{{ $project->company }}</a></li>
+                                                                        @endforeach
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </td>
                                                 </tr>
                                             @endforeach
