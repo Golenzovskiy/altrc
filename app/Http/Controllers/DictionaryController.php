@@ -13,6 +13,7 @@ use App\SectorProject;
 use App\CountryProject;
 use App\DictionaryProject;
 use App\TagProject;
+use DebugBar;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -21,14 +22,10 @@ class DictionaryController extends Controller
 
     public function edit(Request $request)
     {
-        if ($request->isMethod('post')) {
-            var_dump($request->services);
-        }
         return view('dictionary.edit', [
-            'services' => ServiceProject::dictionary(),
-            'sectors' => SectorProject::dictionary(),
-            'country' => CountryProject::dictionary(),
-            'allTags' => TagProject::all(),
+            'services' => ServiceProject::relationDictionary(),
+            'sectors' => SectorProject::relationDictionary(),
+            'allTags' => TagProject::relationDictionary(),
         ]);
     }
 

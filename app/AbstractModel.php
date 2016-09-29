@@ -24,4 +24,25 @@ abstract class AbstractModel extends Model {
     public function scopeDeleteByProject($query, $id) {
         return $query->where('project_id', '=', $id)->delete();
     }
+
+    public function scopeRelationDictionary($query) {
+        /** @var \Illuminate\Database\Query\Builder $query */
+        $table = $this->getTable();
+        $query = $query->select([
+                    "{$table}.name"
+                ])->selectRaw("count({$table}.name) as project_count")
+                ->groupBy("{$table}.name")
+                ->get();
+
+        $query->map(function($item) {
+            $item->projectIds = $this->where('name', '=', $item->name)->select('project_id')->pluck('project_id');
+            return $item;
+        });
+
+        foreach ($query as $item) {
+            $item->projects = Project::whereIn('id', $item->projectIds)->select(['id', 'company'])->get();
+        }
+
+        return $query;
+    }
 }

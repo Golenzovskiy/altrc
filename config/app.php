@@ -210,7 +210,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Helper' => App\Helpers\Helper::class,
         'Image' => Intervention\Image\Facades\Image::class,
-        'Debugbar' => Barryvdh\Debugbar\Facade::class,
+        'DebugBar' => Barryvdh\Debugbar\Facade::class,
     ],
 
 ];
