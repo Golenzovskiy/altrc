@@ -8,7 +8,6 @@
 namespace App\Http\Controllers;
 
 use App\TagProject;
-use App\ReferenceProject;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -21,6 +20,39 @@ class TagsController extends Controller {
             $result[] = $item->name;
         }
         return response()->json($result);
+    }
+    
+    public function update(Request $request) {
+        if (!$request->value) {
+            return response('Значение обязательно к заполнению', 400);
+        }
+        if (!$request->pk) {
+            return response('Произошла ошибка отправки данных', 400);
+        }
+
+        $model = new TagProject();
+
+        if (!$request->name) {
+            // create
+           $model->insert([
+               'name' => $request->value,
+               'project_id' => 0
+           ]);
+            //TODO: если запись существует надо вернуть пользователю ошибку об этом
+        } else {
+            // update
+            $model->where('name', '=', $request->name)
+                ->update(['name' => $request->value]);
+        }
+    }
+    
+    public function remove(Request $request) {
+        if ($request->id || $request->name) {
+            TagProject::where('name', '=', $request->name)
+                ->forceDelete();
+        } else {
+            return response('Произошла ошибка при попытке удалить тег', 400);
+        }
     }
 
 }

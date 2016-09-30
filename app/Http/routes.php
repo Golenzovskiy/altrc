@@ -75,6 +75,14 @@ Route::get('tags', [
     'uses' => 'TagsController@getAllTags',
 ]);
 
+Route::post('tags/update', [
+    'uses' => 'TagsController@update',
+]);
+
+Route::post('tags/delete', [
+    'uses' => 'TagsController@remove',
+]);
+
 Route::get('reset', [
     'uses' => 'ProjectController@reset',
 ]);
