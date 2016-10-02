@@ -65,13 +65,14 @@
                                                 </td>
                                             </tr>
                                             @foreach($services as $i => $items)
+                                            {{--*/ $count = count($items->projects) /*--}}
                                             <tr>
                                                 <td>
                                                     <button style="min-width: 56px;" class="btn btn-default btn-sm"
                                                             type="button" data-toggle="collapse"
-                                                            data-target="#service_{{ $i }}" aria-expanded="false"
+                                                            @if ($count > 0) data-target="#service_{{ $i }}" @endif aria-expanded="false"
                                                             aria-controls="service">
-                                                        <span class="badge">{{ $items->project_count }}</span>
+                                                        <span class="badge">{{ $count }}</span>
                                                     </button>
                                                     <div class="btn-group ">
                                                         <button type="button"
@@ -143,13 +144,14 @@
                                                 </td>
                                             </tr>
                                             @foreach($sectors as $i => $items)
+                                                {{--*/ $count = count($items->projects) /*--}}
                                                 <tr>
                                                     <td>
                                                         <button style="min-width: 56px;" class="btn btn-default btn-sm"
                                                                 type="button" data-toggle="collapse"
-                                                                data-target="#sectors_{{ $i }}" aria-expanded="false"
+                                                                @if ($count > 0) data-target="#sectors_{{ $i }}" @endif aria-expanded="false"
                                                                 aria-controls="sectors">
-                                                            <span class="badge">{{ $items->project_count }}</span>
+                                                            <span class="badge">{{ $count }}</span>
                                                         </button>
                                                         <div class="btn-group">
                                                             <button type="button"
@@ -221,13 +223,14 @@
                                                 </td>
                                             </tr>
                                             @foreach($allTags as $i => $items)
+                                                {{--*/ $count = count($items->projects) /*--}}
                                                 <tr>
                                                     <td>
                                                         <button style="min-width: 56px;" class="btn btn-default btn-sm"
                                                                 type="button" data-toggle="collapse"
-                                                                data-target="#tags_{{ $i }}" aria-expanded="false"
+                                                                @if ($count > 0) data-target="#tags_{{ $i }}" @endif aria-expanded="false"
                                                                 aria-controls="tags">
-                                                            <span class="badge">{{ $items->project_count }}</span>
+                                                            <span class="badge">{{ $count }}</span>
                                                         </button>
                                                         <div class="btn-group">
                                                             <button type="button"

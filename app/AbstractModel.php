@@ -30,8 +30,7 @@ abstract class AbstractModel extends Model {
         $table = $this->getTable();
         $query = $query->select([
                     "{$table}.name"
-                ])->selectRaw("count({$table}.name) as project_count")
-                ->groupBy("{$table}.name")
+                ])->groupBy("{$table}.name")
                 ->get();
 
         $query->map(function($item) {
