@@ -97,6 +97,14 @@ var Filter = {
             });
         });
 
+        $(document).on('click', '.dropdown', function (e) {
+            e.preventDefault;
+            var target = e.target;
+            var amount = $(target).parent().data('amount');
+            $('input[name=amountDisplayProjects]').val(amount);
+            self.filter.trigger('submit');
+        });
+
         $(document).on('click', '.pagination a', function (e) {
             e.preventDefault();
             var url = $(this).attr('href');
@@ -655,6 +663,47 @@ $(document).ready(function () {
         e.preventDefault();
         var newRow = $(this).closest('tr').next();
         newRow.clone().removeClass('hidden').insertAfter($(this).closest('tr'));
+    });
+    
+    $(document).on('click', '.js-tags-remove', function (e) {
+        var value = $(this).parent().next().text();
+        var name = $.trim(value);
+        var model = $(this).closest('div .tab-pane').attr('id');
+        var tr = (this).closest('tr');
+        $.ajax({
+            url: '/tags/delete',
+            type: 'post',
+            dataType: 'html',
+            data: {'name': name, 'model': model}
+        })
+            .done(function () {
+                $(tr).closest('tr').remove();
+            })
+            .fail(function (response) {
+                console.log(response.responseText);
+            })
+            .always(function () {
+                //TODO ajax loader stop
+            });
+    });
+    
+    $(document).on('click', '.js-tags-edit', function (e) {
+        e.stopPropagation();
+        var value = $(this).parent().next().text();
+        var name = $.trim(value);
+        var model = $(this).closest('div .tab-pane').attr('id');
+        var value = name;
+        $($(this).parent().next()).editable({
+            params: function(params) {
+                params.model = model;
+                return params;
+            },
+            type: 'text',
+            name: name,
+            value: value,
+            url: '/tags/update',
+            pk: 1
+        }).editable('toggle');
     });
 
     if (document.location.hash == '#services') {

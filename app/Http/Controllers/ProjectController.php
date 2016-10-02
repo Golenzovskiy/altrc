@@ -35,7 +35,8 @@ class ProjectController extends Controller
             'country' => CountryProject::dictionary(),
             'filter' => $request->session()->get('user.filter'),
             'isFilterSet' => $request->session()->has('user.filter'),
-            'userReferences' => $request->session()->get('user.references') // добавляем в шаблон рефернеции из сессии пользователя
+            'userReferences' => $request->session()->get('user.references'), // добавляем в шаблон рефернеции из сессии пользователя
+            'amountDisplayProjects' => $request->session()->get('user.filter.amountDisplayProjects'),
         ]);
     }
 
@@ -241,7 +242,8 @@ class ProjectController extends Controller
             'result' => view('filter.result', [
                 'projects' => $projects,
                 'tags' => $tags,
-                'userReferences' => $request->session()->get('user.references')
+                'userReferences' => $request->session()->get('user.references'),
+                'amountDisplayProjects' => $request->session()->get('user.filter.amountDisplayProjects'),
             ])->render(),
             'amount' => $projects->total()
         ]);

@@ -5,7 +5,8 @@
         <div class="row">
             <div id="tags-button" class="col-lg-12">
                 @foreach ($tags as $tag)
-                    <a href="javascript:void(0)" class="tag" data-tag="{{ $tag->name }}"><span class="label {{ (!$tag->active) ? 'label-default' : 'label-primary' }}">{{ $tag->name }}</span></a>
+                    <button class="tag btn btn-xs {{ (!$tag->active) ? 'btn-default' : 'btn-primary' }}"
+                            data-tag="{{ $tag->name }}">{{ $tag->name }}</button>
                 @endforeach
             </div>
         </div>

@@ -205,14 +205,14 @@
                                                 <td>
                                                     <div class="btn-group ">
                                                         <button type="button"
-                                                                class="btn btn-link btn-sm js-dictionary-edit"
-                                                                aria-label="Edit dictionary">
+                                                                class="btn btn-link btn-sm js-tags-edit"
+                                                                aria-label="Edit tags">
                                                                         <span class="glyphicon glyphicon-edit"
                                                                               aria-hidden="true"></span>
                                                         </button>
                                                         <button type="button"
-                                                                class="btn btn-link btn-sm js-dictionary-remove"
-                                                                aria-label="Delete dictionary">
+                                                                class="btn btn-link btn-sm js-tags-remove"
+                                                                aria-label="Delete tags">
                                                                         <span class="glyphicon glyphicon-remove"
                                                                               aria-hidden="true"></span>
                                                         </button>
@@ -234,14 +234,14 @@
                                                         </button>
                                                         <div class="btn-group">
                                                             <button type="button"
-                                                                    class="btn btn-link btn-sm js-dictionary-edit"
-                                                                    aria-label="Edit dictionary">
+                                                                    class="btn btn-link btn-sm js-tags-edit"
+                                                                    aria-label="Edit tags">
                                                                             <span class="glyphicon glyphicon-edit"
                                                                                   aria-hidden="true"></span>
                                                             </button>
                                                             <button type="button"
-                                                                    class="btn btn-link btn-sm js-dictionary-remove"
-                                                                    aria-label="Delete dictionary">
+                                                                    class="btn btn-link btn-sm js-tags-remove"
+                                                                    aria-label="Delete tags">
                                                                             <span class="glyphicon glyphicon-remove"
                                                                                   aria-hidden="true"></span>
                                                             </button>

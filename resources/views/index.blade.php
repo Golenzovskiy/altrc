@@ -51,6 +51,7 @@
 				</div>
             </div>
         </div>
+    <input name="amountDisplayProjects" type="hidden" value="{{ ($amountDisplayProjects) ? $amountDisplayProjects : 20 }}"/>
     </form>
     <div id="searchResult" class="hidden">
     </div>

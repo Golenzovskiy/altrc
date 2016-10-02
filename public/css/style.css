@@ -73,9 +73,8 @@ A.dashed {
     background-color: #fcfcfc;
 }
 
-A.tag {
-    font-size: 1.2em;
-    text-decoration: none;
+.tag {
+    margin-bottom: 5px;
 }
 
 .label-default {
