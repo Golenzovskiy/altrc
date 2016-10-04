@@ -34,7 +34,7 @@ class TagsController extends Controller {
 
         if (!$request->name) {
             // create
-            if ($model->where('name', $request->value)->first()) {
+            if ($model->where('name', $request->value)->count()) {
                 return response('Такой тег уже существует', 400);
             } else {
                 $model->insert([

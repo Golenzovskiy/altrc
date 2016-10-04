@@ -26,7 +26,7 @@ class ReferencesController extends Controller {
 
         if (!$request->name) {
             // create
-            if ($model->where('name', $request->value)->first()) {
+            if ($model->where('name', $request->value)->where('project_id', $request->pk)->count()) {
                 return response('Такая референция уже существует', 400);
             } else {
                 $model->insert([
