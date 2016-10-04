@@ -34,11 +34,14 @@ class TagsController extends Controller {
 
         if (!$request->name) {
             // create
-           $model->insert([
-               'name' => $request->value,
-               'project_id' => 0
-           ]);
-            //TODO: если запись существует надо вернуть пользователю ошибку об этом
+            if ($model->where('name', $request->value)->first()) {
+                return response('Такой тег уже существует', 400);
+            } else {
+                $model->insert([
+                    'name' => $request->value,
+                    'project_id' => 0
+                ]);
+            }
         } else {
             // update
             $model->where('name', '=', $request->name)

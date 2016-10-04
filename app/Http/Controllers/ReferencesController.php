@@ -26,11 +26,14 @@ class ReferencesController extends Controller {
 
         if (!$request->name) {
             // create
-           $model->insert([
-               'name' => $request->value,
-               'project_id' => $request->pk
-           ]);
-            //TODO: если запись существует надо вернуть пользователю ошибку об этом
+            if ($model->where('name', $request->value)->first()) {
+                return response('Такая референция уже существует', 400);
+            } else {
+                $model->insert([
+                    'name' => $request->value,
+                    'project_id' => $request->pk
+                ]);
+            }
         } else {
             // update
             $model->where('project_id', '=', $request->pk)
