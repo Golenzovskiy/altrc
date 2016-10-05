@@ -37,7 +37,8 @@ class Project extends Model {
                     $query->orWhere('reference_projects.name', 'like', '%' . $data->search . '%')
                           ->orWhere('tag_projects.name', $data->search)
                           ->orWhere('projects.company', 'like', '%' . $data->search . '%')
-                          ->orWhere('projects.company_alternative', 'like', '%' . $data->search . '%');
+                          ->orWhere('projects.company_alternative', 'like', '%' . $data->search . '%')
+                          ->orWhere('projects.description', 'like', '%' . $data->search . '%');
                 });
         }
 
