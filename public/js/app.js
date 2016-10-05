@@ -108,7 +108,6 @@ var Filter = {
         $(document).on('click', '.pagination a', function (e) {
             e.preventDefault();
             var url = $(this).attr('href');
-            //TODO: ajax loader start
             $('#filterResult').addClass('loader').click(function(){
                 return false;
             });
@@ -126,9 +125,6 @@ var Filter = {
                 .fail(function () {
                     alert("error");
                 })
-                .always(function () {
-                    //TODO: ajax loader stop
-                });
         });
 
         // запуск авто фильтра
@@ -279,9 +275,10 @@ var References = {
         });
 
         $(document).on('click', '.js-references-remove', function (e) {
+            var button = this;
             var $value = $(this).parent().parent().next().children();
             if ($value.hasClass('js-references-change')) {
-                //TODO ajax loader start
+                $(button).attr('disabled', 'disabled').children().toggleClass('glyphicon-remove glyphicon-hourglass');
                 var name = $value.text();
                 var id = $value.data('id');
                 if (id && name) {
@@ -296,10 +293,9 @@ var References = {
                         })
                         .fail(function () {
                             alert("error");
-                        })
-                        .always(function () {
-                            //TODO ajax loader stop
-                        });
+                        }).always(function () {
+                            $(button).removeAttr('disabled', 'disabled').children().toggleClass('glyphicon-remove glyphicon-hourglass');
+                    });
                 }
             }
         });
@@ -622,10 +618,13 @@ $(document).ready(function () {
     });
 
     $(document).on('click', '.js-dictionary-remove', function (e) {
+        var button = this;
         var value = $(this).parent().next().text();
         var name = $.trim(value);
         var model = $(this).closest('div .tab-pane').attr('id');
         var tr = (this).closest('tr');
+        $(button).attr('disabled', 'disabled').children().toggleClass('glyphicon-remove glyphicon-hourglass');
+        console.log('start');
         $.ajax({
             url: '/dictionarys/delete',
             type: 'post',
@@ -636,10 +635,11 @@ $(document).ready(function () {
                 $(tr).closest('tr').remove();
             })
             .fail(function (response) {
+                alert('Возникла ошибка при удалении');
                 console.log(response.responseText);
             })
             .always(function () {
-                //TODO ajax loader stop
+                $(button).removeAttr('disabled', 'disabled').children().toggleClass('glyphicon-remove glyphicon-hourglass');
             });
     });
 
@@ -669,10 +669,12 @@ $(document).ready(function () {
     });
     
     $(document).on('click', '.js-tags-remove', function (e) {
+        var button = this;
         var value = $(this).parent().next().text();
         var name = $.trim(value);
         var model = $(this).closest('div .tab-pane').attr('id');
         var tr = (this).closest('tr');
+        $(button).attr('disabled', 'disabled').children().toggleClass('glyphicon-remove glyphicon-hourglass');
         $.ajax({
             url: '/tags/delete',
             type: 'post',
@@ -683,10 +685,11 @@ $(document).ready(function () {
                 $(tr).closest('tr').remove();
             })
             .fail(function (response) {
+                alert('Возникла ошибка при удалении');
                 console.log(response.responseText);
             })
             .always(function () {
-                //TODO ajax loader stop
+                $(button).attr('disabled', 'disabled').children().toggleClass('glyphicon-remove glyphicon-hourglass');
             });
     });
     
