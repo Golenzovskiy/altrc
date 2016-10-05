@@ -109,6 +109,9 @@ var Filter = {
             e.preventDefault();
             var url = $(this).attr('href');
             //TODO: ajax loader start
+            $('#filterResult').addClass('loader').click(function(){
+                return false;
+            });
             $.ajax({
                 url: url,
                 type: 'post',
