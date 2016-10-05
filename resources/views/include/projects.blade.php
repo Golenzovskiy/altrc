@@ -4,7 +4,7 @@
             <th>Компания</th>
             <th>Логотип</th>
             <th>Название проекта</th>
-            <th>Варианты формулировок</th>
+            <th/>
         </tr>
 
         @foreach ($projects as $k => $project)
@@ -28,14 +28,22 @@
                         ({{ $project->description }})
                     @endif
                 </td>
-                <td><a class="dashed" data-toggle="collapse" href="#collapse{{$k+1}}"
-                       aria-expanded="false" aria-controls="collapse">
-                        @if (isset($project->references[0]))
-                            {{ $project->references[0]->name }}
-                        @else
-                            Пока нет референции
-                        @endif
-                    </a></td>
+                <td style="min-width: 200px">
+                    <div style="float: right; margin-left: 5px" class="btn-group" role="group" aria-label="...">
+                        <a class="btn btn-default btn-xs triangle-bottom" data-toggle="collapse" href="#collapse{{$k+1}}" role="button">
+                            <span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"/>
+                        </a>
+                        <button type="button" class="favorite-refer btn btn-default btn-xs">
+                            <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                        </button>
+                    </div>
+                    @if($project->review)
+                        <button style="float: right; margin-left: 5px; cursor: default" type="button" class="btn btn-primary btn-xs">
+                            <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                        </button>
+                    @endif
+                    <div class="hidden references-text">{{ $project->name }}</div>
+                </td>
             </tr>
             <tr class="collapse" id="collapse{{$k+1}}">
                 <td colspan="5">

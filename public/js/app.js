@@ -730,4 +730,8 @@ $(document).ready(function () {
     $(document).on('click', '.editable, .js-references-edit', function () {
         xeditableFullWidth(this);
     })
+
+    $(document).on('click', '.triangle-bottom', function (e) {
+        $(this).children().toggleClass('glyphicon-triangle-bottom glyphicon-triangle-top')
+    });
 });
