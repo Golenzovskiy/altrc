@@ -86,3 +86,7 @@ Route::post('tags/delete', [
 Route::get('reset', [
     'uses' => 'ProjectController@reset',
 ]);
+
+Route::post('user/references/reset', [
+    'uses' => 'User\ReferencesController@reset',
+]);

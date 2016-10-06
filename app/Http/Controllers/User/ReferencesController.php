@@ -56,4 +56,10 @@ class ReferencesController extends Controller {
             }
         }
     }
+
+    public function reset(Request $request) {
+        if ($request->action == 'reset') {
+            $request->session()->forget('user.references');
+        }
+    }
 }

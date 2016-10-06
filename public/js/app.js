@@ -203,8 +203,9 @@ var References = {
 
             if ($(this).hasClass('btn-default')) {
                 request = '/user/references/store';
-                self.addToPanel($el.clone());
+                self.addToPanel($el.clone().removeClass('hidden'));
             } else {
+                console.log($el);
                 request = '/user/references/remove';
                 self.removeFromPanel($el);
             }
@@ -572,13 +573,11 @@ $(document).ready(function () {
 	
 	$('#clear').click(function () {
 		var references = $('#js-reference-panel').children();
-		references.each(function (index, value) {
-			$.ajax({
-				url: '/user/references/remove',
-				type: 'post',
-				dataType: "html",
-				data: {'name': $(value).text()}
-			})
+        $.ajax({
+            url: '/user/references/reset',
+            type: 'post',
+            dataType: "html",
+            data: {'action': 'reset'}
         });
 		$('#amountReferences').html(0);
 		$('#js-reference-panel').html('');

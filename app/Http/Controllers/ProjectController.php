@@ -82,6 +82,11 @@ class ProjectController extends Controller
         $project->name = $request->name;
         $project->year = $request->year . "-01-01";
         $project->description = $request->description;
+        if ($request->review == 'on') {
+            $project->review = 1;
+        } else {
+            $project->review = 0;
+        }
         if ($request->logo) {
             $imgName = pathinfo($request->file('logo')->getClientOriginalName())['filename'];
             if (glob($project->getImgPath(Project::ORIGIN_DIR) . $imgName . ".*")) {
@@ -147,6 +152,11 @@ class ProjectController extends Controller
             $project->name = $request->name;
             $project->year = $request->year . "-01-01";
             $project->description = $request->description;
+            if ($request->review == 'on') {
+                $project->review = 1;
+            } else {
+                $project->review = 0;
+            }
             if ($request->logo) {
                 $imgName = pathinfo($request->file('logo')->getClientOriginalName())['filename'];
                 if (glob($project->getImgPath(Project::ORIGIN_DIR) . $imgName . ".*")) {

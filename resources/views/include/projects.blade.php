@@ -33,12 +33,12 @@
                         <a class="btn btn-default btn-xs triangle-bottom" data-toggle="collapse" href="#collapse{{$k+1}}" role="button">
                             <span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"/>
                         </a>
-                        <button type="button" class="favorite-refer btn btn-default btn-xs">
+                        <button type="button" class="favorite-refer btn btn-{{ ($userReferences && in_array($project->name, $userReferences)) ? 'primary' : 'default' }} btn-xs" aria-label="Left Align">
                             <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
                         </button>
                     </div>
                     @if($project->review)
-                        <button style="float: right; margin-left: 5px; cursor: default" type="button" class="btn btn-primary btn-xs">
+                        <button title="Есть отзыв" style="float: right; margin-left: 5px; cursor: default" type="button" class="btn btn-primary btn-xs">
                             <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
                         </button>
                     @endif
