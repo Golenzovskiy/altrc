@@ -19,6 +19,7 @@ use App\Project;
 use App\Helpers\Helper;
 use Illuminate\Support\Facades\Session;
 use Symfony\Component\EventDispatcher\Tests\Service;
+use Cache;
 
 class ProjectController extends Controller
 {
@@ -203,6 +204,9 @@ class ProjectController extends Controller
 
             return redirect()->action('ProjectController@index');
         } else {
+            Cache::remember('project_' . $id, 1, function() use ($id) {
+                 return Project::find($id);
+            });
             return $this->editView($id);
         }
     }
