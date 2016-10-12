@@ -146,7 +146,9 @@ class ProjectController extends Controller
         ]);
 
         if ($request->isMethod('post')) {
-            $project = Project::find($id);
+            $project = \Cache::remember('project_' . $id, 1, function() use ($id) {
+                 return Project::find($id);
+            });
             $this->saveProject($project, $request, $id);
 
             return redirect()->action('ProjectController@index');
