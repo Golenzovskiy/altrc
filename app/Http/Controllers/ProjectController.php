@@ -19,7 +19,6 @@ use App\Project;
 use App\Helpers\Helper;
 use Illuminate\Support\Facades\Session;
 use Symfony\Component\EventDispatcher\Tests\Service;
-use Cache;
 
 class ProjectController extends Controller
 {
@@ -148,66 +147,70 @@ class ProjectController extends Controller
 
         if ($request->isMethod('post')) {
             $project = Project::find($id);
-            $project->company = $request->company;
-            $project->company_alternative = $request->company_alternative;
-            $project->name = $request->name;
-            $project->year = $request->year . "-01-01";
-            $project->description = $request->description;
-            if ($request->review == 'on') {
-                $project->review = 1;
-            } else {
-                $project->review = 0;
-            }
-            if ($request->logo) {
-                $imgName = pathinfo($request->file('logo')->getClientOriginalName())['filename'];
-                if (glob($project->getImgPath(Project::ORIGIN_DIR) . $imgName . ".*")) {
-                    $imgExtension =$request->file('logo')->getClientOriginalExtension();
-                    $i = count(glob($project->getImgPath(Project::ORIGIN_DIR) . $imgName . "_*.*"));
-                    $img = $imgName . '_' . ++$i . '.' . $imgExtension;
-                    $request->file('logo')->move(($project->getImgPath(Project::ORIGIN_DIR)), $img);
-                } else {
-                    $img = $request->file('logo')->getClientOriginalName();
-                    $request->file('logo')->move(($project->getImgPath(Project::ORIGIN_DIR)), $img);
-                }
-                $project->logo = '/logos/' . $img;
-            }
-
-            $project->save();
-
-            ServiceProject::DeleteByProject($id);
-            SectorProject::DeleteByProject($id);
-            CountryProject::DeleteByProject($id);
-            TagProject::DeleteByProject($id);
-            ReferenceProject::DeleteByProject($id);
-
-            $tags = explode(',', $request->tags);
-            if ($request->tags) {
-                $dictionary = new TagProject();
-                $arr = $tags;
-                $this->saveDictionary($dictionary, $arr, $id);
-            }
-
-            $dictionaries = [
-                'services' => '\App\ServiceProject',
-                'sectors' => '\App\SectorProject',
-                'country' => '\App\CountryProject',
-                'references' => '\App\ReferenceProject'
-            ];
-
-            foreach ($dictionaries as $key => $value) {
-                if ($request->$key) {
-                    $dictionary = new $value();
-                    $arr = $request->$key;
-                    $this->saveDictionary($dictionary, $arr, $id);
-                }
-            }
+            $this->saveProject($project, $request, $id);
 
             return redirect()->action('ProjectController@index');
         } else {
-            Cache::remember('project_' . $id, 1, function() use ($id) {
+            \Cache::remember('project_' . $id, 1, function() use ($id) {
                  return Project::find($id);
             });
             return $this->editView($id);
+        }
+    }
+
+    public function saveProject($project, $request, $id) {
+        $project->company = $request->company;
+        $project->company_alternative = $request->company_alternative;
+        $project->name = $request->name;
+        $project->year = $request->year . "-01-01";
+        $project->description = $request->description;
+        if ($request->review == 'on') {
+            $project->review = 1;
+        } else {
+            $project->review = 0;
+        }
+        if ($request->logo) {
+            $imgName = pathinfo($request->file('logo')->getClientOriginalName())['filename'];
+            if (glob($project->getImgPath(Project::ORIGIN_DIR) . $imgName . ".*")) {
+                $imgExtension =$request->file('logo')->getClientOriginalExtension();
+                $i = count(glob($project->getImgPath(Project::ORIGIN_DIR) . $imgName . "_*.*"));
+                $img = $imgName . '_' . ++$i . '.' . $imgExtension;
+                $request->file('logo')->move(($project->getImgPath(Project::ORIGIN_DIR)), $img);
+            } else {
+                $img = $request->file('logo')->getClientOriginalName();
+                $request->file('logo')->move(($project->getImgPath(Project::ORIGIN_DIR)), $img);
+            }
+            $project->logo = '/logos/' . $img;
+        }
+
+        $project->save();
+
+        ServiceProject::DeleteByProject($id);
+        SectorProject::DeleteByProject($id);
+        CountryProject::DeleteByProject($id);
+        TagProject::DeleteByProject($id);
+        ReferenceProject::DeleteByProject($id);
+
+        $tags = explode(',', $request->tags);
+        if ($request->tags) {
+            $dictionary = new TagProject();
+            $arr = $tags;
+            $this->saveDictionary($dictionary, $arr, $id);
+        }
+
+        $dictionaries = [
+            'services' => '\App\ServiceProject',
+            'sectors' => '\App\SectorProject',
+            'country' => '\App\CountryProject',
+            'references' => '\App\ReferenceProject'
+        ];
+
+        foreach ($dictionaries as $key => $value) {
+            if ($request->$key) {
+                $dictionary = new $value();
+                $arr = $request->$key;
+                $this->saveDictionary($dictionary, $arr, $id);
+            }
         }
     }
 
