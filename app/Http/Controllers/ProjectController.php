@@ -19,7 +19,6 @@ use App\Project;
 use App\Helpers\Helper;
 use Illuminate\Support\Facades\Session;
 use Symfony\Component\EventDispatcher\Tests\Service;
-use Cache;
 
 class ProjectController extends Controller
 {
@@ -202,31 +201,39 @@ class ProjectController extends Controller
                 }
             }
 
+            if (\Cache::has('project_' . $id)) {
+                \Cache::forget('project_' . $id);
+            }
+
             return redirect()->action('ProjectController@index');
         } else {
-            Cache::remember('project_' . $id, 1, function() use ($id) {
-                 return Project::find($id);
-            });
             return $this->editView($id);
         }
     }
 
     private function editView($id)
     {
-        return view('project.edit', [
-            'project' => Project::find($id),
-            'services' => ServiceProject::dictionary(),
-            'selectedServices' => ServiceProject::where('project_id', '=', $id)->get(),
-            'sectors' => SectorProject::dictionary(),
-            'selectedSectors' => SectorProject::where('project_id', '=', $id)->get(),
-            'country' => CountryProject::dictionary(),
-            'selectedCountrys' => CountryProject::where('project_id', '=', $id)->get(),
-            'selectedTags' => TagProject::where('project_id', '=', $id)->get()
-        ]);
+        $data = \Cache::remember('project_' . $id, 1, function () use ($id) {
+            return
+            [
+                'project' => Project::find($id),
+                'services' => ServiceProject::dictionary(),
+                'selectedServices' => ServiceProject::where('project_id', '=', $id)->get(),
+                'sectors' => SectorProject::dictionary(),
+                'selectedSectors' => SectorProject::where('project_id', '=', $id)->get(),
+                'country' => CountryProject::dictionary(),
+                'selectedCountrys' => CountryProject::where('project_id', '=', $id)->get(),
+                'selectedTags' => TagProject::where('project_id', '=', $id)->get()
+            ];
+        });
+        return view('project.edit', $data);
     }
 
     public function remove($id) {
         $count = Project::destroy($id);
+        if (\Cache::has('project_' . $id)) {
+            \Cache::forget('project_' . $id);
+        }
         $status = ($count > 0) ? 'success' : 'error';
         return response()->json([
             'status' => $status,
