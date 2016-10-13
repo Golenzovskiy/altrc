@@ -14,7 +14,7 @@
 
     <link href="https://bootswatch.com/simplex/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/css/ladda-themeless.min.css">
-    <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
     <link rel="stylesheet" type="text/css" href="/css/sweetalert.css">
     <link href="/css/jquery.tagit.css" rel="stylesheet" type="text/css">
     <link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/css/bootstrap-editable.css"
@@ -42,7 +42,7 @@
                 <span class="icon-bar"></span>
             </button>
             <a href="/" class="navbar-brand"><img class="img-responsive imgl"
-                                                  src="http://altrc.ru/bitrix/tpl/img/alt-logo-color-rgb.png"/></a>
+                                                  src="//altrc.ru/bitrix/tpl/img/alt-logo-color-rgb.png"/></a>
         </div>
         <ul class="nav navbar-nav collapse navbar-collapse" id="resonsive-menu">
             <li class="active"><a href="/">Найти референцию</a></li>
@@ -70,7 +70,7 @@
 
 <script src="{{asset('js/jquery.min.js')}}"></script>
 <script src="{{asset('js/bootstrap.min.js')}}"></script>
-<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <script src="/js/datepicker-ru.js"></script>
 <script src="/js/spin.min.js"></script>
 <script src="/js/ladda.min.js"></script>
