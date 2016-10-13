@@ -201,6 +201,10 @@ class ProjectController extends Controller
                 }
             }
 
+            if (\Cache::has('project_' . $id)) {
+                \Cache::forget('project_' . $id);
+            }
+
             return redirect()->action('ProjectController@index');
         } else {
             return $this->editView($id);
