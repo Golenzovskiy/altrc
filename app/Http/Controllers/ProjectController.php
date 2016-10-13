@@ -231,6 +231,9 @@ class ProjectController extends Controller
 
     public function remove($id) {
         $count = Project::destroy($id);
+        if (\Cache::has('project_' . $id)) {
+            \Cache::forget('project_' . $id);
+        }
         $status = ($count > 0) ? 'success' : 'error';
         return response()->json([
             'status' => $status,
