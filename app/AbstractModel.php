@@ -34,12 +34,18 @@ abstract class AbstractModel extends Model {
                 ->get();
 
         $query->map(function($item) {
-            $item->projectIds = $this->where('name', '=', $item->name)->select('project_id')->pluck('project_id');
+            $projectIds = \Cache::remember($item->name . '_projectIds', 1, function () use ($item) {
+                return $this->where('name', '=', $item->name)->select('project_id')->pluck('project_id');
+            });
+            $item->projectIds = $projectIds;
             return $item;
         });
 
         foreach ($query as $item) {
-            $item->projects = Project::whereIn('id', $item->projectIds)->select(['id', 'company'])->get();
+            $projects = \Cache::remember($item->name . '_projects', 1, function () use ($item) {
+                return Project::whereIn('id', $item->projectIds)->select(['id', 'company'])->get();
+            });
+            $item->projects = $projects;
         }
 
         return $query;
