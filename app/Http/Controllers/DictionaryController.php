@@ -38,7 +38,15 @@ class DictionaryController extends Controller
         ];
         if ($request->name) {
             $model = $dictionaries[$request->model];
-            $model::where('name', '=', $request->name)->update(['name' => 'Прочее']);
+            $models = $model::where('name', $request->name)->get();
+            foreach ($models as $model) {
+                $project_id = $model->project_id;
+                if ($model::where('name', 'Прочее')->where('project_id', $project_id)->count() > 0) {
+                    $model::where('name', $request->name)->where('project_id', $project_id)->delete();
+                } else {
+                    $model::where('name', '=', $request->name)->where('project_id', $project_id)->update(['name' => 'Прочее']);
+                }
+            }
         } else {
             return response('Произошла ошибка при попытке удаления', 400);
         }
