@@ -135,6 +135,7 @@ class Project extends Model {
 						mkdir($this->getImgPath(self::THUMB_DIR));
 						chmod($this->getImgPath(self::THUMB_DIR), 0770);
 					}
+                    Image::configure(array('driver' => 'imagick'));
                     $thumb = Image::make($img)->resize(80, 80, function ($constraint) {
 						$constraint->aspectRatio();
 					})->resizeCanvas(80, 80);
