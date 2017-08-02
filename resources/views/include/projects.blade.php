@@ -18,8 +18,7 @@
                 </td>
                 <td>
                     @if ($project->logo)
-                        <img class="max-max-width-100" border="0"
-                             src="{{ $project->logo }}">
+                        <img border="0" src="{{ $project->logo }}">
                     @endif
                 </td>
                 <td>

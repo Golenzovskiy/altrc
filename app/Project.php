@@ -135,9 +135,9 @@ class Project extends Model {
 						mkdir($this->getImgPath(self::THUMB_DIR));
 						chmod($this->getImgPath(self::THUMB_DIR), 0770);
 					}
-					$thumb = Image::make($img)->resize(100, null, function ($constraint) {
+                    $thumb = Image::make($img)->resize(80, 80, function ($constraint) {
 						$constraint->aspectRatio();
-					});
+					})->resizeCanvas(80, 80);
 					$thumb->save($this->getImgPath(self::THUMB_DIR) . $imgThumb, 90);
 					return self::THUMB_DIR . $imgThumb;
 				}
